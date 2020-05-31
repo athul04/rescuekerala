@@ -1,5 +1,3 @@
-import os
-import uuid
 from enum import Enum
 import csv
 import codecs
@@ -16,6 +14,7 @@ from django.core.cache import cache
 from django.dispatch import receiver
 from django.utils import timezone
 
+from mainapp.utils.model_utils import upload_to
 
 districts = (
     ('alp','Alappuzha - ആലപ്പുഴ'),
@@ -88,11 +87,6 @@ announcement_types =(
     (3,'Weather'),
     (4, 'All'),
 )
-
-announcement_priorities = [
-    ('H', 'High'),
-    ('M', 'Medium'),
-    ('L', 'Low')]
 
 
 person_status = (
@@ -545,35 +539,6 @@ class Person(models.Model):
             super(Person, self).save(*args, **kwargs)
 
 
-
-def upload_to(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = "%s.%s" % (uuid.uuid4(), ext)
-    return os.path.join('media/', filename)
-
-
-class Announcements(models.Model):
-    dateadded = models.DateTimeField(auto_now_add=True)
-    priority = models.CharField(
-        max_length=20,
-        choices = announcement_priorities,
-        verbose_name='Priority',
-        default='L')
-
-    description = models.TextField(blank=True)
-    hashtags = models.TextField(blank=True,default="",help_text="Add hashtags as comma separated values.")
-    image = models.ImageField(blank=True, upload_to=upload_to)
-    upload = models.FileField(blank=True, upload_to=upload_to)
-    is_pinned = models.BooleanField(default=False)
-
-    class Meta:
-        verbose_name = 'Announcement: News'
-        verbose_name_plural = 'Announcements: News'
-
-    def __str__(self):
-        return self.description[:100]
-
-
 class DataCollection(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     document_name = models.CharField(
@@ -709,7 +674,7 @@ class Hospital(models.Model):
     email = models.EmailField()
 
     def __str__(self):
-        return self.name + ' - ' + self.designation      
+        return self.name + ' - ' + self.designation
 
 
 class SmsJob(models.Model):
@@ -745,15 +710,15 @@ class SmsJob(models.Model):
     informational messages. For consent messages, a preconfigured message is used')
     failure = models.CharField(max_length=100, null=True, blank=True)
     has_completed = models.BooleanField(default=False)
-    
+
     def __str__(self):
-        mess = ""  
+        mess = ""
         if self.sms_type == "info":
             mess = "Message {} sent to ".format(self.message)
         else:
             mess = "Consent Message sent to "
         if(self.district != None and self.area != None):
-            return mess + self.get_district_display() + '-' + self.get_area_display() 
+            return mess + self.get_district_display() + '-' + self.get_area_display()
         else:
             return mess + "Sent to Group :" + str(self.group)
 

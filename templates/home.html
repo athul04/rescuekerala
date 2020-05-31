@@ -21,26 +21,26 @@
         <a class="btn btn-danger btn-msg" href="{%url 'Announcements' %}">{% bootstrap_icon "bullhorn" %} Announcements (<span class="ml notranslate mal">അറിയിപ്പുകൾ</span>)</a>
         <a class="btn btn-info btn-msg mal" href="https://afterflood.in">After Flood (പ്രളയാനന്തരം)</a>
     </p>
-  <a href="https://keralarescuemap.ushahidi.io/posts/create/17" class="home-button card" role="button">
+  <a href="{%url 'requestview' %}" class="home-button card" role="button">
     {% bootstrap_icon "bell" %}
     <span class="text">
         Request<br/>for rescue<br/>
         <span class="ml small notranslate mal">രക്ഷാപ്രവർത്തനം അഭ്യർത്ഥിക്കാൻ</span>
     </span>
-</a>  <a href="https://keralarescuemap.ushahidi.io/posts/create/18" class="home-button card" role="button">
-    {% bootstrap_icon "grain" %}
-    <span class="text">
-        Request<br/>for resources<br/>
-        <span class="ml small notranslate mal">സഹായം അഭ്യർത്ഥിക്കാൻ</span>
-    </span>
-</a>
-<a href="{%url 'contribute' %}" class="home-button card" role="button">
-    {% bootstrap_icon "apple" %}
-    <span class="text">
-        Contribute<br/>
-        <span class="ml small notranslate mal">സഹായങ്ങൾ</span>
-    </span>
-</a>
+<!--</a>  <a href="https://keralarescuemap.ushahidi.io/posts/create/18" class="home-button card" role="button">-->
+<!--    {% bootstrap_icon "grain" %}-->
+<!--    <span class="text">-->
+<!--        Request<br/>for resources<br/>-->
+<!--        <span class="ml small notranslate mal">സഹായം അഭ്യർത്ഥിക്കാൻ</span>-->
+<!--    </span>-->
+<!--</a>-->
+<!--<a href="{%url 'contribute' %}" class="home-button card" role="button">-->
+<!--    {% bootstrap_icon "apple" %}-->
+<!--    <span class="text">-->
+<!--        Contribute<br/>-->
+<!--        <span class="ml small notranslate mal">സഹായങ്ങൾ</span>-->
+<!--    </span>-->
+<!--</a>-->
     <!-- <a href="{%url 'report_find_person' %}" class="home-button card" role="button">
         {% bootstrap_icon "user" %}
         <span class="text">
@@ -55,13 +55,13 @@
         <span class="ml small notranslate mal">ഇതു വരെ ആവശ്യപ്പെട്ടവ</span>
       </span>
     </a>
-    <a href="{%url 'relief_camps' %}" class="home-button card" role="button">
-        {% bootstrap_icon "home" %}
-        <span class="text">
-          Relief Camps<br/>
-          <span class="ml small notranslate mal">ദുരിതാശ്വാസ ക്യാമ്പുകൾ</span>
-        </span>
-    </a>
+<!--    <a href="{%url 'relief_camps' %}" class="home-button card" role="button">-->
+<!--        {% bootstrap_icon "home" %}-->
+<!--        <span class="text">-->
+<!--          Relief Camps<br/>-->
+<!--          <span class="ml small notranslate mal">ദുരിതാശ്വാസ ക്യാമ്പുകൾ</span>-->
+<!--        </span>-->
+<!--    </a>-->
   <!--  <a href="{%url 'Announcements' %}" class="home-button card" role="button">
             {% bootstrap_icon "bullhorn" %}
             <span class="text">
@@ -83,13 +83,13 @@
             <span class="ml small notranslate mal">ജില്ലകളിലെ ആവശ്യങ്ങൾ</span>
         </span>
     </a>
-    <a href="{%url 'ngovolunteerview' %}" class="home-button card" role="button">
-        {% bootstrap_icon "user" %}
-        <span class="text">
-            Volunteer &amp; NGO/COMPANY <br/>
-            <span class="ml small notranslate mal">വൊളന്‍റീയര &amp;<br/> എൻജിഒ്/കമ്പനി‍ </span>
-        </span>
-    </a>
+<!--    <a href="{%url 'ngovolunteerview' %}" class="home-button card" role="button">-->
+<!--        {% bootstrap_icon "user" %}-->
+<!--        <span class="text">-->
+<!--            Volunteer &amp; NGO/COMPANY <br/>-->
+<!--            <span class="ml small notranslate mal">വൊളന്‍റീയര &amp;<br/> എൻജിഒ്/കമ്പനി‍ </span>-->
+<!--        </span>-->
+<!--    </a>-->
      <a href="https://map.keralarescue.in/" class="home-button card" role="button">
         {% bootstrap_icon "globe" %}
         <span class="text">
@@ -111,21 +111,21 @@
             <span class="ml small notranslate mal">ചികിത്സാ സംബന്ധമായ വിവരങ്ങൾ</span>
         </span>
     </a>
-    <a href="{%url 'privatedetails' %}" class="home-button card" role="button">
-        {% bootstrap_icon "briefcase" %}
-        <span class="text">
-                Private Relief &<br> Collection Centers<br/>
-            <span class="ml small notranslate mal">സ്വകാര്യ റിലീഫ് ആൻഡ് കളക്ഷൻ സെന്ററുകൾ</span>
-        </span>
-    </a>
-    <a href="https://survey.keralarescue.in" class="home-button card" role="button">
-        {% bootstrap_icon "list" %}
-        <span class="text">
-                Damage Assesment
-                 <br>Survey<br/>
-            <!--<span class="ml small notranslate">സ്വകാര്യ റിലീഫ് ആൻഡ് കളക്ഷൻ സെന്ററുകൾ</span>-->
-        </span>
-    </a>
+<!--    <a href="{%url 'privatedetails' %}" class="home-button card" role="button">-->
+<!--        {% bootstrap_icon "briefcase" %}-->
+<!--        <span class="text">-->
+<!--                Private Relief &<br> Collection Centers<br/>-->
+<!--            <span class="ml small notranslate mal">സ്വകാര്യ റിലീഫ് ആൻഡ് കളക്ഷൻ സെന്ററുകൾ</span>-->
+<!--        </span>-->
+<!--    </a>-->
+<!--    <a href="https://survey.keralarescue.in" class="home-button card" role="button">-->
+<!--        {% bootstrap_icon "list" %}-->
+<!--        <span class="text">-->
+<!--                Damage Assesment-->
+<!--                 <br>Survey<br/>-->
+<!--            &lt;!&ndash;<span class="ml small notranslate">സ്വകാര്യ റിലീഫ് ആൻഡ് കളക്ഷൻ സെന്ററുകൾ</span>&ndash;&gt;-->
+<!--        </span>-->
+<!--    </a>-->
 
     <p class="home-info">
             For emergency support, call the District control room at <b>1077</b> or the State control room at <b>1070</b>.<br>

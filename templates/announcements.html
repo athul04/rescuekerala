@@ -31,18 +31,17 @@
         {% if not id %}
         <div class="card">
                 <span class="card-text">Tags<a href="{% url 'Announcements' %}" class="btn btn-info btn-xs pull-right" role="button">Clear Filters</a></span>
-
-                {% for i in hashtags %}
+                {% for id, tag in hashtags.items %}
                     <span class="card-time">
-                        {% if i == selected_hashtag %}
-                        {% bootstrap_icon "link" %}<a href="{% url 'announcements_filter' i %}" style="color:red; font-weight: 
-                        bold"> {{ i }}</a>
+                        {% if id == selected_hashtag_id %}
+                        {% bootstrap_icon "link" %}<a href="{% url 'announcements_filter' id %}" style="color:red; font-weight:
+                        bold"> {{ tag }}</a>
                          {% else %}
-                        {% bootstrap_icon "link" %}<a href="{% url 'announcements_filter' i %}"> {{ i }}</a>
+                        {% bootstrap_icon "link" %}<a href="{% url 'announcements_filter' id %}"> {{ tag }}</a>
                         {% endif %}
                     </span>
-
                 {% endfor %}
+
         </div>
         {% endif %}
         {% for req in pinned_data %}
@@ -76,9 +75,9 @@
                 <span class="card-time">{% bootstrap_icon "time" %}&nbsp;<a href="{% url 'announcements_id' req.id %}">{{ req.dateadded }}</a></span>
 
 
-                {% with req.hashtags|get_list as hashtags_ %}
-                {% if hashtags_|length != 0 %}
-                {% for i in hashtags_ %}
+                {% with req.hashtags as hashtags %}
+                {% if hashtags|length != 0 %}
+                {% for i in hashtags %}
                 <span class="card-time">{% bootstrap_icon "link" %} <a href="{% url 'announcements_filter' i %}"> {{ i }}</a></span>
                 {% endfor %}
                 {% endif %}
