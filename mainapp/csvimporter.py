@@ -1,6 +1,4 @@
 import datetime
-from hashlib import md5
-from redis import Redis
 import csv
 import codecs
 
@@ -25,7 +23,7 @@ def import_inmate_file(csvid, is_recovery=False):
     import django
     django.setup()
 
-    from mainapp.models import Person, RescueCamp, CsvBulkUpload
+    from mainapp.models import Person, CsvBulkUpload
 
     upload = CsvBulkUpload.objects.get(id = csvid)
 

@@ -1,6 +1,6 @@
 import json
 
-from .models import Person, RescueCamp, RequestUpdate, Request
+from mainapp.models import RequestUpdate, Request
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -8,7 +8,7 @@ from rest_framework import serializers
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from .models import RescueCamp, Person
+from mainapp.models import RescueCamp, Person
 
 class RescueCampSerializer(serializers.ModelSerializer):
     class Meta:
