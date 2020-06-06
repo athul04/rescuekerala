@@ -27,7 +27,6 @@ env = environ.Env(
     CACHE_TIMEOUT=(int, 60),
 )
 # reading .env file
-env = environ.Env()
 
 # False if not in os.environ
 DEBUG = env("DEBUG")
