@@ -38,7 +38,6 @@ set -o nounset
 # >&2 echo 'PostgreSQL is available'
 # export NEW_RELIC_CONFIG_FILE=/etc/newrelic.ini
 
-export NEW_RELIC_CONFIG_FILE=/etc/newrelic.ini
 python manage.py collectstatic --noinput
 python manage.py migrate
-newrelic-admin run-program /usr/local/bin/gunicorn floodrelief.wsgi:application --bind 0.0.0.0:9000 --chdir=/app
+/usr/local/bin/gunicorn floodrelief.wsgi:application --bind 0.0.0.0:9000 --chdir=/app
