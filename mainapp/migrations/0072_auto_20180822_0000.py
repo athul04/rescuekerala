@@ -6,12 +6,9 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0071_csvfileupload'),
+        ("mainapp", "0071_csvfileupload"),
     ]
 
     operations = [
-        migrations.RenameModel(
-            old_name='CsvFileUpload',
-            new_name='CsvBulkUpload',
-        ),
+        migrations.RenameModel(old_name="CsvFileUpload", new_name="CsvBulkUpload",),
     ]

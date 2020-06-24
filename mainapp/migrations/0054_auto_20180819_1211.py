@@ -7,18 +7,22 @@ import mainapp.utils.model_utils
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0053_reliefcampdata'),
+        ("mainapp", "0053_reliefcampdata"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='announcements',
-            name='image',
-            field=models.ImageField(blank=True, upload_to=mainapp.utils.model_utils.upload_to),
+            model_name="announcements",
+            name="image",
+            field=models.ImageField(
+                blank=True, upload_to=mainapp.utils.model_utils.upload_to
+            ),
         ),
         migrations.AlterField(
-            model_name='announcements',
-            name='upload',
-            field=models.FileField(blank=True, upload_to=mainapp.utils.model_utils.upload_to),
+            model_name="announcements",
+            name="upload",
+            field=models.FileField(
+                blank=True, upload_to=mainapp.utils.model_utils.upload_to
+            ),
         ),
     ]

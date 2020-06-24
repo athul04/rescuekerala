@@ -7,23 +7,53 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0057_add_status_to_relief_camp'),
+        ("mainapp", "0057_add_status_to_relief_camp"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='contributor',
-            name='phone',
-            field=models.CharField(max_length=11, validators=[django.core.validators.RegexValidator(code='invalid_mobile', message='Please Enter 10 digit mobile number', regex='^[6-9]\\d{9}$')], verbose_name='Phone - ഫോണ്\u200d നമ്പര്\u200d'),
+            model_name="contributor",
+            name="phone",
+            field=models.CharField(
+                max_length=11,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        code="invalid_mobile",
+                        message="Please Enter 10 digit mobile number",
+                        regex="^[6-9]\\d{9}$",
+                    )
+                ],
+                verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d",
+            ),
         ),
         migrations.AlterField(
-            model_name='request',
-            name='requestee_phone',
-            field=models.CharField(max_length=11, validators=[django.core.validators.RegexValidator(code='invalid_mobile', message='Please Enter 10/11 digit mobile number', regex='^[6-9]\\d{10}$')], verbose_name='Requestee Phone - അപേക്ഷകന്\u200dറെ ഫോണ്\u200d നമ്പര്\u200d'),
+            model_name="request",
+            name="requestee_phone",
+            field=models.CharField(
+                max_length=11,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        code="invalid_mobile",
+                        message="Please Enter 10/11 digit mobile number",
+                        regex="^[6-9]\\d{10}$",
+                    )
+                ],
+                verbose_name="Requestee Phone - അപേക്ഷകന്\u200dറെ ഫോണ്\u200d നമ്പര്\u200d",
+            ),
         ),
         migrations.AlterField(
-            model_name='volunteer',
-            name='phone',
-            field=models.CharField(max_length=11, validators=[django.core.validators.RegexValidator(code='invalid_mobile', message='Please Enter 10 digit mobile number', regex='^[6-9]\\d{9}$')], verbose_name='Phone - ഫോണ്\u200d നമ്പര്\u200d'),
+            model_name="volunteer",
+            name="phone",
+            field=models.CharField(
+                max_length=11,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        code="invalid_mobile",
+                        message="Please Enter 10 digit mobile number",
+                        regex="^[6-9]\\d{9}$",
+                    )
+                ],
+                verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d",
+            ),
         ),
     ]

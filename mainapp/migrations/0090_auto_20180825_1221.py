@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0089_person_is_dup'),
+        ("mainapp", "0089_person_is_dup"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='request',
-            name='is_request_for_others',
-            field=models.BooleanField(default=False, help_text="If this is checked, enter other's location from the 'Enter location manually' button at the bottom", verbose_name='Requesting for others - മറ്റൊരാൾക്ക് വേണ്ടി അപേക്ഷിക്കുന്നു  '),
+            model_name="request",
+            name="is_request_for_others",
+            field=models.BooleanField(
+                default=False,
+                help_text="If this is checked, enter other's location from the 'Enter location manually' button at the bottom",
+                verbose_name="Requesting for others - മറ്റൊരാൾക്ക് വേണ്ടി അപേക്ഷിക്കുന്നു  ",
+            ),
         ),
     ]

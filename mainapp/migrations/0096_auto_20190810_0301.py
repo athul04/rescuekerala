@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0095_hospital'),
+        ("mainapp", "0095_hospital"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='announcements',
-            name='hashtags',
-            field=models.TextField(blank=True, default=''),
+            model_name="announcements",
+            name="hashtags",
+            field=models.TextField(blank=True, default=""),
         ),
         migrations.AlterField(
-            model_name='hospital',
-            name='designation',
-            field=models.CharField(max_length=250, verbose_name='Officer name'),
+            model_name="hospital",
+            name="designation",
+            field=models.CharField(max_length=250, verbose_name="Officer name"),
         ),
     ]

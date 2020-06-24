@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0062_volunteer_has_consented'),
+        ("mainapp", "0062_volunteer_has_consented"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='volunteer',
-            name='has_consented',
-            field=models.BooleanField(default=False, verbose_name='Available'),
+            model_name="volunteer",
+            name="has_consented",
+            field=models.BooleanField(default=False, verbose_name="Available"),
         ),
     ]

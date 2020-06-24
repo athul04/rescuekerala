@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0039_auto_20180818_0328'),
+        ("mainapp", "0039_auto_20180818_0328"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='request',
-            name='is_request_for_others',
-            field=models.BooleanField(default=False, help_text='If it is enabled, no need to consider lat and lng', verbose_name='Requesting for others - മറ്റൊരാൾക്ക് വേണ്ടി അപേക്ഷിക്കുന്നു  '),
+            model_name="request",
+            name="is_request_for_others",
+            field=models.BooleanField(
+                default=False,
+                help_text="If it is enabled, no need to consider lat and lng",
+                verbose_name="Requesting for others - മറ്റൊരാൾക്ക് വേണ്ടി അപേക്ഷിക്കുന്നു  ",
+            ),
         ),
     ]

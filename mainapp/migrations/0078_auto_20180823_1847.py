@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0077_auto_20180822_1509'),
+        ("mainapp", "0077_auto_20180822_1509"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='csvbulkupload',
-            name='is_completed',
-            field=models.BooleanField(default=False, verbose_name='Import Status'),
+            model_name="csvbulkupload",
+            name="is_completed",
+            field=models.BooleanField(default=False, verbose_name="Import Status"),
         ),
     ]

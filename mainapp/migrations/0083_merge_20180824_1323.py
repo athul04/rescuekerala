@@ -6,9 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0082_auto_20180824_1147'),
-        ('mainapp', '0082_collectioncenter_map_link'),
+        ("mainapp", "0082_auto_20180824_1147"),
+        ("mainapp", "0082_collectioncenter_map_link"),
     ]
 
-    operations = [
-    ]
+    operations = []

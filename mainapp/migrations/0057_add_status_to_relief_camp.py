@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0056_auto_20180819_1420'),
+        ("mainapp", "0056_auto_20180819_1420"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='rescuecamp',
-            name='status',
-            field=models.CharField(choices=[('active', 'Active'), ('closed', 'Closed')], default='active', max_length=10),
+            model_name="rescuecamp",
+            name="status",
+            field=models.CharField(
+                choices=[("active", "Active"), ("closed", "Closed")],
+                default="active",
+                max_length=10,
+            ),
         ),
     ]

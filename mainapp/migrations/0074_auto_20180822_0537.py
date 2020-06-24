@@ -6,18 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0073_merge_20180822_0015'),
+        ("mainapp", "0073_merge_20180822_0015"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='person',
-            name='checkin_date',
-            field=models.DateField(blank=True, null=True, verbose_name='Check-in Date - ചെക്ക്-ഇൻ തീയതി'),
+            model_name="person",
+            name="checkin_date",
+            field=models.DateField(
+                blank=True, null=True, verbose_name="Check-in Date - ചെക്ക്-ഇൻ തീയതി"
+            ),
         ),
         migrations.AlterField(
-            model_name='person',
-            name='checkout_date',
-            field=models.DateField(blank=True, null=True, verbose_name='Check-out Date - ചെക്ക്-ഔട്ട് തീയതി'),
+            model_name="person",
+            name="checkout_date",
+            field=models.DateField(
+                blank=True,
+                null=True,
+                verbose_name="Check-out Date - ചെക്ക്-ഔട്ട് തീയതി",
+            ),
         ),
     ]

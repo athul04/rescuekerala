@@ -6,18 +6,39 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0095_hospital'),
+        ("mainapp", "0095_hospital"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='hospital',
-            name='district',
-            field=models.CharField(blank=True, choices=[('alp', 'Alappuzha - ആലപ്പുഴ'), ('ekm', 'Ernakulam - എറണാകുളം'), ('idk', 'Idukki - ഇടുക്കി'), ('knr', 'Kannur - കണ്ണൂർ'), ('ksr', 'Kasaragod - കാസർഗോഡ്'), ('kol', 'Kollam - കൊല്ലം'), ('ktm', 'Kottayam - കോട്ടയം'), ('koz', 'Kozhikode - കോഴിക്കോട്'), ('mpm', 'Malappuram - മലപ്പുറം'), ('pkd', 'Palakkad - പാലക്കാട്'), ('ptm', 'Pathanamthitta - പത്തനംതിട്ട'), ('tvm', 'Thiruvananthapuram - തിരുവനന്തപുരം'), ('tcr', 'Thrissur - തൃശ്ശൂർ'), ('wnd', 'Wayanad - വയനാട്')], max_length=15, null=True, verbose_name='District - ജില്ല'),
+            model_name="hospital",
+            name="district",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("alp", "Alappuzha - ആലപ്പുഴ"),
+                    ("ekm", "Ernakulam - എറണാകുളം"),
+                    ("idk", "Idukki - ഇടുക്കി"),
+                    ("knr", "Kannur - കണ്ണൂർ"),
+                    ("ksr", "Kasaragod - കാസർഗോഡ്"),
+                    ("kol", "Kollam - കൊല്ലം"),
+                    ("ktm", "Kottayam - കോട്ടയം"),
+                    ("koz", "Kozhikode - കോഴിക്കോട്"),
+                    ("mpm", "Malappuram - മലപ്പുറം"),
+                    ("pkd", "Palakkad - പാലക്കാട്"),
+                    ("ptm", "Pathanamthitta - പത്തനംതിട്ട"),
+                    ("tvm", "Thiruvananthapuram - തിരുവനന്തപുരം"),
+                    ("tcr", "Thrissur - തൃശ്ശൂർ"),
+                    ("wnd", "Wayanad - വയനാട്"),
+                ],
+                max_length=15,
+                null=True,
+                verbose_name="District - ജില്ല",
+            ),
         ),
         migrations.AlterField(
-            model_name='hospital',
-            name='designation',
-            field=models.CharField(max_length=250, verbose_name='Officer name'),
+            model_name="hospital",
+            name="designation",
+            field=models.CharField(max_length=250, verbose_name="Officer name"),
         ),
     ]

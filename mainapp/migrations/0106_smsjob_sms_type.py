@@ -6,14 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0105_smsjob'),
+        ("mainapp", "0105_smsjob"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='smsjob',
-            name='sms_type',
-            field=models.CharField(choices=[('consent', 'Consent'), ('info', 'Information')], default='', max_length=10),
+            model_name="smsjob",
+            name="sms_type",
+            field=models.CharField(
+                choices=[("consent", "Consent"), ("info", "Information")],
+                default="",
+                max_length=10,
+            ),
             preserve_default=False,
         ),
     ]

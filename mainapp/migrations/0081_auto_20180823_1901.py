@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0080_auto_20180823_1900'),
+        ("mainapp", "0080_auto_20180823_1900"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='csvbulkupload',
-            name='failure_reason',
-            field=models.CharField(blank=True, default='', max_length=150, verbose_name='Reason of failure, if failed'),
+            model_name="csvbulkupload",
+            name="failure_reason",
+            field=models.CharField(
+                blank=True,
+                default="",
+                max_length=150,
+                verbose_name="Reason of failure, if failed",
+            ),
         ),
     ]

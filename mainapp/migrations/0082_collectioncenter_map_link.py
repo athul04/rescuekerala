@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0081_auto_20180823_1901'),
+        ("mainapp", "0081_auto_20180823_1901"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='collectioncenter',
-            name='map_link',
-            field=models.TextField(blank=True, help_text='Copy and paste the full Google Maps link', null=True, verbose_name='Map(Cordinate links) link'),
+            model_name="collectioncenter",
+            name="map_link",
+            field=models.TextField(
+                blank=True,
+                help_text="Copy and paste the full Google Maps link",
+                null=True,
+                verbose_name="Map(Cordinate links) link",
+            ),
         ),
     ]

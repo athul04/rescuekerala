@@ -6,12 +6,15 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0101_auto_20190811_1859'),
+        ("mainapp", "0101_auto_20190811_1859"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='datacollection',
-            options={'verbose_name': 'Data Uploads', 'verbose_name_plural': 'Data Uploads'},
+            name="datacollection",
+            options={
+                "verbose_name": "Data Uploads",
+                "verbose_name_plural": "Data Uploads",
+            },
         ),
     ]

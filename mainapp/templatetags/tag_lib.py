@@ -7,9 +7,9 @@ register = template.Library()
 #     return hashtags.split(',')
 
 
-@register.filter(name='get_list')
+@register.filter(name="get_list")
 def get_list(hashtags):
     if hashtags == "":
         return []
 
-    return [i.strip() for i in hashtags.split(',')]
+    return [i.strip() for i in hashtags.split(",")]

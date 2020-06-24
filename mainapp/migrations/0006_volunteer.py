@@ -6,20 +6,49 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0005_auto_20180811_0957'),
+        ("mainapp", "0005_auto_20180811_0957"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Volunteer',
+            name="Volunteer",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('district', models.CharField(choices=[('tvm', 'Thiruvananthapuram'), ('ptm', 'Pathanamthitta'), ('alp', 'Alappuzha'), ('ktm', 'Kottayam'), ('idk', 'Idukki'), ('mpm', 'Malappuram'), ('koz', 'Kozhikode'), ('wnd', 'Wayanad'), ('knr', 'Kannur'), ('ksr', 'Kasaragod'), ('pkd', 'Palakkad'), ('tcr', 'Thrissur'), ('ekm', 'Ernakulam'), ('kol', 'Kollam')], max_length=15)),
-                ('name', models.CharField(max_length=100)),
-                ('phone', models.CharField(max_length=10)),
-                ('organisation', models.CharField(max_length=250)),
-                ('address', models.CharField(max_length=1000)),
-                ('is_spoc', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "district",
+                    models.CharField(
+                        choices=[
+                            ("tvm", "Thiruvananthapuram"),
+                            ("ptm", "Pathanamthitta"),
+                            ("alp", "Alappuzha"),
+                            ("ktm", "Kottayam"),
+                            ("idk", "Idukki"),
+                            ("mpm", "Malappuram"),
+                            ("koz", "Kozhikode"),
+                            ("wnd", "Wayanad"),
+                            ("knr", "Kannur"),
+                            ("ksr", "Kasaragod"),
+                            ("pkd", "Palakkad"),
+                            ("tcr", "Thrissur"),
+                            ("ekm", "Ernakulam"),
+                            ("kol", "Kollam"),
+                        ],
+                        max_length=15,
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("phone", models.CharField(max_length=10)),
+                ("organisation", models.CharField(max_length=250)),
+                ("address", models.CharField(max_length=1000)),
+                ("is_spoc", models.BooleanField(default=False)),
             ],
         ),
     ]

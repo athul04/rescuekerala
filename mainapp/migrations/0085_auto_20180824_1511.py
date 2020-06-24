@@ -6,17 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0084_contributor_contribution_type'),
+        ("mainapp", "0084_contributor_contribution_type"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='contributor',
-            name='commodities',
-        ),
+        migrations.RemoveField(model_name="contributor", name="commodities",),
         migrations.AddField(
-            model_name='contributor',
-            name='contrib_details',
-            field=models.TextField(default='', verbose_name='Details of contribution Eg: 10 shirts'),
+            model_name="contributor",
+            name="contrib_details",
+            field=models.TextField(
+                default="", verbose_name="Details of contribution Eg: 10 shirts"
+            ),
         ),
     ]

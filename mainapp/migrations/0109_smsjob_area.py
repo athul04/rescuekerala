@@ -6,14 +6,32 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0108_auto_20190817_2320'),
+        ("mainapp", "0108_auto_20190817_2320"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='smsjob',
-            name='area',
-            field=models.CharField(choices=[('dcr', 'Doctor'), ('hsv', 'Health Services'), ('elw', 'Electrical Works'), ('mew', 'Mechanical Work'), ('cvw', 'Civil Work'), ('plw', 'Plumbing work'), ('vls', 'Vehicle Support'), ('ckg', 'Cooking'), ('rlo', 'Relief operation'), ('cln', 'Cleaning'), ('bot', 'Boat Service'), ('rck', 'Rock Climbing'), ('oth', 'Other')], default='rlo', max_length=3),
+            model_name="smsjob",
+            name="area",
+            field=models.CharField(
+                choices=[
+                    ("dcr", "Doctor"),
+                    ("hsv", "Health Services"),
+                    ("elw", "Electrical Works"),
+                    ("mew", "Mechanical Work"),
+                    ("cvw", "Civil Work"),
+                    ("plw", "Plumbing work"),
+                    ("vls", "Vehicle Support"),
+                    ("ckg", "Cooking"),
+                    ("rlo", "Relief operation"),
+                    ("cln", "Cleaning"),
+                    ("bot", "Boat Service"),
+                    ("rck", "Rock Climbing"),
+                    ("oth", "Other"),
+                ],
+                default="rlo",
+                max_length=3,
+            ),
             preserve_default=False,
         ),
     ]

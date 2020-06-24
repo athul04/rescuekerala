@@ -6,13 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0083_merge_20180824_1323'),
+        ("mainapp", "0083_merge_20180824_1323"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='contributor',
-            name='contribution_type',
-            field=models.CharField(choices=[('fod', 'Food'), ('med', 'Medicines'), ('shl', 'Shelter'), ('clt', 'Clothing'), ('sny', 'Sanitary materials'), ('oth', 'Others')], default='oth', max_length=3),
+            model_name="contributor",
+            name="contribution_type",
+            field=models.CharField(
+                choices=[
+                    ("fod", "Food"),
+                    ("med", "Medicines"),
+                    ("shl", "Shelter"),
+                    ("clt", "Clothing"),
+                    ("sny", "Sanitary materials"),
+                    ("oth", "Others"),
+                ],
+                default="oth",
+                max_length=3,
+            ),
         ),
     ]

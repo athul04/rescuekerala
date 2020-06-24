@@ -32,8 +32,20 @@ import django_filters
 
 from mainapp.redis_queue import sms_queue
 from mainapp.sms_handler import send_confirmation_sms
-from mainapp.models import Request, Volunteer, DistrictManager, Contributor, DistrictNeed,\
-    Person, RescueCamp, NGO, Announcements, districts, RequestUpdate, PrivateRescueCamp
+from mainapp.models import (
+    Request,
+    Volunteer,
+    DistrictManager,
+    Contributor,
+    DistrictNeed,
+    Person,
+    RescueCamp,
+    NGO,
+    Announcements,
+    districts,
+    RequestUpdate,
+    PrivateRescueCamp,
+)
 from mainapp.admin import create_csv_response
 from mainapp.models import CollectionCenter, Hospital, HashTag
 
@@ -52,98 +64,105 @@ class CustomForm(forms.ModelForm):
 
 class CreateRequest(CreateView):
     model = Request
-    template_name = 'mainapp/request_form.html'
+    template_name = "mainapp/request_form.html"
     fields = [
-        'district',
-        'location',
-        'requestee',
-        'requestee_phone',
-        'is_request_for_others',
-        'latlng',
-        'latlng_accuracy',
-        'needrescue',
-        'detailrescue',
-        'needwater',
-        'detailwater',
-        'needfood',
-        'detailfood',
-        'needcloth',
-        'detailcloth',
-        'needmed',
-        'detailmed',
-        'needkit_util',
-        'detailkit_util',
-        'needtoilet',
-        'detailtoilet',
-        'needothers'
+        "district",
+        "location",
+        "requestee",
+        "requestee_phone",
+        "is_request_for_others",
+        "latlng",
+        "latlng_accuracy",
+        "needrescue",
+        "detailrescue",
+        "needwater",
+        "detailwater",
+        "needfood",
+        "detailfood",
+        "needcloth",
+        "detailcloth",
+        "needmed",
+        "detailmed",
+        "needkit_util",
+        "detailkit_util",
+        "needtoilet",
+        "detailtoilet",
+        "needothers",
     ]
-    success_url = '/req_sucess/'
+    success_url = "/req_sucess/"
 
     def form_valid(self, form):
         self.object = form.save()
-        sms_queue.enqueue(
-            send_confirmation_sms, self.object.requestee_phone
-        )
+        sms_queue.enqueue(send_confirmation_sms, self.object.requestee_phone)
         return HttpResponseRedirect(self.get_success_url())
 
 
 class RegisterVolunteer(CreateView):
     model = Volunteer
-    fields = ['name', 'district', 'phone', 'organisation', 'area', 'address']
-    success_url = '/reg_success/'
+    fields = ["name", "district", "phone", "organisation", "area", "address"]
+    success_url = "/reg_success/"
 
 
 def volunteerdata(request):
     filter = VolunteerFilter(request.GET, queryset=Volunteer.objects.all())
-    req_data = filter.qs.order_by('-id')
+    req_data = filter.qs.order_by("-id")
     paginator = Paginator(req_data, PER_PAGE)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     req_data = paginator.get_page(page)
     req_data.min_page = req_data.number - PAGE_LEFT
     req_data.max_page = req_data.number + PAGE_RIGHT
     req_data.lim_page = PAGE_INTERMEDIATE
-    return render(request, 'mainapp/volunteerview.html', {'filter': filter, "data": req_data})
+    return render(
+        request, "mainapp/volunteerview.html", {"filter": filter, "data": req_data}
+    )
 
 
 class RegisterNGO(CreateView):
     model = NGO
-    fields = ['organisation', 'organisation_type', 'organisation_address', 'district', 'name', 'phone', 'area',
-              'description', 'website_url', 'location']
-    success_url = '/reg_success'
+    fields = [
+        "organisation",
+        "organisation_type",
+        "organisation_address",
+        "district",
+        "name",
+        "phone",
+        "area",
+        "description",
+        "website_url",
+        "location",
+    ]
+    success_url = "/reg_success"
 
 
 class RegisterPrivateReliefCampForm(forms.ModelForm):
     class Meta:
         model = PrivateRescueCamp
         fields = [
-            'name',
-            'location',
-            'district',
-            'lsg_name',
-            'ward_name',
-            'contacts',
-            'facilities_available',
-            'map_link',
-            'latlng',
-            'total_people',
-            'total_males',
-            'total_females',
-            'total_infants',
-            'food_req',
-            'clothing_req',
-            'sanitary_req',
-            'medical_req',
-            'other_req'
+            "name",
+            "location",
+            "district",
+            "lsg_name",
+            "ward_name",
+            "contacts",
+            "facilities_available",
+            "map_link",
+            "latlng",
+            "total_people",
+            "total_males",
+            "total_females",
+            "total_infants",
+            "food_req",
+            "clothing_req",
+            "sanitary_req",
+            "medical_req",
+            "other_req",
         ]
-        widgets = {
-            'lsg_name': forms.Select(),
-            'ward_name': forms.Select()
-        }
+        widgets = {"lsg_name": forms.Select(), "ward_name": forms.Select()}
 
 
 class RegisterPrivateReliefCamp(CreateView):
     model = PrivateRescueCamp
-    success_url = '/pcamp'
+    success_url = "/pcamp"
     form_class = RegisterPrivateReliefCampForm
 
 
@@ -153,60 +172,73 @@ def privatecc(request):
 
 def pcamplist(request):
     filter = PrivateCampFilter(request.GET, queryset=PrivateRescueCamp.objects.all())
-    data = filter.qs.order_by('-id')
+    data = filter.qs.order_by("-id")
     paginator = Paginator(data, 50)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     data = paginator.get_page(page)
 
-    return render(request, "mainapp/pcamplist.html", {'filter': filter, 'data': data})
+    return render(request, "mainapp/pcamplist.html", {"filter": filter, "data": data})
 
 
 def pcampdetails(request):
-    if ('id' not in request.GET.keys()): return HttpResponseRedirect('/pcamp')
-    id = request.GET.get('id')
+    if "id" not in request.GET.keys():
+        return HttpResponseRedirect("/pcamp")
+    id = request.GET.get("id")
     try:
         req_data = PrivateRescueCamp.objects.get(id=id)
     except:
-        return HttpResponseRedirect("/error?error_text={}".format('Sorry, we couldnt fetch details for that Camp'))
-    return render(request, 'mainapp/p_camp_details.html', {'req': req_data})
+        return HttpResponseRedirect(
+            "/error?error_text={}".format(
+                "Sorry, we couldnt fetch details for that Camp"
+            )
+        )
+    return render(request, "mainapp/p_camp_details.html", {"req": req_data})
 
 
 def download_ngo_list(request):
-    district = request.GET.get('district', None)
-    filename = 'ngo_list.csv'
+    district = request.GET.get("district", None)
+    filename = "ngo_list.csv"
     if district is not None:
-        filename = 'ngo_list_{0}.csv'.format(district)
-        qs = NGO.objects.filter(district=district).order_by('district', 'name')
+        filename = "ngo_list_{0}.csv".format(district)
+        qs = NGO.objects.filter(district=district).order_by("district", "name")
     else:
-        qs = NGO.objects.all().order_by('district', 'name')
-    header_row = ['Organisation',
-                  'Type',
-                  'Address',
-                  'Name',
-                  'Phone',
-                  'Description',
-                  'District',
-                  'Area',
-                  'Location',
-                  ]
+        qs = NGO.objects.all().order_by("district", "name")
+    header_row = [
+        "Organisation",
+        "Type",
+        "Address",
+        "Name",
+        "Phone",
+        "Description",
+        "District",
+        "Area",
+        "Location",
+    ]
     body_rows = qs.values_list(
-        'organisation',
-        'organisation_type',
-        'organisation_address',
-        'name',
-        'phone',
-        'description',
-        'district',
-        'area',
-        'location',
+        "organisation",
+        "organisation_type",
+        "organisation_address",
+        "name",
+        "phone",
+        "description",
+        "district",
+        "area",
+        "location",
     )
     return create_csv_response(filename, header_row, body_rows)
 
 
 class RegisterContributor(CreateView):
     model = Contributor
-    fields = ['name', 'district', 'phone', 'address', 'contribution_type', 'contrib_details']
-    success_url = '/contrib_success/'
+    fields = [
+        "name",
+        "district",
+        "phone",
+        "address",
+        "contribution_type",
+        "contrib_details",
+    ]
+    success_url = "/contrib_success/"
 
 
 class HomePageView(TemplateView):
@@ -226,20 +258,22 @@ class NhmDpmView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(NhmDpmView, self).get_context_data(*args, **kwargs)
-        context['data'] = [['Thiruvananthapuram', 'Dr Arun PV', '9946105471'],
-                           ['Kollam', 'Dr Harikumar', '9946105474'],
-                           ['Pathanamthitta', 'Dr Abey Sushan', '9946105476'],
-                           ['Alappuzha', 'Dr Radhakrishnan', '9946105478'],
-                           ['Kottayam', 'Dr Vyas Sukumaran', '9946105480'],
-                           ['Idukki', 'Dr Sujith Sukumaran', '9946105482'],
-                           ['Ernakulam', 'Dr Mathews Numpeli', '9946777951'],
-                           ['Thrissur', 'Dr Satheeshan', '9946105486'],
-                           ['Palakkad', 'Dr Rachana', '9946105488'],
-                           ['Malappuram', 'Dr Shibulal', '9946105490'],
-                           ['Kozhikode', 'Dr Naveen A', '9946105492'],
-                           ['Wayanad', 'Dr Abhilash B', '9946105494'],
-                           ['Kannur', 'Dr Latheesh KV', '9946105496'],
-                           ['Kasargod', 'Dr Raman Swathy', '8943110022']]
+        context["data"] = [
+            ["Thiruvananthapuram", "Dr Arun PV", "9946105471"],
+            ["Kollam", "Dr Harikumar", "9946105474"],
+            ["Pathanamthitta", "Dr Abey Sushan", "9946105476"],
+            ["Alappuzha", "Dr Radhakrishnan", "9946105478"],
+            ["Kottayam", "Dr Vyas Sukumaran", "9946105480"],
+            ["Idukki", "Dr Sujith Sukumaran", "9946105482"],
+            ["Ernakulam", "Dr Mathews Numpeli", "9946777951"],
+            ["Thrissur", "Dr Satheeshan", "9946105486"],
+            ["Palakkad", "Dr Rachana", "9946105488"],
+            ["Malappuram", "Dr Shibulal", "9946105490"],
+            ["Kozhikode", "Dr Naveen A", "9946105492"],
+            ["Wayanad", "Dr Abhilash B", "9946105494"],
+            ["Kannur", "Dr Latheesh KV", "9946105496"],
+            ["Kasargod", "Dr Raman Swathy", "8943110022"],
+        ]
         return context
 
 
@@ -276,14 +310,14 @@ class DistNeeds(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['district_data'] = DistrictNeed.objects.all()
+        context["district_data"] = DistrictNeed.objects.all()
         return context
 
 
 class RescueCampFilter(django_filters.FilterSet):
     class Meta:
         model = RescueCamp
-        fields = ['district']
+        fields = ["district"]
 
     def __init__(self, *args, **kwargs):
         super(RescueCampFilter, self).__init__(*args, **kwargs)
@@ -301,12 +335,18 @@ def missing_persons(request):
 
 
 def relief_camps_list(request):
-    filter = RescueCampFilter(request.GET, queryset=RescueCamp.objects.filter(status='active'))
-    relief_camps = filter.qs.annotate(count=Count('person')).order_by('district', 'name').all()
+    filter = RescueCampFilter(
+        request.GET, queryset=RescueCamp.objects.filter(status="active")
+    )
+    relief_camps = (
+        filter.qs.annotate(count=Count("person")).order_by("district", "name").all()
+    )
     paginator = Paginator(relief_camps, 50)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     data = paginator.get_page(page)
-    return render(request, 'mainapp/relief_camps_list.html', {'filter': filter, 'data': data})
+    return render(
+        request, "mainapp/relief_camps_list.html", {"filter": filter, "data": data}
+    )
 
 
 class RequestFilter(django_filters.FilterSet):
@@ -315,18 +355,18 @@ class RequestFilter(django_filters.FilterSet):
         # fields = ['district', 'status', 'needwater', 'needfood', 'needcloth', 'needmed', 'needkit_util', 'needtoilet', 'needothers',]
 
         fields = {
-            'district': ['exact'],
-            'requestee': ['icontains'],
-            'requestee_phone': ['exact'],
-            'location': ['icontains'],
-            'needrescue': ['exact'],
-            'needwater': ['exact'],
-            'needfood': ['exact'],
-            'needcloth': ['exact'],
-            'needmed': ['exact'],
-            'needkit_util': ['exact'],
-            'needtoilet': ['exact'],
-            'needothers': ['exact']
+            "district": ["exact"],
+            "requestee": ["icontains"],
+            "requestee_phone": ["exact"],
+            "location": ["icontains"],
+            "needrescue": ["exact"],
+            "needwater": ["exact"],
+            "needfood": ["exact"],
+            "needcloth": ["exact"],
+            "needmed": ["exact"],
+            "needkit_util": ["exact"],
+            "needtoilet": ["exact"],
+            "needothers": ["exact"],
         }
 
     def __init__(self, *args, **kwargs):
@@ -340,8 +380,8 @@ class VolunteerFilter(django_filters.FilterSet):
     class Meta:
         model = Volunteer
         fields = {
-            'district': ['exact'],
-            'area': ['exact'],
+            "district": ["exact"],
+            "area": ["exact"],
         }
 
     def __init__(self, *args, **kwargs):
@@ -354,9 +394,7 @@ class VolunteerFilter(django_filters.FilterSet):
 class NGOFilter(django_filters.FilterSet):
     class Meta:
         model = NGO
-        fields = {
-            'area': ['icontains']
-        }
+        fields = {"area": ["icontains"]}
 
     def __init__(self, *args, **kwargs):
         super(NGOFilter, self).__init__(*args, **kwargs)
@@ -369,12 +407,12 @@ class ContribFilter(django_filters.FilterSet):
     class Meta:
         model = Contributor
         fields = {
-            'district': ['exact'],
-            'name': ['icontains'],
-            'phone': ['exact'],
-            'status': ['exact'],
-            'address': ['icontains'],
-            'contrib_details': ['icontains'],
+            "district": ["exact"],
+            "name": ["icontains"],
+            "phone": ["exact"],
+            "status": ["exact"],
+            "address": ["icontains"],
+            "contrib_details": ["icontains"],
         }
 
     def __init__(self, *args, **kwargs):
@@ -386,56 +424,74 @@ class ContribFilter(django_filters.FilterSet):
 
 def contributors(request):
     filter = ContribFilter(request.GET, queryset=Contributor.objects.all())
-    contrib_data = filter.qs.order_by('-id')
+    contrib_data = filter.qs.order_by("-id")
     paginator = Paginator(contrib_data, PER_PAGE)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     contrib_data = paginator.get_page(page)
     contrib_data.min_page = contrib_data.number - PAGE_LEFT
     contrib_data.max_page = contrib_data.number + PAGE_RIGHT
     contrib_data.lim_page = PAGE_INTERMEDIATE
-    return render(request, 'mainapp/contrib_list.html', {'filter': filter, "data": contrib_data})
+    return render(
+        request, "mainapp/contrib_list.html", {"filter": filter, "data": contrib_data}
+    )
 
 
 def request_list(request):
-    filter = RequestFilter(request.GET, queryset=Request.objects.exclude(status='sup'))
-    req_data = filter.qs.order_by('-id')
+    filter = RequestFilter(request.GET, queryset=Request.objects.exclude(status="sup"))
+    req_data = filter.qs.order_by("-id")
     paginator = Paginator(req_data, PER_PAGE)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     req_data = paginator.get_page(page)
     req_data.min_page = req_data.number - PAGE_LEFT
     req_data.max_page = req_data.number + PAGE_RIGHT
     req_data.lim_page = PAGE_INTERMEDIATE
-    return render(request, 'mainapp/request_list.html', {'filter': filter, "data": req_data})
+    return render(
+        request, "mainapp/request_list.html", {"filter": filter, "data": req_data}
+    )
 
 
 def ngo_list(request):
     filter = NGOFilter(request.GET, queryset=NGO.objects.all())
-    ngo_data = filter.qs.order_by('-id')
+    ngo_data = filter.qs.order_by("-id")
     paginator = Paginator(ngo_data, PER_PAGE)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     ngo_data = paginator.get_page(page)
     ngo_data.min_page = ngo_data.number - PAGE_LEFT
     ngo_data.max_page = ngo_data.number + PAGE_RIGHT
     ngo_data.lim_page = PAGE_INTERMEDIATE
-    return render(request, 'mainapp/ngo_list.html', {'filter': filter, "data": ngo_data})
+    return render(
+        request, "mainapp/ngo_list.html", {"filter": filter, "data": ngo_data}
+    )
 
 
 def request_details(request, request_id=None):
     if not request_id:
-        return HttpResponseRedirect("/error?error_text={}".format('Page not found!'))
+        return HttpResponseRedirect("/error?error_text={}".format("Page not found!"))
     filter = RequestFilter(None)
     try:
         req_data = Request.objects.get(id=request_id)
-        updates = RequestUpdate.objects.all().filter(request_id=request_id).order_by('-update_ts')
+        updates = (
+            RequestUpdate.objects.all()
+            .filter(request_id=request_id)
+            .order_by("-update_ts")
+        )
     except:
-        return HttpResponseRedirect("/error?error_text={}".format('Sorry, we couldnt fetch details for that request'))
-    return render(request, 'mainapp/request_details.html', {'filter': filter, 'req': req_data, 'updates': updates})
+        return HttpResponseRedirect(
+            "/error?error_text={}".format(
+                "Sorry, we couldnt fetch details for that request"
+            )
+        )
+    return render(
+        request,
+        "mainapp/request_details.html",
+        {"filter": filter, "req": req_data, "updates": updates},
+    )
 
 
 class DistrictManagerFilter(django_filters.FilterSet):
     class Meta:
         model = DistrictManager
-        fields = ['district']
+        fields = ["district"]
 
     def __init__(self, *args, **kwargs):
         super(DistrictManagerFilter, self).__init__(*args, **kwargs)
@@ -446,7 +502,7 @@ class DistrictManagerFilter(django_filters.FilterSet):
 
 def districtmanager_list(request):
     filter = DistrictManagerFilter(request.GET, queryset=DistrictManager.objects.all())
-    return render(request, 'mainapp/districtmanager_list.html', {'filter': filter})
+    return render(request, "mainapp/districtmanager_list.html", {"filter": filter})
 
 
 class Maintenance(TemplateView):
@@ -455,30 +511,50 @@ class Maintenance(TemplateView):
 
 def relief_camps_data(request):
     try:
-        offset = int(request.GET.get('offset'))
+        offset = int(request.GET.get("offset"))
     except:
         offset = 0
     if RescueCamp.objects.exists():
-        last_record = RescueCamp.objects.latest('id')
+        last_record = RescueCamp.objects.latest("id")
     else:
         last_record = RescueCamp(id=0)
-    relief_camp_data = (RescueCamp.objects.filter(id__gt=offset).order_by('id')[:300]).values()
-    description = 'select * from mainapp_rescuecamp where id > offset order by id limit 300'
-    response = {'data': list(relief_camp_data),
-                'meta': {'offset': offset, 'limit': 300, 'description': description, 'last_record_id': last_record.id}}
+    relief_camp_data = (
+        RescueCamp.objects.filter(id__gt=offset).order_by("id")[:300]
+    ).values()
+    description = (
+        "select * from mainapp_rescuecamp where id > offset order by id limit 300"
+    )
+    response = {
+        "data": list(relief_camp_data),
+        "meta": {
+            "offset": offset,
+            "limit": 300,
+            "description": description,
+            "last_record_id": last_record.id,
+        },
+    }
     return JsonResponse(response, safe=False)
 
 
 def data(request):
     try:
-        offset = int(request.GET.get('offset'))
+        offset = int(request.GET.get("offset"))
     except:
         offset = 0
-    last_record = Request.objects.latest('id')
-    request_data = (Request.objects.filter(id__gt=offset).order_by('id')[:300]).values()
-    description = 'select * from mainapp_requests where id > offset order by id limit 300'
-    response = {'data': list(request_data),
-                'meta': {'offset': offset, 'limit': 300, 'description': description, 'last_record_id': last_record.id}}
+    last_record = Request.objects.latest("id")
+    request_data = (Request.objects.filter(id__gt=offset).order_by("id")[:300]).values()
+    description = (
+        "select * from mainapp_requests where id > offset order by id limit 300"
+    )
+    response = {
+        "data": list(request_data),
+        "meta": {
+            "offset": offset,
+            "limit": 300,
+            "description": description,
+            "last_record_id": last_record.id,
+        },
+    }
     return JsonResponse(response, safe=False)
 
 
@@ -488,7 +564,9 @@ def mapdata(request):
     if data:
         return JsonResponse(list(data), safe=False)
     if district != "all":
-        data = Request.objects.exclude(latlng__exact="").filter(district=district).values()
+        data = (
+            Request.objects.exclude(latlng__exact="").filter(district=district).values()
+        )
     else:
         data = Request.objects.exclude(latlng__exact="").values()
     cache.set("mapdata:" + district, data, settings.CACHE_TIMEOUT)
@@ -500,11 +578,11 @@ def mapview(request):
 
 
 def dmodash(request):
-    camps = 0;
-    total_people = 0;
-    total_male = 0;
-    total_female = 0;
-    total_infant = 0;
+    camps = 0
+    total_people = 0
+    total_male = 0
+    total_female = 0
+    total_infant = 0
     total_medical = 0
 
     for i in RescueCamp.objects.all().filter(status="active"):
@@ -513,21 +591,31 @@ def dmodash(request):
         total_male += ifnonezero(i.total_males)
         total_female += ifnonezero(i.total_females)
         total_infant += ifnonezero(i.total_infants)
-        if (i.medical_req.strip() != ""): total_medical += 1
+        if i.medical_req.strip() != "":
+            total_medical += 1
 
-    return render(request, "dmodash.html",
-                  {"camp": camps, "people": total_people, "male": total_male, "female": total_female,
-                   "infant": total_infant, "medicine": total_medical})
+    return render(
+        request,
+        "dmodash.html",
+        {
+            "camp": camps,
+            "people": total_people,
+            "male": total_male,
+            "female": total_female,
+            "infant": total_infant,
+            "medicine": total_medical,
+        },
+    )
 
 
 def dmodist(request):
     d = []
     for district in districts:
-        camps = 0;
-        total_people = 0;
-        total_male = 0;
-        total_female = 0;
-        total_infant = 0;
+        camps = 0
+        total_people = 0
+        total_male = 0
+        total_female = 0
+        total_infant = 0
         total_medical = 0
 
         for i in RescueCamp.objects.all().filter(district=district[0], status="active"):
@@ -536,10 +624,20 @@ def dmodist(request):
             total_male += ifnonezero(i.total_males)
             total_female += ifnonezero(i.total_females)
             total_infant += ifnonezero(i.total_infants)
-            if (i.medical_req.strip() != ""): total_medical += 1
+            if i.medical_req.strip() != "":
+                total_medical += 1
 
-        d.append({"district": district[1], "total_camp": camps, "total_people": total_people, "total_male": total_male,
-                  "total_female": total_female, "total_infant": total_infant, "total_medical": total_medical})
+        d.append(
+            {
+                "district": district[1],
+                "total_camp": camps,
+                "total_people": total_people,
+                "total_male": total_male,
+                "total_female": total_female,
+                "total_infant": total_infant,
+                "total_medical": total_medical,
+            }
+        )
     return render(request, "dmodist.html", {"camps": d})
 
 
@@ -547,7 +645,7 @@ def dmotal(request):
     dist = request.GET.get("district", -1)
     if dist == -1:
         return render(request, "dmotal.html")
-    camp_qs = RescueCamp.objects.filter(status='active')
+    camp_qs = RescueCamp.objects.filter(status="active")
     distmapper = dict(districts)
     if dist != "all":
         queryset = [dist]
@@ -556,44 +654,56 @@ def dmotal(request):
     camps_by_taluk = []
     for query in queryset:
         camps = camp_qs.filter(district=query)
-        camps_by_taluk += list(camps.values('taluk').annotate(
-            total_people=Sum('total_people'), total_male=Sum('total_males'),
-            total_female=Sum('total_females'), total_infant=Sum('total_infants'),
-            total_medical=Count(Case(
-                # Empty strings with or w/o spaces.
-                When(medical_req__regex=r'^[ ]*$', then=1),
-                # Null strings.
-                When(medical_req__isnull=True, then=1))),
-            total_camp=Count('id'), district=Value(distmapper[query], CharField())
-        ).annotate(
-            # We wanted non-empty, non-null strings but counted the opposite. Reverse now.
-            total_medical=F('total_camp') - F('total_medical')
-        ))
+        camps_by_taluk += list(
+            camps.values("taluk")
+            .annotate(
+                total_people=Sum("total_people"),
+                total_male=Sum("total_males"),
+                total_female=Sum("total_females"),
+                total_infant=Sum("total_infants"),
+                total_medical=Count(
+                    Case(
+                        # Empty strings with or w/o spaces.
+                        When(medical_req__regex=r"^[ ]*$", then=1),
+                        # Null strings.
+                        When(medical_req__isnull=True, then=1),
+                    )
+                ),
+                total_camp=Count("id"),
+                district=Value(distmapper[query], CharField()),
+            )
+            .annotate(
+                # We wanted non-empty, non-null strings but counted the opposite. Reverse now.
+                total_medical=F("total_camp")
+                - F("total_medical")
+            )
+        )
     return render(request, "dmotal.html", {"camps": camps_by_taluk})
 
 
 def dmocsv(request):
-    if ("district" not in request.GET.keys()): return HttpResponseRedirect("/")
+    if "district" not in request.GET.keys():
+        return HttpResponseRedirect("/")
     dist = request.GET.get("district")
     header_row = [i.name for i in RescueCamp._meta.get_fields()][
-                 1:]  # There is a person field in the begining , to remove that
+        1:
+    ]  # There is a person field in the begining , to remove that
     body_rows = []
     csv_name = "{}-data".format(dist)
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(csv_name)
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(csv_name)
     writer = csv.writer(response)
     writer.writerow(header_row)
     for camp in RescueCamp.objects.all().filter(district=dist, status="active"):
-        row = [
-            getattr(camp, key) for key in header_row
-        ]
+        row = [getattr(camp, key) for key in header_row]
         writer.writerow(row)
 
     return response
 
 
 def ifnonezero(val):
-    if (val == None): return 0
+    if val == None:
+        return 0
     return val
 
 
@@ -603,88 +713,95 @@ def dmoinfo(request):
         req_summary = Request.objects.filter(district=dist_code).aggregate(
             supplied=Count(Case(When(status="sup", then=1))),
             progress=Count(Case(When(status="pro", then=1))),
-            total=Count('id'),
+            total=Count("id"),
         )
         con_summary = Contributor.objects.filter(district=dist_code).aggregate(
-            fullfilled=Count(Case(When(status="ful", then=1))),
-            total=Count('id'),
+            fullfilled=Count(Case(When(status="ful", then=1))), total=Count("id"),
         )
         vol = Volunteer.objects.filter(district=dist_code).count()
-        data.append({
-            "district": dist_name,
-            "req": req_summary['total'],
-            "reqo": req_summary['progress'],
-            "reqd": req_summary['supplied'],
-            "con": con_summary['total'],
-            "cons": con_summary['fullfilled'],
-            "vol": vol
-        })
+        data.append(
+            {
+                "district": dist_name,
+                "req": req_summary["total"],
+                "reqo": req_summary["progress"],
+                "reqd": req_summary["supplied"],
+                "con": con_summary["total"],
+                "cons": con_summary["fullfilled"],
+                "vol": vol,
+            }
+        )
 
     return render(request, "dmoinfo.html", {"data": data})
 
 
 def error(request):
-    error_text = request.GET.get('error_text')
+    error_text = request.GET.get("error_text")
     return render(request, "mainapp/error.html", {"error_text": error_text})
 
 
 def logout_view(request):
     logout(request)
     # Redirect to camps page instead
-    return redirect('/relief_camps')
+    return redirect("/relief_camps")
 
 
 class PersonForm(CustomForm):
-    checkin_date = forms.DateField(required=False, input_formats=["%d-%m-%Y"],
-                                   help_text="Use dd-mm-yyyy format. Eg. 18-08-2018")
-    checkout_date = forms.DateField(required=False, input_formats=["%d-%m-%Y"],
-                                    help_text="Use dd-mm-yyyy format. Eg. 21-08-2018")
+    checkin_date = forms.DateField(
+        required=False,
+        input_formats=["%d-%m-%Y"],
+        help_text="Use dd-mm-yyyy format. Eg. 18-08-2018",
+    )
+    checkout_date = forms.DateField(
+        required=False,
+        input_formats=["%d-%m-%Y"],
+        help_text="Use dd-mm-yyyy format. Eg. 21-08-2018",
+    )
 
     class Meta:
         model = Person
         fields = [
-            'camped_at',
-            'name',
-            'phone',
-            'age',
-            'gender',
-            'district',
-            'address',
-            'notes',
-            'checkin_date',
-            'checkout_date',
-            'status'
+            "camped_at",
+            "name",
+            "phone",
+            "age",
+            "gender",
+            "district",
+            "address",
+            "notes",
+            "checkin_date",
+            "checkout_date",
+            "status",
         ]
 
         widgets = {
-            'address': forms.Textarea(attrs={'rows': 3}),
-            'notes': forms.Textarea(attrs={'rows': 3}),
-            'gender': forms.RadioSelect(),
+            "address": forms.Textarea(attrs={"rows": 3}),
+            "notes": forms.Textarea(attrs={"rows": 3}),
+            "gender": forms.RadioSelect(),
         }
 
     def __init__(self, *args, **kwargs):
-        camp_id = kwargs.pop('camp_id')
+        camp_id = kwargs.pop("camp_id")
         super(PersonForm, self).__init__(*args, **kwargs)
         rescue_camp_qs = RescueCamp.objects.filter(id=camp_id)
-        self.fields['camped_at'].queryset = rescue_camp_qs
-        self.fields['camped_at'].initial = rescue_camp_qs.first()
+        self.fields["camped_at"].queryset = rescue_camp_qs
+        self.fields["camped_at"].initial = rescue_camp_qs.first()
         # for field_name, field in self.fields.items():
         #    print(field_name)
         #    field.widget.attrs['class'] = 'form-control'
 
 
 class AddPerson(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    login_url = '/login/'
+    login_url = "/login/"
     model = Person
-    template_name = 'mainapp/add_person.html'
+    template_name = "mainapp/add_person.html"
     form_class = PersonForm
     success_message = "'%(name)s' registered successfully"
 
     def get_success_url(self):
-        return reverse('add_person', args=(self.camp_id,))
+        return reverse("add_person", args=(self.camp_id,))
 
     def dispatch(self, request, *args, **kwargs):
-        self.camp_id = kwargs.get('camp_id', '')
+        self.camp_id = kwargs.get("camp_id", "")
 
         try:
             self.camp = RescueCamp.objects.get(id=int(self.camp_id))
@@ -699,7 +816,7 @@ class AddPerson(SuccessMessageMixin, LoginRequiredMixin, CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(AddPerson, self).get_form_kwargs()
-        kwargs['camp_id'] = self.camp_id
+        kwargs["camp_id"] = self.camp_id
         return kwargs
 
 
@@ -707,41 +824,41 @@ class CampRequirementsForm(forms.ModelForm):
     class Meta:
         model = RescueCamp
         help_texts = {
-            'food_req': 'Indicate the required items and approximate quantity',
-            'clothing_req': 'Indicate the required items and approximate quantity',
-            'medical_req': 'Indicate the required items and approximate quantity',
-            'sanitary_req': 'Indicate the required items and approximate quantity',
-            'other_req': 'Indicate the required items and approximate quantity',
+            "food_req": "Indicate the required items and approximate quantity",
+            "clothing_req": "Indicate the required items and approximate quantity",
+            "medical_req": "Indicate the required items and approximate quantity",
+            "sanitary_req": "Indicate the required items and approximate quantity",
+            "other_req": "Indicate the required items and approximate quantity",
         }
         fields = [
-            'name',
-            'total_people',
-            'total_males',
-            'total_females',
-            'total_infants',
-            'food_req',
-            'clothing_req',
-            'sanitary_req',
-            'medical_req',
-            'other_req'
+            "name",
+            "total_people",
+            "total_males",
+            "total_females",
+            "total_infants",
+            "food_req",
+            "clothing_req",
+            "sanitary_req",
+            "medical_req",
+            "other_req",
         ]
-        read_only = ('name',)
+        read_only = ("name",)
         widgets = {
-            'name': forms.Textarea(attrs={'rows': 1, 'readonly': True}),
-            'food_req': forms.Textarea(attrs={'rows': 3}),
-            'clothing_req': forms.Textarea(attrs={'rows': 3}),
-            'medical_req': forms.Textarea(attrs={'rows': 3}),
-            'sanitary_req': forms.Textarea(attrs={'rows': 3}),
-            'other_req': forms.Textarea(attrs={'rows': 3}),
+            "name": forms.Textarea(attrs={"rows": 1, "readonly": True}),
+            "food_req": forms.Textarea(attrs={"rows": 3}),
+            "clothing_req": forms.Textarea(attrs={"rows": 3}),
+            "medical_req": forms.Textarea(attrs={"rows": 3}),
+            "sanitary_req": forms.Textarea(attrs={"rows": 3}),
+            "other_req": forms.Textarea(attrs={"rows": 3}),
         }
 
 
 class CampRequirements(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    login_url = '/login/'
+    login_url = "/login/"
     model = RescueCamp
-    template_name = 'mainapp/camp_requirements.html'
+    template_name = "mainapp/camp_requirements.html"
     form_class = CampRequirementsForm
-    success_url = '/coordinator_home/'
+    success_url = "/coordinator_home/"
     success_message = "Updated requirements saved!"
 
     # Commented to allow all users to edit all camps
@@ -756,24 +873,24 @@ class CampDetailsForm(forms.ModelForm):
     class Meta:
         model = RescueCamp
         fields = [
-            'name',
-            'location',
-            'district',
-            'taluk',
-            'village',
-            'contacts',
-            'facilities_available',
-            'map_link',
-            'latlng',
+            "name",
+            "location",
+            "district",
+            "taluk",
+            "village",
+            "contacts",
+            "facilities_available",
+            "map_link",
+            "latlng",
         ]
 
 
 class CampDetails(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    login_url = '/login/'
+    login_url = "/login/"
     model = RescueCamp
-    template_name = 'mainapp/camp_details.html'
+    template_name = "mainapp/camp_details.html"
     form_class = CampDetailsForm
-    success_url = '/coordinator_home/'
+    success_url = "/coordinator_home/"
     success_message = "Details saved!"
 
     # Commented to allow all users to edit all camps
@@ -785,18 +902,18 @@ class CampDetails(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 
 class PeopleFilter(django_filters.FilterSet):
-    fields = ['name', 'phone', 'address', 'district', 'notes', 'gender', 'camped_at']
+    fields = ["name", "phone", "address", "district", "notes", "gender", "camped_at"]
 
     class Meta:
         model = Person
         fields = {
-            'name': ['icontains'],
-            'phone': ['icontains'],
-            'address': ['icontains'],
-            'district': ['exact'],
-            'notes': ['icontains'],
-            'gender': ['exact'],
-            'camped_at': ['exact']
+            "name": ["icontains"],
+            "phone": ["icontains"],
+            "address": ["icontains"],
+            "district": ["exact"],
+            "notes": ["icontains"],
+            "gender": ["exact"],
+            "camped_at": ["exact"],
         }
 
         # TODO - field order seems to not be working!
@@ -810,68 +927,95 @@ class PeopleFilter(django_filters.FilterSet):
 
 def find_people(request):
     filter = PeopleFilter(request.GET, queryset=Person.objects.all())
-    people = filter.qs.order_by('name', '-added_at')
+    people = filter.qs.order_by("name", "-added_at")
     paginator = Paginator(people, PER_PAGE)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     people = paginator.get_page(page)
     people.min_page = people.number - PAGE_LEFT
     people.max_page = people.number + PAGE_RIGHT
     people.lim_page = PAGE_INTERMEDIATE
 
-    return render(request, 'mainapp/people.html', {'filter': filter, "data": people})
+    return render(request, "mainapp/people.html", {"filter": filter, "data": people})
 
 
 # Get unique hashtags from items in DB
 def get_hashtags(announcement_obj):
     hashtags_str = ""
-    for i in (announcement_obj.objects.all().values_list('hashtags', flat=True)):
-        if i != '':
+    for i in announcement_obj.objects.all().values_list("hashtags", flat=True):
+        if i != "":
             hashtags_str = hashtags_str + "," + i
-    hashtags = list(set([j.strip() for j in hashtags_str.strip(',').split(',') if j not in EMPTY_VALUES]))
+    hashtags = list(
+        set(
+            [
+                j.strip()
+                for j in hashtags_str.strip(",").split(",")
+                if j not in EMPTY_VALUES
+            ]
+        )
+    )
     return hashtags
 
 
 def announcements(request):
-    link_data = Announcements.objects.filter(is_pinned=False).order_by('-id').all()
-    pinned_data = Announcements.objects.filter(is_pinned=True).order_by('-id').all()[:5]
-    all_hashtags = dict(HashTag.objects.values_list('id', 'name'))
+    link_data = Announcements.objects.filter(is_pinned=False).order_by("-id").all()
+    pinned_data = Announcements.objects.filter(is_pinned=True).order_by("-id").all()[:5]
+    all_hashtags = dict(HashTag.objects.values_list("id", "name"))
     paginator = Paginator(link_data, 10)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     link_data = paginator.get_page(page)
-    return render(request, 'announcements.html', {'filter': filter, "data": link_data,
-                                                  'pinned_data': pinned_data, 'hashtags': all_hashtags})
+    return render(
+        request,
+        "announcements.html",
+        {
+            "filter": filter,
+            "data": link_data,
+            "pinned_data": pinned_data,
+            "hashtags": all_hashtags,
+        },
+    )
 
 
 def announcements_id(request, id):
     link_data = Announcements.objects.filter(id=id)
-    all_hashtags = dict(HashTag.objects.values_list('id', 'name'))
+    all_hashtags = dict(HashTag.objects.values_list("id", "name"))
     paginator = Paginator(link_data, 10)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     link_data = paginator.get_page(page)
-    return render(request, 'announcements.html', {"data": link_data, 'hashtags': all_hashtags, 'id': id})
+    return render(
+        request,
+        "announcements.html",
+        {"data": link_data, "hashtags": all_hashtags, "id": id},
+    )
 
 
 # Function to filter announcements based on hashtag
 def announcements_filter(request, hashtag_id):
-    link_data = Announcements.objects.filter(hashtag__in=[hashtag_id]).order_by('-id').all()
+    link_data = (
+        Announcements.objects.filter(hashtag__in=[hashtag_id]).order_by("-id").all()
+    )
     # Uncomment next line if you want to show pinned data in filtered view and add pinned data in render JSON
     # pinned_data = Announcements.objects.filter(is_pinned=True).order_by('-id').all()[:5]
 
-    all_hashtags = dict(HashTag.objects.values_list('id', 'name'))
+    all_hashtags = dict(HashTag.objects.values_list("id", "name"))
     paginator = Paginator(link_data, 10)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     link_data = paginator.get_page(page)
-    return render(request, 'announcements.html', {'filter': filter, "data": link_data,
-                                                  'hashtags': all_hashtags, 'selected_hashtag_id': hashtag_id})
+    return render(
+        request,
+        "announcements.html",
+        {
+            "filter": filter,
+            "data": link_data,
+            "hashtags": all_hashtags,
+            "selected_hashtag_id": hashtag_id,
+        },
+    )
 
 
 class CoordinatorCampFilter(django_filters.FilterSet):
     class Meta:
         model = RescueCamp
-        fields = {
-            'district': ['exact'],
-            'name': ['icontains']
-        }
+        fields = {"district": ["exact"], "name": ["icontains"]}
 
     def __init__(self, *args, **kwargs):
         super(CoordinatorCampFilter, self).__init__(*args, **kwargs)
@@ -882,10 +1026,7 @@ class CoordinatorCampFilter(django_filters.FilterSet):
 class PrivateCampFilter(django_filters.FilterSet):
     class Meta:
         model = PrivateRescueCamp
-        fields = {
-            'district': ['exact'],
-            'name': ['icontains']
-        }
+        fields = {"district": ["exact"], "name": ["icontains"]}
 
     def __init__(self, *args, **kwargs):
         super(PrivateCampFilter, self).__init__(*args, **kwargs)
@@ -893,25 +1034,27 @@ class PrivateCampFilter(django_filters.FilterSet):
             self.queryset = self.queryset.none()
 
 
-@login_required(login_url='/login/')
+@login_required(login_url="/login/")
 def coordinator_home(request):
     filter = CoordinatorCampFilter(request.GET, queryset=RescueCamp.objects.all())
-    data = filter.qs.annotate(count=Count('person')).order_by('district', 'name').all()
+    data = filter.qs.annotate(count=Count("person")).order_by("district", "name").all()
     paginator = Paginator(data, 50)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     data = paginator.get_page(page)
 
-    return render(request, "mainapp/coordinator_home.html", {'filter': filter, 'data': data})
+    return render(
+        request, "mainapp/coordinator_home.html", {"filter": filter, "data": data}
+    )
 
 
 class CampRequirementsFilter(django_filters.FilterSet):
     class Meta:
         model = RescueCamp
         fields = {
-            'district': ['exact'],
-            'name': ['icontains'],
-            'taluk': ['icontains'],
-            'village': ['icontains']
+            "district": ["exact"],
+            "name": ["icontains"],
+            "taluk": ["icontains"],
+            "village": ["icontains"],
         }
 
     def __init__(self, *args, **kwargs):
@@ -922,17 +1065,19 @@ class CampRequirementsFilter(django_filters.FilterSet):
 
 class VolunteerConsent(UpdateView):
     model = Volunteer
-    fields = ['has_consented']
-    success_url = '/consent_success/'
+    fields = ["has_consented"]
+    success_url = "/consent_success/"
 
     def dispatch(self, request, *args, **kwargs):
         timestamp = parser.parse(self.get_object().joined.isoformat())
         timestamp = calendar.timegm(timestamp.utctimetuple())
         timestamp = str(timestamp)[-4:]
-        request_ts = kwargs['ts']
+        request_ts = kwargs["ts"]
 
         if request_ts != timestamp:
-            return HttpResponseRedirect("/error?error_text={}".format('Sorry, we couldnt fetch volunteer info'))
+            return HttpResponseRedirect(
+                "/error?error_text={}".format("Sorry, we couldnt fetch volunteer info")
+            )
         return super(VolunteerConsent, self).dispatch(request, *args, **kwargs)
 
 
@@ -942,24 +1087,20 @@ class ConsentSuccess(TemplateView):
 
 def camp_requirements_list(request):
     filter = CampRequirementsFilter(request.GET, queryset=RescueCamp.objects.all())
-    camp_data = filter.qs.order_by('name')
+    camp_data = filter.qs.order_by("name")
     paginator = Paginator(camp_data, 50)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     data = paginator.get_page(page)
-    return render(request, "mainapp/camp_requirements_list.html", {'filter': filter, 'data': data})
+    return render(
+        request, "mainapp/camp_requirements_list.html", {"filter": filter, "data": data}
+    )
 
 
 class RequestUpdateView(CreateView):
     model = RequestUpdate
-    template_name = 'mainapp/request_update.html'
-    fields = [
-        'status',
-        'other_status',
-        'updater_name',
-        'updater_phone',
-        'notes'
-    ]
-    success_url = '/req_update_success/'
+    template_name = "mainapp/request_update.html"
+    fields = ["status", "other_status", "updater_name", "updater_phone", "notes"]
+    success_url = "/req_update_success/"
 
     def original_request(self):
         return self.original_request
@@ -974,8 +1115,12 @@ class RequestUpdateView(CreateView):
         # if not request.user.is_authenticated:
         #     return redirect('/login'+'?next=request_updates/'+kwargs['request_id']+'/')
 
-        self.original_request = get_object_or_404(Request, pk=kwargs['request_id'])
-        self.updates = RequestUpdate.objects.all().filter(request_id=kwargs['request_id']).order_by('-update_ts')
+        self.original_request = get_object_or_404(Request, pk=kwargs["request_id"])
+        self.updates = (
+            RequestUpdate.objects.all()
+            .filter(request_id=kwargs["request_id"])
+            .order_by("-update_ts")
+        )
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -1000,12 +1145,12 @@ class CollectionCenterFilter(django_filters.FilterSet):
     class Meta:
         model = CollectionCenter
         fields = OrderedDict()
-        fields['name'] = ['icontains']
-        fields['address'] = ['icontains']
-        fields['contacts'] = ['icontains']
-        fields['district'] = ['exact']
-        fields['lsg_name'] = ['exact']
-        fields['ward_name'] = ['exact']
+        fields["name"] = ["icontains"]
+        fields["address"] = ["icontains"]
+        fields["contacts"] = ["icontains"]
+        fields["district"] = ["exact"]
+        fields["lsg_name"] = ["exact"]
+        fields["ward_name"] = ["exact"]
         # fields['city'] = ['icontains']
 
     def __init__(self, *args, **kwargs):
@@ -1018,9 +1163,9 @@ class HospitalViewFitler(django_filters.FilterSet):
     class Meta:
         model = Hospital
         fields = OrderedDict()
-        fields['name'] = ['icontains']
-        fields['designation'] = ['icontains']
-        fields['district'] = ['exact']
+        fields["name"] = ["icontains"]
+        fields["designation"] = ["icontains"]
+        fields["district"] = ["exact"]
 
     # def __init__(self, *args, **kwargs):
     #     super(HospitalViewFitler, self).__init__(*args, **kwargs)
@@ -1031,39 +1176,43 @@ class HospitalViewFitler(django_filters.FilterSet):
 class HospitalForm(forms.ModelForm):
     class Meta:
         model = Hospital
-        fields = ['name', 'designation', 'district']
+        fields = ["name", "designation", "district"]
 
 
 class HospitalView(ListView):
     model = Hospital
-    success_url = '/hospitals/'
+    success_url = "/hospitals/"
     paginate_by = 50
-    template_name = 'mainapp/hospitals.html'
-    queryset = Hospital.objects.order_by('-id')
+    template_name = "mainapp/hospitals.html"
+    queryset = Hospital.objects.order_by("-id")
 
     def get_context_data(self, **kwargs):
         filtered_list = HospitalViewFitler(
-            self.request.GET, queryset=self.get_queryset())
-        kwargs['object_list'] = filtered_list.qs
+            self.request.GET, queryset=self.get_queryset()
+        )
+        kwargs["object_list"] = filtered_list.qs
         context = super().get_context_data(**kwargs)
-        filtered_list._qs = context['object_list']
+        filtered_list._qs = context["object_list"]
 
-        context['filter'] = filtered_list
+        context["filter"] = filtered_list
         return context
 
 
 class CollectionCenterListView(ListView):
     model = CollectionCenter
     paginate_by = PER_PAGE
-    ordering = ['-id']
+    ordering = ["-id"]
 
     def get_context_data(self, **kwargs):
-        location = self.kwargs['location']
-        inside_kerala = True if location == 'inside_kerala' else False
+        location = self.kwargs["location"]
+        inside_kerala = True if location == "inside_kerala" else False
         context = super().get_context_data(**kwargs)
-        context['inside_kerala'] = inside_kerala
-        context['filter'] = CollectionCenterFilter(
-            self.request.GET, queryset=CollectionCenter.objects.filter(is_inside_kerala=inside_kerala).order_by('-id')
+        context["inside_kerala"] = inside_kerala
+        context["filter"] = CollectionCenterFilter(
+            self.request.GET,
+            queryset=CollectionCenter.objects.filter(
+                is_inside_kerala=inside_kerala
+            ).order_by("-id"),
         )
         return context
 
@@ -1072,27 +1221,27 @@ class CollectionCenterForm(forms.ModelForm):
     class Meta:
         model = CollectionCenter
         fields = [
-            'name',
-            'address',
-            'contacts',
-            'type_of_materials_collecting',
-            'is_inside_kerala',
-            'district',
-            'lsg_name',
-            'ward_name',
-            'city',
-            'map_link',
+            "name",
+            "address",
+            "contacts",
+            "type_of_materials_collecting",
+            "is_inside_kerala",
+            "district",
+            "lsg_name",
+            "ward_name",
+            "city",
+            "map_link",
         ]
         widgets = {
-            'lsg_name': forms.Select(),
-            'ward_name': forms.Select(),
+            "lsg_name": forms.Select(),
+            "ward_name": forms.Select(),
         }
 
 
 class CollectionCenterView(CreateView):
     model = CollectionCenter
     form_class = CollectionCenterForm
-    success_url = '/collection_centers/'
+    success_url = "/collection_centers/"
 
 
 def announcement_api(request):
@@ -1102,7 +1251,7 @@ def announcement_api(request):
 
 
 def contribute(request):
-    return render(request, 'mainapp/contribute.html')
+    return render(request, "mainapp/contribute.html")
 
 
 def fbannouncements(request):

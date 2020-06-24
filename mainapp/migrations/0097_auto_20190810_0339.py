@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0096_auto_20190810_0301'),
+        ("mainapp", "0096_auto_20190810_0301"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='announcements',
-            name='hashtags',
-            field=models.TextField(blank=True, default='', help_text='Add hashtags as comma separated values.'),
+            model_name="announcements",
+            name="hashtags",
+            field=models.TextField(
+                blank=True,
+                default="",
+                help_text="Add hashtags as comma separated values.",
+            ),
         ),
     ]

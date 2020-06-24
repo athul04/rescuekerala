@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0106_smsjob_sms_type'),
+        ("mainapp", "0106_smsjob_sms_type"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='smsjob',
-            name='message',
+            model_name="smsjob",
+            name="message",
             field=models.CharField(blank=True, max_length=160, null=True),
         ),
     ]

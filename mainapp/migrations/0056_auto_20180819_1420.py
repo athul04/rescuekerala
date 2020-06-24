@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0055_rescuecamp_facilities_available'),
+        ("mainapp", "0055_rescuecamp_facilities_available"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='rescuecamp',
-            name='facilities_available',
-            field=models.TextField(blank=True, null=True, verbose_name='Facilities Available (light, kitchen, toilets etc.) - ലഭ്യമായ സൗകര്യങ്ങൾ'),
+            model_name="rescuecamp",
+            name="facilities_available",
+            field=models.TextField(
+                blank=True,
+                null=True,
+                verbose_name="Facilities Available (light, kitchen, toilets etc.) - ലഭ്യമായ സൗകര്യങ്ങൾ",
+            ),
         ),
     ]

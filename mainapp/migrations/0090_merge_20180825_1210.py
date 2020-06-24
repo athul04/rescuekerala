@@ -6,9 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0089_ngo_website_url'),
-        ('mainapp', '0089_person_is_dup'),
+        ("mainapp", "0089_ngo_website_url"),
+        ("mainapp", "0089_person_is_dup"),
     ]
 
-    operations = [
-    ]
+    operations = []

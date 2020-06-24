@@ -6,13 +6,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0024_auto_20180815_2306'),
+        ("mainapp", "0024_auto_20180815_2306"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='volunteer',
-            name='area',
-            field=models.CharField(choices=[('dcr', 'Doctor'), ('hsv', 'Health Services'), ('elw', 'Electrical Works'), ('mew', 'Mechanical Work'), ('cvw', 'Civil Work'), ('plw', 'Plumbing work'), ('vls', 'Vehicle Support'), ('ckg', 'Cooking'), ('rlo', 'Relief operation'), ('cln', 'Cleaning'), ('bot', 'Boat Service'), ('rck', 'Rock Climbing'), ('oth', 'Other')], max_length=15, verbose_name='Area of volunteering'),
+            model_name="volunteer",
+            name="area",
+            field=models.CharField(
+                choices=[
+                    ("dcr", "Doctor"),
+                    ("hsv", "Health Services"),
+                    ("elw", "Electrical Works"),
+                    ("mew", "Mechanical Work"),
+                    ("cvw", "Civil Work"),
+                    ("plw", "Plumbing work"),
+                    ("vls", "Vehicle Support"),
+                    ("ckg", "Cooking"),
+                    ("rlo", "Relief operation"),
+                    ("cln", "Cleaning"),
+                    ("bot", "Boat Service"),
+                    ("rck", "Rock Climbing"),
+                    ("oth", "Other"),
+                ],
+                max_length=15,
+                verbose_name="Area of volunteering",
+            ),
         ),
     ]

@@ -6,13 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0091_merge_20180825_1236'),
+        ("mainapp", "0091_merge_20180825_1236"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='request',
-            name='is_request_for_others',
-            field=models.BooleanField(default=False, verbose_name='Requesting for others - മറ്റൊരാൾക്ക് വേണ്ടി അപേക്ഷിക്കുന്നു '),
+            model_name="request",
+            name="is_request_for_others",
+            field=models.BooleanField(
+                default=False,
+                verbose_name="Requesting for others - മറ്റൊരാൾക്ക് വേണ്ടി അപേക്ഷിക്കുന്നു ",
+            ),
         ),
     ]

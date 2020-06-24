@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0088_merge_20180824_1631'),
+        ("mainapp", "0088_merge_20180824_1631"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='person',
-            name='is_dup',
+            model_name="person",
+            name="is_dup",
             field=models.BooleanField(default=False),
         ),
     ]

@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0088_merge_20180824_1631'),
+        ("mainapp", "0088_merge_20180824_1631"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='ngo',
-            name='website_url',
-            field=models.CharField(default='', max_length=300, verbose_name='Enter your website link'),
+            model_name="ngo",
+            name="website_url",
+            field=models.CharField(
+                default="", max_length=300, verbose_name="Enter your website link"
+            ),
         ),
     ]

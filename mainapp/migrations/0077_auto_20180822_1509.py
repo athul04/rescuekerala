@@ -7,19 +7,23 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0076_auto_20180822_1220'),
+        ("mainapp", "0076_auto_20180822_1220"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='csvbulkupload',
-            name='camp',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='mainapp.RescueCamp'),
+            model_name="csvbulkupload",
+            name="camp",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="mainapp.RescueCamp",
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='csvbulkupload',
-            name='is_completed',
+            model_name="csvbulkupload",
+            name="is_completed",
             field=models.BooleanField(default=False),
         ),
     ]

@@ -6,12 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0083_merge_20180824_1323'),
+        ("mainapp", "0083_merge_20180824_1323"),
     ]
 
     operations = [
         migrations.AddIndex(
-            model_name='person',
-            index=models.Index(fields=['name', '-added_at'], name='mainapp_per_name_65f623_idx'),
+            model_name="person",
+            index=models.Index(
+                fields=["name", "-added_at"], name="mainapp_per_name_65f623_idx"
+            ),
         ),
     ]

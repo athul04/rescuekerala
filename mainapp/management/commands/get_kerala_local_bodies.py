@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 url = "http://lsgelection.kerala.gov.in/public/search/voterlist"
 headers = {
-    'Content-Type': "application/x-www-form-urlencoded",
+    "Content-Type": "application/x-www-form-urlencoded",
 }
 
 districts = {
@@ -33,12 +33,12 @@ districts = {
 def get_wards_from_lsg_code(lsg_code):
     payload = "form%5BlocalBody%5D={0}".format(lsg_code)
     response = requests.request("POST", url, data=payload, headers=headers)
-    soup = BeautifulSoup(response.text, 'html.parser')
+    soup = BeautifulSoup(response.text, "html.parser")
     ward_names_options = soup.find(id="form_ward")
     ward_names_dict = {
-        ward['value']: ward.text
-        for ward in ward_names_options.find_all('option')
-        if ward['value']
+        ward["value"]: ward.text
+        for ward in ward_names_options.find_all("option")
+        if ward["value"]
     }
     return ward_names_dict
 
@@ -46,13 +46,13 @@ def get_wards_from_lsg_code(lsg_code):
 def get_lsg_details_for_district(district_key):
     payload = "form%5Bdistrict%5D={0}".format(district_key)
     response = requests.request("POST", url, data=payload, headers=headers)
-    soup = BeautifulSoup(response.text, 'html.parser')
+    soup = BeautifulSoup(response.text, "html.parser")
 
     lsg_names_options = soup.find(id="form_localBody")
     lsg_names_dict = {
-        lsg['value']: {"name": lsg.text, "wards": {}}
-        for lsg in lsg_names_options.find_all('option')
-        if lsg['value']
+        lsg["value"]: {"name": lsg.text, "wards": {}}
+        for lsg in lsg_names_options.find_all("option")
+        if lsg["value"]
     }
     return lsg_names_dict
 
@@ -66,7 +66,7 @@ def get_govt_local_bodies():
 
         for lsg_code, lsg_dict in lsg_names_dict.items():
             ward_names_dict = get_wards_from_lsg_code(lsg_code)
-            lsg_names_dict[lsg_code]['wards'] = ward_names_dict
+            lsg_names_dict[lsg_code]["wards"] = ward_names_dict
             print("-------------------> LSG: ", lsg_code)
 
         districts_mapping[distr_name] = lsg_names_dict
@@ -76,8 +76,8 @@ def get_govt_local_bodies():
 
 class Command(BaseCommand):
     help = (
-        'Read Kerala govt. local bodies from official website' 
-        '(http://lsgelection.kerala.gov.in/) and save in a json file.'
+        "Read Kerala govt. local bodies from official website"
+        "(http://lsgelection.kerala.gov.in/) and save in a json file."
     )
 
     def handle(self, *args, **options):
@@ -100,6 +100,8 @@ class Command(BaseCommand):
         }
         """
         local_bodies = get_govt_local_bodies()
-        file_path = os.path.join(settings.BASE_DIR + '/static/js/kerala_local_bodies.json')
-        with open(file_path, 'w') as f:
+        file_path = os.path.join(
+            settings.BASE_DIR + "/static/js/kerala_local_bodies.json"
+        )
+        with open(file_path, "w") as f:
             f.write(str(local_bodies))
