@@ -9,9 +9,7 @@
 
 import calendar
 import csv
-import datetime
 import sys
-import time
 
 import requests
 
@@ -71,7 +69,7 @@ if __name__ == "__main__":
                 failed.write(mobile)
                 sys.exit()
 
-            except:
+            except requests.RequestException:
 
                 failed.write(mobile)
 

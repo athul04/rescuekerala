@@ -1,9 +1,11 @@
+import logging
 import os
 import requests
 
 SMS_ENDPOINT = os.environ.get("SMS_API")
 SMS_USER = os.environ.get("SMS_USER")
 SMS_PASSWORD = os.environ.get("SMS_PASSWORD")
+_LOG = logging.getLogger(__name__)
 
 
 def send_confirmation_sms(phone_number):
@@ -19,6 +21,6 @@ def send_confirmation_sms(phone_number):
     )
     try:
         requests.get(api_url, timeout=1)
-    except Exception as e:
+    except requests.RequestException:
         # API endpoint might misbehave, and sms confirmation is not a critical function
-        pass
+        _LOG.info("eSMS request failed")
