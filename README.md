@@ -32,7 +32,7 @@
 [^top](#table-of-contents)
 
 #### Docker
-- Check out this [Wiki](https://github.com/IEEEKeralaSection/rescuekerala/wiki/Using-Docker) to see how to run docker for this project.
+- Check out this [Wiki](https://github.com/raksha-life/rescuekerala/wiki/Using-Docker) to see how to run docker for this project.
 
 #### [Python 3](https://www.python.org/downloads/)
 
@@ -76,7 +76,7 @@
 <details>
 <summary>2. Clone the repo.</summary>
 
-    git clone https://github.com/IEEEKeralaSection/rescuekerala.git
+    git clone https://github.com/raksha-life/rescuekerala.git
     cd rescuekerala
 </details>
 
@@ -201,23 +201,23 @@ In the above example the server is being run on a local IP address on port 8002 
 
 #### Verification of Rescue Requests
 
-You can help us with verifying user submitted request from our [Ushahidi volunteer](https://volunteers.keralarescue.in/) portal. Please follow the usermanual available in either [English](https://github.com/IEEEKeralaSection/rescuekerala/files/2300176/Kerala.Rescue.Volunteers.Manual.Draft.pdf) or [Malayalam](https://github.com/IEEEKeralaSection/rescuekerala/files/2299875/default.pdf)
+You can help us with verifying user submitted request from our [Ushahidi volunteer](https://volunteers.keralarescue.in/) portal. Please follow the usermanual available in either [English](https://github.com/raksha-life/rescuekerala/files/2300176/Kerala.Rescue.Volunteers.Manual.Draft.pdf) or [Malayalam](https://github.com/raksha-life/rescuekerala/files/2299875/default.pdf)
 
 #### Contribution Guidelines
-Check out this [Wiki](https://github.com/IEEEKeralaSection/rescuekerala/wiki/Contribution-Guidelines) for our contribution guidelines.
+Check out this [Wiki](https://github.com/raksha-life/rescuekerala/wiki/Contribution-Guidelines) for our contribution guidelines.
 
-Please find issues that we need help [here](https://github.com/IEEEKeralaSection/rescuekerala/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22). Go through the comments in the issue to check if someone else is already working on it. Don't forget to drop a comment when you start working on it.
+Please find issues that we need help [here](https://github.com/raksha-life/rescuekerala/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22). Go through the comments in the issue to check if someone else is already working on it. Don't forget to drop a comment when you start working on it.
 
 
 <details>
 <summary>Testing PRs
 
-We have a lot of [Pull Requests](https://github.com/IEEEKeralaSection/rescuekerala/pulls) that requires testing. Pick any PR that you like, try to reproduce the original issue and fix. Also join `#testing` channel in our slack and drop a note that you
+We have a lot of [Pull Requests](https://github.com/raksha-life/rescuekerala/pulls) that requires testing. Pick any PR that you like, try to reproduce the original issue and fix. Also join `#testing` channel in our slack and drop a note that you
 are working on it.
 </summary>
 
 #### Testing Pull Requests
-Note: If you have cloned a fork of IEEEKeralaSection/rescuekerala, replace ```origin``` with ```upstream```
+Note: If you have cloned a fork of raksha-life/rescuekerala, replace ```origin``` with ```upstream```
 
 1. Checkout the Pull Request you would like to test by
       ```
@@ -235,7 +235,7 @@ Note: If you have cloned a fork of IEEEKeralaSection/rescuekerala, replace ```or
 <details>
 <summary>Submitting Pull Requests
 
-Please find issues that we need help [here](https://github.com/IEEEKeralaSection/rescuekerala/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22). Go through the comments in the issue to check if someone else is already working on it. Don't forget to drop a comment when you start working on it.</summary>
+Please find issues that we need help [here](https://github.com/raksha-life/rescuekerala/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22). Go through the comments in the issue to check if someone else is already working on it. Don't forget to drop a comment when you start working on it.</summary>
 
 Always start your work in a new git branch. **Don't start to work on the
 master branch**. Before you start your branch make sure you have the most
@@ -266,8 +266,8 @@ has the bug number in the branch name.
       ```
 7. Compare and create your pull request.
 
-[0]: https://travis-ci.org/IEEEKeralaSection/rescuekerala.svg?branch=master
-[1]: https://travis-ci.org/IEEEKeralaSection/rescuekerala
+[0]: https://travis-ci.org/raksha-life/rescuekerala.svg?branch=master
+[1]: https://travis-ci.org/raksha-life/rescuekerala
 </details>
 
 <hr>
