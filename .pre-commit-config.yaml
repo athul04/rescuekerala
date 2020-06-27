@@ -1,10 +1,21 @@
 repos:
--   repo: https://github.com/ambv/black
+  - repo: 'https://github.com/pre-commit/pre-commit-hooks'
+    rev: master
+    hooks:
+      - id: trailing-whitespace
+        files: (^|/)a/.+\.(py|html|sh|css|js)$
+      - id: check-merge-conflict
+        name: check for merge conflict
+        description: Prevent accidentally commiting files with merge conflicts.
+      - id: end-of-file-fixer
+        name: fix end of files.
+        description: 'Ensures that a file is either empty, or ends with one newline.'
+  - repo: 'https://github.com/ambv/black'
     rev: stable
     hooks:
-    - id: black
-      language_version: python3.6
--   repo: https://gitlab.com/pycqa/flake8
+      - id: black
+        language_version: python3.6
+  - repo: 'https://gitlab.com/pycqa/flake8'
     rev: 3.7.9
     hooks:
-    - id: flake8
+      - id: flake8
