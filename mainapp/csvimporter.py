@@ -13,7 +13,7 @@ def parsedate(str):
                 else:
                     return datetime.datetime.strptime(str, "%d/%m/%Y")
         return None
-    except:
+    except IndexError:
         return None
 
 
@@ -58,7 +58,7 @@ def import_inmate_file(csvid, is_recovery=False):
                 "age",
             ]
             for i in header:
-                if datum.get(i, "") == None:
+                if not datum.get(i, ""):
                     empty += 1
                     continue
                 if datum.get(i, "").strip() == "":
@@ -79,11 +79,11 @@ def import_inmate_file(csvid, is_recovery=False):
                 ):
                     gender = 1
             age = "-1"
-            if datum.get("age", "") != None:
+            if datum.get("age", ""):
                 if datum.get("age", "").strip() != "":
                     age = datum.get("age", "").strip()
             district = ""
-            if datum.get("district", "") != None:
+            if datum.get("district", ""):
                 district = district.lower()
 
             Person(

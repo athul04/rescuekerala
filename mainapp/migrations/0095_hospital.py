@@ -33,7 +33,8 @@ class Migration(migrations.Migration):
                         validators=[
                             django.core.validators.RegexValidator(
                                 code="invalid_mobile",
-                                message="Please Enter 10/11 digit mobile number or landline as 0<std code><phone number>",
+                                message="Please Enter 10/11 digit mobile number or\
+                                 landline as 0<std code><phone number>",
                                 regex="^((\\+91|91|0)[\\- ]{0,1})?[456789]\\d{9}$",
                             )
                         ],
@@ -46,7 +47,8 @@ class Migration(migrations.Migration):
                         validators=[
                             django.core.validators.RegexValidator(
                                 code="invalid_mobile",
-                                message="Please Enter 10/11 digit mobile number or landline as 0<std code><phone number>",
+                                message="Please Enter 10/11 digit mobile number or\
+                                 landline as 0<std code><phone number>",
                                 regex="^((\\+91|91|0)[\\- ]{0,1})?[456789]\\d{9}$",
                             )
                         ],

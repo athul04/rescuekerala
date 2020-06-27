@@ -92,6 +92,8 @@ contribution_types = (
     ("oth", "Others"),
 )
 
+PHONE_NUMBER_REGEX = r"^((\+91|91|0)[\- ]{0,1})?[456789]\d{9}$"
+
 
 class LSGTypes(Enum):
     CORPORATION = 0
@@ -109,7 +111,7 @@ class Request(models.Model):
     )
 
     phone_number_regex = RegexValidator(
-        regex="^((\+91|91|0)[\- ]{0,1})?[456789]\d{9}$",
+        PHONE_NUMBER_REGEX,
         message="Please Enter 10/11 digit mobile number or landline as 0<std code><phone number>",
         code="invalid_mobile",
     )
@@ -240,7 +242,7 @@ class Volunteer(models.Model):
     name = models.CharField(max_length=100, verbose_name="Name - പേര്")
 
     phone_number_regex = RegexValidator(
-        regex="^((\+91|91|0)[\- ]{0,1})?[456789]\d{9}$",
+        PHONE_NUMBER_REGEX,
         message="Please Enter 10 digit mobile number or landline as 0<std code><phone number>",
         code="invalid_mobile",
     )
@@ -318,7 +320,7 @@ class Contributor(models.Model):
     name = models.CharField(max_length=100, verbose_name="Name - പേര്")
 
     phone_number_regex = RegexValidator(
-        regex="^((\+91|91|0)[\- ]{0,1})?[456789]\d{9}$",
+        PHONE_NUMBER_REGEX,
         message="Please Enter 10 digit mobile number or landline as 0<std code><phone number>",
         code="invalid_mobile",
     )
@@ -640,7 +642,7 @@ class Person(models.Model):
         verbose_name = "Relief: Inmate"
         verbose_name_plural = "Relief: Inmates"
         indexes = [
-            models.Index(fields=["name", "-added_at",]),
+            models.Index(fields=["name", "-added_at"]),
         ]
 
     def __str__(self):
@@ -692,7 +694,7 @@ class RequestUpdate(models.Model):
     )
 
     phone_number_regex = RegexValidator(
-        regex="^((\+91|91|0)[\- ]{0,1})?[456789]\d{9}$",
+        PHONE_NUMBER_REGEX,
         message="Please Enter 10/11 digit mobile number or landline as 0<std code><phone number>",
         code="invalid_mobile",
     )
@@ -829,7 +831,7 @@ class Hospital(models.Model):
     officer = models.CharField(max_length=100)
     designation = models.CharField(max_length=250, verbose_name="Officer name")
     phone_number_regex = RegexValidator(
-        regex="^((\+91|91|0)[\- ]{0,1})?[456789]\d{9}$",
+        PHONE_NUMBER_REGEX,
         message="Please Enter 10/11 digit mobile number or landline as 0<std code><phone number>",
         code="invalid_mobile",
     )
@@ -887,7 +889,7 @@ class SmsJob(models.Model):
             mess = "Message {} sent to ".format(self.message)
         else:
             mess = "Consent Message sent to "
-        if self.district != None and self.area != None:
+        if self.district and self.area:
             return mess + self.get_district_display() + "-" + self.get_area_display()
         else:
             return mess + "Sent to Group :" + str(self.group)

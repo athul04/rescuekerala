@@ -37,7 +37,8 @@ class Migration(migrations.Migration):
             model_name="contributor",
             name="commodities",
             field=models.TextField(
-                verbose_name="What you can contribute. ( സംഭാവന ചെയ്യാന്\u200d ഉദ്ദേശിക്കുന്ന സാധനങ്ങള്\u200d ) -- Eg: Shirts, torches etc "
+                verbose_name="What you can contribute. ( സംഭാവന ചെയ്യാന്\u200d ഉദ്ദേശിക്കുന്ന സാധനങ്ങള്\u200d ) -- "
+                             "Eg: Shirts, torches etc "
             ),
         ),
         migrations.AlterField(

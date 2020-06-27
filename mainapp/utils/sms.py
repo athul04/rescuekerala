@@ -10,6 +10,10 @@ from mainapp.models import Volunteer, SmsJob
 
 logger = logging.getLogger("send_sms")
 
+SMS_API_URL = os.environ.get("SMS_API")
+API_USERNAME = os.environ.get("SMS_USER")
+API_PASSWORD = os.environ.get("SMS_PASSWORD")
+
 
 def sms_sender(smsjobid, **kwargs):
     smsjob = SmsJob.objects.get(id=smsjobid)
@@ -19,40 +23,36 @@ def sms_sender(smsjobid, **kwargs):
     root = environ.Path(__file__) - 3
     environ.Env.read_env(root(".env"))
 
-    SMS_API_URL = os.environ.get("SMS_API")
-    API_USERNAME = os.environ.get("SMS_USER")
-    API_PASSWORD = os.environ.get("SMS_PASSWORD")
-
     district = kwargs["district"]
-    type = kwargs["type"]
+    _type = kwargs["type"]
     area = kwargs["area"]
     message = kwargs["message"]
     group = kwargs["group"]
 
     logger.info(
         "Starting sms job.\nDistrict: {}, Type: {}, Area: {}, Message: {} , Group: {}".format(
-            str(district), str(type), str(area), str(message), str(group)
+            str(district), str(_type), str(area), str(message), str(group)
         )
     )
     volunteers = Volunteer.objects.all()
-    if district != None:
+    if district:
         volunteers = volunteers.filter(district=district)
-    if area != None:
+    if area:
         volunteers = volunteers.filter(area=area)
-    if group != None:
+    if group:
         volunteers = volunteers.filter(groups__in=[group])
-    if district == None and area == None and group == None:
+    if not (district or area or group):
         smsjob.failure = "Incorrect Information Provided"
         logger.info(smsjob.failure)
         smsjob.has_completed = True
         smsjob.save()
         return
     logger.info("Filtered out {} Volunteers ".format(volunteers.count()))
-    if type != "consent":
+    if _type != "consent":
         volunteers.filter(has_consented=True)
     fail_count = 0
     for volunteer in volunteers:
-        if type == "consent" or type == "survey":
+        if _type == "consent" or _type == "survey":
             timestamp = parser.parse(str(volunteer.joined))
             timestamp = calendar.timegm(timestamp.utctimetuple())
             # Preparing unique URL
@@ -66,10 +66,11 @@ def sms_sender(smsjobid, **kwargs):
                 "Thank you for registering as a volunteer on keralarescue. Please click here to confirm. "
                 + url
             )
-            if type == "survey":
+            if _type == "survey":
                 message = (
-                    "Thanks keralarescue volunteer if willing to conduct damage assessment field survey, Pls click on the link to confirm. "
-                    + url
+                    "Thanks keralarescue volunteer if willing to conduct damage assessment field survey, "
+                    "Pls click on "
+                    "the link to confirm. " + url
                 )
         payload = {
             "username": API_USERNAME,

@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("mainapp", "0109_smsjob_area"),
     ]
@@ -15,7 +14,8 @@ class Migration(migrations.Migration):
             name="message",
             field=models.CharField(
                 blank=True,
-                help_text="This will only be used for     informational messages. For consent messages, a preconfigured message is used",
+                help_text="This will only be used for"
+                          "informational messages. For consent messages, a preconfigured message is used",
                 max_length=160,
                 null=True,
             ),

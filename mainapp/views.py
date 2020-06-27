@@ -48,6 +48,7 @@ from mainapp.models import (
 )
 from mainapp.admin import create_csv_response
 from mainapp.models import CollectionCenter, Hospital, HashTag
+from mainapp.utils import get_numeric_value
 
 PER_PAGE = 100
 PAGE_LEFT = 5
@@ -186,7 +187,7 @@ def pcampdetails(request):
     id = request.GET.get("id")
     try:
         req_data = PrivateRescueCamp.objects.get(id=id)
-    except:
+    except PrivateRescueCamp.DoesNotExist:
         return HttpResponseRedirect(
             "/error?error_text={}".format(
                 "Sorry, we couldnt fetch details for that Camp"
@@ -198,7 +199,7 @@ def pcampdetails(request):
 def download_ngo_list(request):
     district = request.GET.get("district", None)
     filename = "ngo_list.csv"
-    if district is not None:
+    if district:
         filename = "ngo_list_{0}.csv".format(district)
         qs = NGO.objects.filter(district=district).order_by("district", "name")
     else:
@@ -352,7 +353,6 @@ def relief_camps_list(request):
 class RequestFilter(django_filters.FilterSet):
     class Meta:
         model = Request
-        # fields = ['district', 'status', 'needwater', 'needfood', 'needcloth', 'needmed', 'needkit_util', 'needtoilet', 'needothers',]
 
         fields = {
             "district": ["exact"],
@@ -475,7 +475,7 @@ def request_details(request, request_id=None):
             .filter(request_id=request_id)
             .order_by("-update_ts")
         )
-    except:
+    except RequestUpdate.DoesNotExist:
         return HttpResponseRedirect(
             "/error?error_text={}".format(
                 "Sorry, we couldnt fetch details for that request"
@@ -512,7 +512,7 @@ class Maintenance(TemplateView):
 def relief_camps_data(request):
     try:
         offset = int(request.GET.get("offset"))
-    except:
+    except TypeError:
         offset = 0
     if RescueCamp.objects.exists():
         last_record = RescueCamp.objects.latest("id")
@@ -539,7 +539,7 @@ def relief_camps_data(request):
 def data(request):
     try:
         offset = int(request.GET.get("offset"))
-    except:
+    except TypeError:
         offset = 0
     last_record = Request.objects.latest("id")
     request_data = (Request.objects.filter(id__gt=offset).order_by("id")[:300]).values()
@@ -587,10 +587,10 @@ def dmodash(request):
 
     for i in RescueCamp.objects.all().filter(status="active"):
         camps += 1
-        total_people += ifnonezero(i.total_people)
-        total_male += ifnonezero(i.total_males)
-        total_female += ifnonezero(i.total_females)
-        total_infant += ifnonezero(i.total_infants)
+        total_people += get_numeric_value(i.total_people)
+        total_male += get_numeric_value(i.total_males)
+        total_female += get_numeric_value(i.total_females)
+        total_infant += get_numeric_value(i.total_infants)
         if i.medical_req.strip() != "":
             total_medical += 1
 
@@ -620,10 +620,10 @@ def dmodist(request):
 
         for i in RescueCamp.objects.all().filter(district=district[0], status="active"):
             camps += 1
-            total_people += ifnonezero(i.total_people)
-            total_male += ifnonezero(i.total_males)
-            total_female += ifnonezero(i.total_females)
-            total_infant += ifnonezero(i.total_infants)
+            total_people += get_numeric_value(i.total_people)
+            total_male += get_numeric_value(i.total_males)
+            total_female += get_numeric_value(i.total_females)
+            total_infant += get_numeric_value(i.total_infants)
             if i.medical_req.strip() != "":
                 total_medical += 1
 
@@ -687,8 +687,7 @@ def dmocsv(request):
     dist = request.GET.get("district")
     header_row = [i.name for i in RescueCamp._meta.get_fields()][
         1:
-    ]  # There is a person field in the begining , to remove that
-    body_rows = []
+    ]  # There is a person field in the beginning , to remove that
     csv_name = "{}-data".format(dist)
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(csv_name)
@@ -699,12 +698,6 @@ def dmocsv(request):
         writer.writerow(row)
 
     return response
-
-
-def ifnonezero(val):
-    if val == None:
-        return 0
-    return val
 
 
 def dmoinfo(request):

@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import environ
-import dj_database_url
-import raven
 import datetime
+
+import raven # noqa
 
 
 def get_list(text):

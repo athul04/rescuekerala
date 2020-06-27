@@ -1,7 +1,6 @@
 import csv
 import io
 
-# import chardet
 from django.test import TestCase, Client
 from django.urls import reverse
 
@@ -210,11 +209,9 @@ class RegisterNGOViewTests(TestCase):
         ]
         for field in req_fields:
             self.assertFormError(response, "form", field, "This field is required.")
-        # post_data = {'area': 'asdasdasd'}
-        # response = client.post(self.url, post_data)
-        # self.assertEqual(response.status_code, 200)
-        # self.assertTemplateUsed(response, 'mainapp/ngo_form.html')
-        # self.assertFormError(response, 'form', 'area', 'Select a valid choice. asdasdasd is not one of the available choices.')
+        # post_data = {'area': 'asdasdasd'} response = client.post(self.url, post_data) self.assertEqual(
+        # response.status_code, 200) self.assertTemplateUsed(response, 'mainapp/ngo_form.html') self.assertFormError(
+        # response, 'form', 'area', 'Select a valid choice. asdasdasd is not one of the available choices.')
 
     def test_creation(self):
         client = Client()
@@ -416,21 +413,21 @@ class ReliefCampsListTest(TestCase):
             "taluk": "chalakudy",
             "village": "kadukutty",
         }
-        rescue_camp_tcr_1_model = RescueCamp.objects.create(**rescue_camp_tcr_1_data)
+        rescue_camp_tcr_1_model = RescueCamp.objects.create(**rescue_camp_tcr_1_data) # noqa
         rescue_camp_tcr_2_data = {
             "name": "anamanada lp school",
             "district": "tcr",
             "taluk": "chalakudy",
             "village": "anamanada",
         }
-        rescue_camp_tcr_2_model = RescueCamp.objects.create(**rescue_camp_tcr_2_data)
+        rescue_camp_tcr_2_model = RescueCamp.objects.create(**rescue_camp_tcr_2_data) # noqa
         rescue_camp_tcr_3_data = {
             "name": "maloor lp school",
             "district": "tcr",
             "taluk": "chalakudy",
             "village": "maloor",
         }
-        rescue_camp_tcr_3_model = RescueCamp.objects.create(**rescue_camp_tcr_3_data)
+        rescue_camp_tcr_3_model = RescueCamp.objects.create(**rescue_camp_tcr_3_data) # noqa
         # _ = Person.objects.create(name='person1', camped_at=rescue_camp_tcr_1_model)
         # _ = Person.objects.create(name='person2', camped_at=rescue_camp_tcr_1_model)
         # _ = Person.objects.create(name='person3', camped_at=rescue_camp_tcr_2_model)

@@ -15,7 +15,8 @@ class Migration(migrations.Migration):
             name="is_request_for_others",
             field=models.BooleanField(
                 default=False,
-                help_text="If this is checked, enter other's location from the 'Enter location manually' button at the bottom",
+                help_text="If this is checked, enter other's location from the 'Enter location manually'"
+                "button at the bottom",
                 verbose_name="Requesting for others - മറ്റൊരാൾക്ക് വേണ്ടി അപേക്ഷിക്കുന്നു  ",
             ),
         ),
