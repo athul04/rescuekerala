@@ -15,28 +15,20 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="privaterescuecamp",
             name="city",
-            field=models.CharField(
-                default="", max_length=150, verbose_name="City - നഗരം"
-            ),
+            field=models.CharField(default="", max_length=150, verbose_name="City - നഗരം"),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name="privaterescuecamp",
             name="is_inside_kerala",
-            field=models.BooleanField(
-                default=False,
-                verbose_name="Center inside kerala? - കേന്ദ്രം കേരളത്തിലാണോ",
-            ),
+            field=models.BooleanField(default=False, verbose_name="Center inside kerala? - കേന്ദ്രം കേരളത്തിലാണോ",),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name="privaterescuecamp",
             name="lsg_name",
             field=models.CharField(
-                blank=True,
-                max_length=150,
-                null=True,
-                verbose_name="LSG Name - സ്വയംഭരണ സ്ഥാപനത്തിന്റെ പേര്",
+                blank=True, max_length=150, null=True, verbose_name="LSG Name - സ്വയംഭരണ സ്ഥാപനത്തിന്റെ പേര്",
             ),
         ),
         migrations.AddField(
@@ -44,11 +36,7 @@ class Migration(migrations.Migration):
             name="lsg_type",
             field=models.SmallIntegerField(
                 blank=True,
-                choices=[
-                    (0, "Corporation"),
-                    (1, "Municipality"),
-                    (2, "Grama Panchayath"),
-                ],
+                choices=[(0, "Corporation"), (1, "Municipality"), (2, "Grama Panchayath"),],
                 null=True,
                 verbose_name="LSG Type - തദ്ദേശ സ്വയംഭരണ സ്ഥാപനം",
             ),
@@ -56,8 +44,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="privaterescuecamp",
             name="ward_name",
-            field=models.CharField(
-                blank=True, max_length=150, null=True, verbose_name="Ward - വാർഡ്"
-            ),
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name="Ward - വാർഡ്"),
         ),
     ]

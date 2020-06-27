@@ -11,9 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddIndex(
-            model_name="person",
-            index=models.Index(
-                fields=["name", "-added_at"], name="mainapp_per_name_65f623_idx"
-            ),
+            model_name="person", index=models.Index(fields=["name", "-added_at"], name="mainapp_per_name_65f623_idx"),
         ),
     ]

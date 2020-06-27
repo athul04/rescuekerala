@@ -14,9 +14,7 @@ class Migration(migrations.Migration):
             model_name="smsjob",
             name="sms_type",
             field=models.CharField(
-                choices=[("consent", "Consent"), ("info", "Information")],
-                default="",
-                max_length=10,
+                choices=[("consent", "Consent"), ("info", "Information")], default="", max_length=10,
             ),
             preserve_default=False,
         ),

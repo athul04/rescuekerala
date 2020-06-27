@@ -14,9 +14,7 @@ class Migration(migrations.Migration):
             model_name="request",
             name="status",
             field=models.CharField(
-                choices=[("new", "New"), ("pro", "In progess"), ("sup", "Supplied")],
-                default="new",
-                max_length=10,
+                choices=[("new", "New"), ("pro", "In progess"), ("sup", "Supplied")], default="new", max_length=10,
             ),
         ),
         migrations.AlterField(

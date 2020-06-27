@@ -16,31 +16,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Person",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 ("name", models.CharField(max_length=30, verbose_name="Name - പേര്")),
-                (
-                    "phone",
-                    models.CharField(
-                        blank=True,
-                        max_length=11,
-                        null=True,
-                        verbose_name="Mobile - മൊബൈൽ",
-                    ),
-                ),
-                (
-                    "age",
-                    models.IntegerField(
-                        blank=True, null=True, verbose_name="Age - പ്രായം"
-                    ),
-                ),
+                ("phone", models.CharField(blank=True, max_length=11, null=True, verbose_name="Mobile - മൊബൈൽ",),),
+                ("age", models.IntegerField(blank=True, null=True, verbose_name="Age - പ്രായം"),),
                 (
                     "gender",
                     models.IntegerField(
@@ -52,12 +31,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "address",
-                    models.CharField(
-                        blank=True,
-                        max_length=150,
-                        null=True,
-                        verbose_name="Address - വിലാസം",
-                    ),
+                    models.CharField(blank=True, max_length=150, null=True, verbose_name="Address - വിലാസം",),
                 ),
                 (
                     "district",
@@ -86,12 +60,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "notes",
-                    models.TextField(
-                        blank=True,
-                        max_length=500,
-                        null=True,
-                        verbose_name="Notes - കുറിപ്പുകൾ",
-                    ),
+                    models.TextField(blank=True, max_length=500, null=True, verbose_name="Notes - കുറിപ്പുകൾ",),
                 ),
                 ("added_at", models.DateTimeField(auto_now_add=True)),
             ],
@@ -99,15 +68,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="RescueCamp",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 ("name", models.CharField(max_length=50, verbose_name="Name")),
                 ("location", models.TextField(verbose_name="Address")),
                 (

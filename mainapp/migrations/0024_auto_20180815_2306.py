@@ -10,9 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name="districtmanager",
-            name="phone",
-            field=models.CharField(max_length=11),
-        ),
+        migrations.AlterField(model_name="districtmanager", name="phone", field=models.CharField(max_length=11),),
     ]

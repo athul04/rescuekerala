@@ -13,15 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="HashTag",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 ("name", models.CharField(max_length=20)),
             ],
         ),
@@ -30,21 +22,14 @@ class Migration(migrations.Migration):
             model_name="smsjob",
             name="sms_type",
             field=models.CharField(
-                choices=[
-                    ("consent", "Consent"),
-                    ("info", "Information"),
-                    ("survey", "Survey"),
-                ],
-                max_length=10,
+                choices=[("consent", "Consent"), ("info", "Information"), ("survey", "Survey"),], max_length=10,
             ),
         ),
         migrations.AddField(
             model_name="announcements",
             name="hashtags",
             field=models.ManyToManyField(
-                blank=True,
-                help_text="Add hashtags as comma separated values.",
-                to="mainapp.HashTag",
+                blank=True, help_text="Add hashtags as comma separated values.", to="mainapp.HashTag",
             ),
         ),
     ]

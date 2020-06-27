@@ -14,16 +14,12 @@ class Migration(migrations.Migration):
             model_name="request",
             name="latlng",
             field=models.CharField(
-                blank=True,
-                max_length=100,
-                verbose_name="GPS Coordinates - GPS നിർദ്ദേശാങ്കങ്ങൾ ",
+                blank=True, max_length=100, verbose_name="GPS Coordinates - GPS നിർദ്ദേശാങ്കങ്ങൾ ",
             ),
         ),
         migrations.AddField(
             model_name="request",
             name="latlng_accuracy",
-            field=models.CharField(
-                blank=True, max_length=100, verbose_name="GPS Accuracy - GPS കൃത്യത "
-            ),
+            field=models.CharField(blank=True, max_length=100, verbose_name="GPS Accuracy - GPS കൃത്യത "),
         ),
     ]

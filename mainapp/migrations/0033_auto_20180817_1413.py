@@ -13,15 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Announcements",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 ("dateadded", models.DateTimeField(auto_now_add=True)),
                 ("name", models.CharField(max_length=50)),
                 ("link", models.CharField(max_length=100)),
@@ -51,18 +43,10 @@ class Migration(migrations.Migration):
                 (
                     "category",
                     models.IntegerField(
-                        choices=[
-                            (0, "General"),
-                            (1, "Food"),
-                            (2, "Camps"),
-                            (3, "Weather"),
-                        ],
-                        verbose_name="Type",
+                        choices=[(0, "General"), (1, "Food"), (2, "Camps"), (3, "Weather"),], verbose_name="Type",
                     ),
                 ),
             ],
         ),
-        migrations.AlterModelOptions(
-            name="rescuecamp", options={"verbose_name": "Relief Camp"},
-        ),
+        migrations.AlterModelOptions(name="rescuecamp", options={"verbose_name": "Relief Camp"},),
     ]

@@ -56,16 +56,8 @@ def sms_sender(smsjobid, **kwargs):
             timestamp = parser.parse(str(volunteer.joined))
             timestamp = calendar.timegm(timestamp.utctimetuple())
             # Preparing unique URL
-            url = (
-                "http://keralarescue.in/c/"
-                + str(volunteer.id)
-                + "/"
-                + str(timestamp)[-4:]
-            )
-            message = (
-                "Thank you for registering as a volunteer on keralarescue. Please click here to confirm. "
-                + url
-            )
+            url = "http://keralarescue.in/c/" + str(volunteer.id) + "/" + str(timestamp)[-4:]
+            message = "Thank you for registering as a volunteer on keralarescue. Please click here to confirm. " + url
             if _type == "survey":
                 message = (
                     "Thanks keralarescue volunteer if willing to conduct damage assessment field survey, "
@@ -80,11 +72,7 @@ def sms_sender(smsjobid, **kwargs):
         }
 
         response = requests.get(SMS_API_URL, params=payload)
-        logger.info(
-            "Got {} as response for {} - {}".format(
-                response.text, volunteer.name, volunteer.phone
-            )
-        )
+        logger.info("Got {} as response for {} - {}".format(response.text, volunteer.name, volunteer.phone))
         if "402" not in response.text:
             fail_count += 1
 

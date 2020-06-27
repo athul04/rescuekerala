@@ -14,15 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="VolunteerGroup",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 ("group_name", models.CharField(max_length=200)),
             ],
         ),
@@ -79,15 +71,10 @@ class Migration(migrations.Migration):
             model_name="smsjob",
             name="group",
             field=models.ForeignKey(
-                blank=True,
-                null=True,
-                on_delete=django.db.models.deletion.CASCADE,
-                to="mainapp.VolunteerGroup",
+                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to="mainapp.VolunteerGroup",
             ),
         ),
         migrations.AddField(
-            model_name="volunteer",
-            name="groups",
-            field=models.ManyToManyField(to="mainapp.VolunteerGroup"),
+            model_name="volunteer", name="groups", field=models.ManyToManyField(to="mainapp.VolunteerGroup"),
         ),
     ]

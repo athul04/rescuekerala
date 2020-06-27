@@ -10,9 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name="hashtag",
-            name="name",
-            field=models.CharField(max_length=20, unique=True),
-        ),
+        migrations.AlterField(model_name="hashtag", name="name", field=models.CharField(max_length=20, unique=True),),
     ]

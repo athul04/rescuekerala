@@ -13,10 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="announcements",
             name="hashtags",
-            field=models.TextField(
-                blank=True,
-                default="",
-                help_text="Add hashtags as comma separated values.",
-            ),
+            field=models.TextField(blank=True, default="", help_text="Add hashtags as comma separated values.",),
         ),
     ]

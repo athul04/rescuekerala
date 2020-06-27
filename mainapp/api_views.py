@@ -89,16 +89,10 @@ class PersonViewSet(viewsets.ModelViewSet):
                 if camped_at:
                     serializer.save()
                 else:
-                    return Response(
-                        {"error": "Rescue Camp is required field."},
-                        status=status.HTTP_400_BAD_REQUEST,
-                    )
+                    return Response({"error": "Rescue Camp is required field."}, status=status.HTTP_400_BAD_REQUEST,)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response(
-            {"status": "success", "message": "Person(s) added"},
-            status=status.HTTP_201_CREATED,
-        )
+        return Response({"status": "success", "message": "Person(s) added"}, status=status.HTTP_201_CREATED,)
 
 
 class CampList(APIView):
@@ -115,10 +109,7 @@ class CampList(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         else:
-            return Response(
-                {"error": "District Code is Required"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            return Response({"error": "District Code is Required"}, status=status.HTTP_400_BAD_REQUEST,)
 
 
 @csrf_exempt
@@ -137,7 +128,5 @@ def request_update_list(request):
 def get_kerala_local_bodies(request):
     from django.conf import settings
 
-    data = json.loads(
-        open(settings.BASE_DIR + "/static/js/kerala_local_bodies.json").read()
-    )
+    data = json.loads(open(settings.BASE_DIR + "/static/js/kerala_local_bodies.json").read())
     return JsonResponse(data, safe=False)

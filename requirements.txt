@@ -25,3 +25,4 @@ python-dateutil
 beautifulsoup4==4.6.3
 ddtrace==0.12.1
 newrelic
+pre-commit==2.5.1

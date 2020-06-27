@@ -13,32 +13,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="CollectionCenter",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 ("name", models.CharField(max_length=100, verbose_name="Name - പേര്")),
                 ("address", models.TextField(verbose_name="Address - വിലാസം")),
-                (
-                    "contacts",
-                    models.CharField(
-                        blank=True,
-                        max_length=250,
-                        null=True,
-                        verbose_name="Mobile - മൊബൈൽ",
-                    ),
-                ),
+                ("contacts", models.CharField(blank=True, max_length=250, null=True, verbose_name="Mobile - മൊബൈൽ",),),
                 (
                     "type_of_materials_collecting",
                     models.TextField(
-                        blank=True,
-                        null=True,
-                        verbose_name="Type of materials collecting - ശേഖരിക്കുന്ന വസ്തുക്കൾ ",
+                        blank=True, null=True, verbose_name="Type of materials collecting - ശേഖരിക്കുന്ന വസ്തുക്കൾ ",
                     ),
                 ),
                 (
@@ -69,34 +51,14 @@ class Migration(migrations.Migration):
                 (
                     "lsg_type",
                     models.SmallIntegerField(
-                        blank=True,
-                        null=True,
-                        verbose_name="LSG Type - തദ്ദേശ സ്വയംഭരണ സ്ഥാപനം",
+                        blank=True, null=True, verbose_name="LSG Type - തദ്ദേശ സ്വയംഭരണ സ്ഥാപനം",
                     ),
                 ),
-                (
-                    "lsg_name",
-                    models.CharField(
-                        blank=True,
-                        max_length=150,
-                        null=True,
-                        verbose_name="Name - പേര്",
-                    ),
-                ),
-                (
-                    "ward_name",
-                    models.CharField(
-                        blank=True,
-                        max_length=150,
-                        null=True,
-                        verbose_name="Ward - വാർഡ്",
-                    ),
-                ),
+                ("lsg_name", models.CharField(blank=True, max_length=150, null=True, verbose_name="Name - പേര്",),),
+                ("ward_name", models.CharField(blank=True, max_length=150, null=True, verbose_name="Ward - വാർഡ്",),),
                 (
                     "is_inside_kerala",
-                    models.BooleanField(
-                        verbose_name="Center inside kerala? - കേന്ദ്രം കേരളത്തിലാണോ"
-                    ),
+                    models.BooleanField(verbose_name="Center inside kerala? - കേന്ദ്രം കേരളത്തിലാണോ"),
                 ),
                 ("city", models.CharField(max_length=150, verbose_name="City - നഗരം")),
                 ("added_at", models.DateTimeField(auto_now_add=True)),

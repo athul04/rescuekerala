@@ -34,8 +34,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="person",
             name="address",
-            field=models.TextField(
-                blank=True, max_length=150, null=True, verbose_name="Address - വിലാസം"
-            ),
+            field=models.TextField(blank=True, max_length=150, null=True, verbose_name="Address - വിലാസം"),
         ),
     ]

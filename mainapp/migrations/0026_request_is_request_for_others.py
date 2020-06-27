@@ -14,8 +14,7 @@ class Migration(migrations.Migration):
             model_name="request",
             name="is_request_for_others",
             field=models.BooleanField(
-                default=False,
-                verbose_name="Requesting for others - മറ്റൊരാൾക്ക് വേണ്ടി അപേക്ഷിക്കുന്നു  ",
+                default=False, verbose_name="Requesting for others - മറ്റൊരാൾക്ക് വേണ്ടി അപേക്ഷിക്കുന്നു  ",
             ),
         ),
     ]

@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
             name="commodities",
             field=models.TextField(
                 verbose_name="What you can contribute. ( സംഭാവന ചെയ്യാന്\u200d ഉദ്ദേശിക്കുന്ന സാധനങ്ങള്\u200d ) -- "
-                             "Eg: Shirts, torches etc "
+                "Eg: Shirts, torches etc "
             ),
         ),
         migrations.AlterField(
@@ -125,21 +125,15 @@ class Migration(migrations.Migration):
             field=models.CharField(max_length=500, verbose_name="Location - സ്ഥലം"),
         ),
         migrations.AlterField(
-            model_name="request",
-            name="needcloth",
-            field=models.BooleanField(verbose_name="Clothing - വസ്ത്രം"),
+            model_name="request", name="needcloth", field=models.BooleanField(verbose_name="Clothing - വസ്ത്രം"),
         ),
         migrations.AlterField(
-            model_name="request",
-            name="needfood",
-            field=models.BooleanField(verbose_name="Food - ഭക്ഷണം"),
+            model_name="request", name="needfood", field=models.BooleanField(verbose_name="Food - ഭക്ഷണം"),
         ),
         migrations.AlterField(
             model_name="request",
             name="needkit_util",
-            field=models.BooleanField(
-                verbose_name="Kitchen utensil - അടുക്കള സാമഗ്രികള്\u200d"
-            ),
+            field=models.BooleanField(verbose_name="Kitchen utensil - അടുക്കള സാമഗ്രികള്\u200d"),
         ),
         migrations.AlterField(
             model_name="request",
@@ -149,44 +143,31 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="request",
             name="needothers",
-            field=models.CharField(
-                blank=True,
-                max_length=500,
-                verbose_name="Other needs - മറ്റു ആവശ്യങ്ങള്\u200d",
-            ),
+            field=models.CharField(blank=True, max_length=500, verbose_name="Other needs - മറ്റു ആവശ്യങ്ങള്\u200d",),
         ),
         migrations.AlterField(
             model_name="request",
             name="needtoilet",
-            field=models.BooleanField(
-                verbose_name="Toiletries - ശുചീകരണ സാമഗ്രികള്\u200d "
-            ),
+            field=models.BooleanField(verbose_name="Toiletries - ശുചീകരണ സാമഗ്രികള്\u200d "),
         ),
         migrations.AlterField(
-            model_name="request",
-            name="needwater",
-            field=models.BooleanField(verbose_name="Water - വെള്ളം"),
+            model_name="request", name="needwater", field=models.BooleanField(verbose_name="Water - വെള്ളം"),
         ),
         migrations.AlterField(
             model_name="request",
             name="requestee",
-            field=models.CharField(
-                max_length=100, verbose_name="Requestee - അപേക്ഷകന്\u200dറെ പേര്"
-            ),
+            field=models.CharField(max_length=100, verbose_name="Requestee - അപേക്ഷകന്\u200dറെ പേര്"),
         ),
         migrations.AlterField(
             model_name="request",
             name="requestee_phone",
             field=models.CharField(
-                max_length=10,
-                verbose_name="Requestee Phone - അപേക്ഷകന്\u200dറെ ഫോണ്\u200d നമ്പര്\u200d",
+                max_length=10, verbose_name="Requestee Phone - അപേക്ഷകന്\u200dറെ ഫോണ്\u200d നമ്പര്\u200d",
             ),
         ),
         migrations.AlterField(
             model_name="volunteer",
             name="organisation",
-            field=models.CharField(
-                max_length=250, verbose_name="Organization (സംഘടന) / Institution"
-            ),
+            field=models.CharField(max_length=250, verbose_name="Organization (സംഘടന) / Institution"),
         ),
     ]

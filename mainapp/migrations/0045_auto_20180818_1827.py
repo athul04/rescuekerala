@@ -12,52 +12,28 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name="announcements",
-            options={
-                "verbose_name": "Announcement: News",
-                "verbose_name_plural": "Announcements: News",
-            },
+            options={"verbose_name": "Announcement: News", "verbose_name_plural": "Announcements: News",},
         ),
         migrations.AlterModelOptions(
             name="contributor",
-            options={
-                "verbose_name": "Contributor: Donation",
-                "verbose_name_plural": "Contributors: Donations",
-            },
+            options={"verbose_name": "Contributor: Donation", "verbose_name_plural": "Contributors: Donations",},
         ),
         migrations.AlterModelOptions(
             name="districtcollection",
-            options={
-                "verbose_name": "District: Collection",
-                "verbose_name_plural": "District: Collections",
-            },
+            options={"verbose_name": "District: Collection", "verbose_name_plural": "District: Collections",},
         ),
         migrations.AlterModelOptions(
             name="districtmanager",
-            options={
-                "verbose_name": "District: Manager",
-                "verbose_name_plural": "District: Managers",
-            },
+            options={"verbose_name": "District: Manager", "verbose_name_plural": "District: Managers",},
         ),
         migrations.AlterModelOptions(
-            name="districtneed",
-            options={
-                "verbose_name": "District: Need",
-                "verbose_name_plural": "District: Needs",
-            },
+            name="districtneed", options={"verbose_name": "District: Need", "verbose_name_plural": "District: Needs",},
         ),
         migrations.AlterModelOptions(
-            name="ngo",
-            options={
-                "verbose_name": "Volunteer: NGO",
-                "verbose_name_plural": "Volunteers: NGOs",
-            },
+            name="ngo", options={"verbose_name": "Volunteer: NGO", "verbose_name_plural": "Volunteers: NGOs",},
         ),
         migrations.AlterModelOptions(
-            name="person",
-            options={
-                "verbose_name": "Relief: Refugee",
-                "verbose_name_plural": "Relief: Refugees",
-            },
+            name="person", options={"verbose_name": "Relief: Refugee", "verbose_name_plural": "Relief: Refugees",},
         ),
         migrations.AlterModelOptions(
             name="request",
@@ -67,17 +43,10 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.AlterModelOptions(
-            name="rescuecamp",
-            options={
-                "verbose_name": "Relief: Camp",
-                "verbose_name_plural": "Relief: Camps",
-            },
+            name="rescuecamp", options={"verbose_name": "Relief: Camp", "verbose_name_plural": "Relief: Camps",},
         ),
         migrations.AlterModelOptions(
             name="volunteer",
-            options={
-                "verbose_name": "Volunteer: Individual",
-                "verbose_name_plural": "Volunteers: Individuals",
-            },
+            options={"verbose_name": "Volunteer: Individual", "verbose_name_plural": "Volunteers: Individuals",},
         ),
     ]

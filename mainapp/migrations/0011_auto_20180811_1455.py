@@ -13,52 +13,34 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="request",
             name="detailcloth",
-            field=models.CharField(
-                blank=True, max_length=250, verbose_name="Details for required clothing"
-            ),
+            field=models.CharField(blank=True, max_length=250, verbose_name="Details for required clothing"),
         ),
         migrations.AddField(
             model_name="request",
             name="detailfood",
-            field=models.CharField(
-                blank=True, max_length=250, verbose_name="Details for required food"
-            ),
+            field=models.CharField(blank=True, max_length=250, verbose_name="Details for required food"),
         ),
         migrations.AddField(
             model_name="request",
             name="detailkit_util",
-            field=models.CharField(
-                blank=True,
-                max_length=250,
-                verbose_name="Details for required kitchen utensil",
-            ),
+            field=models.CharField(blank=True, max_length=250, verbose_name="Details for required kitchen utensil",),
         ),
         migrations.AddField(
             model_name="request",
             name="detailmed",
-            field=models.CharField(
-                blank=True, max_length=250, verbose_name="Details for required medicine"
-            ),
+            field=models.CharField(blank=True, max_length=250, verbose_name="Details for required medicine"),
         ),
         migrations.AddField(
             model_name="request",
             name="detailtoilet",
-            field=models.CharField(
-                blank=True,
-                max_length=250,
-                verbose_name="Details for required toileteries",
-            ),
+            field=models.CharField(blank=True, max_length=250, verbose_name="Details for required toileteries",),
         ),
         migrations.AddField(
             model_name="request",
             name="detailwater",
-            field=models.CharField(
-                blank=True, max_length=250, verbose_name="Details for required water"
-            ),
+            field=models.CharField(blank=True, max_length=250, verbose_name="Details for required water"),
         ),
         migrations.AlterField(
-            model_name="request",
-            name="needkit_util",
-            field=models.BooleanField(verbose_name="Kitchen utensil"),
+            model_name="request", name="needkit_util", field=models.BooleanField(verbose_name="Kitchen utensil"),
         ),
     ]

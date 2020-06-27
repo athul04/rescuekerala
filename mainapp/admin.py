@@ -52,10 +52,7 @@ def create_streaming_csv_response(header_row, queryset, filename):
     writer = csv.writer(pseudo_buffer)
 
     response = StreamingHttpResponse(
-        (
-            writer.writerow([getattr(object, field) for field in header_row])
-            for object in objects.iterator()
-        ),
+        (writer.writerow([getattr(object, field) for field in header_row]) for object in objects.iterator()),
         content_type="text/csv",
     )
     response["Content-Disposition"] = 'attachment; filename="{}.csv"'.format(filename)
@@ -145,12 +142,7 @@ class VolunteerAdmin(admin.ModelAdmin):
         header_row = [f.name for f in Volunteer._meta.get_fields()]
         body_rows = []
         for volunteer in Volunteer.objects.all():
-            row = [
-                getattr(volunteer, key)
-                if key != "area"
-                else volunteer.get_area_display()
-                for key in header_row
-            ]
+            row = [getattr(volunteer, key) if key != "area" else volunteer.get_area_display() for key in header_row]
             body_rows.append(row)
 
         response = create_csv_response("Volunteers", header_row, body_rows)
@@ -260,20 +252,14 @@ class RescueCampAdmin(admin.ModelAdmin):
                 row = [getattr(person, field) for field in header_row]
                 body_rows.append(row)
 
-        response = create_csv_response(
-            "InmatesList".format(queryset[0].name), header_row, body_rows
-        )
+        response = create_csv_response("InmatesList".format(queryset[0].name), header_row, body_rows)
         return response
 
     def get_readonly_fields(self, request, obj=None):
         fields = []
 
         if obj not in EMPTY_VALUES and obj.status in ["closed", "duplicate"]:
-            fields = [
-                i.name
-                for i in obj._meta.fields
-                if i.name not in ["status", "data_entry_user"]
-            ]
+            fields = [i.name for i in obj._meta.fields if i.name not in ["status", "data_entry_user"]]
 
         return fields
 

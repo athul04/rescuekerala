@@ -18,9 +18,7 @@ class Migration(migrations.Migration):
                 max_length=10,
                 validators=[
                     django.core.validators.RegexValidator(
-                        code="invalid_mobile",
-                        message="Please Enter 10 digit mobile number",
-                        regex="^[6-9]\\d{9}$",
+                        code="invalid_mobile", message="Please Enter 10 digit mobile number", regex="^[6-9]\\d{9}$",
                     )
                 ],
                 verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d",
@@ -57,9 +55,7 @@ class Migration(migrations.Migration):
                 max_length=10,
                 validators=[
                     django.core.validators.RegexValidator(
-                        code="invalid_mobile",
-                        message="Please Enter 10 digit mobile number",
-                        regex="^[6-9]\\d{9}$",
+                        code="invalid_mobile", message="Please Enter 10 digit mobile number", regex="^[6-9]\\d{9}$",
                     )
                 ],
                 verbose_name="Requestee Phone - അപേക്ഷകന്\u200dറെ ഫോണ്\u200d നമ്പര്\u200d",
@@ -72,9 +68,7 @@ class Migration(migrations.Migration):
                 max_length=10,
                 validators=[
                     django.core.validators.RegexValidator(
-                        code="invalid_mobile",
-                        message="Please Enter 10 digit mobile number",
-                        regex="^[6-9]\\d{9}$",
+                        code="invalid_mobile", message="Please Enter 10 digit mobile number", regex="^[6-9]\\d{9}$",
                     )
                 ],
                 verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d",

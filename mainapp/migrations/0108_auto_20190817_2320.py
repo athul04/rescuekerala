@@ -11,13 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="smsjob",
-            name="failure",
-            field=models.CharField(blank=True, max_length=100, null=True),
+            model_name="smsjob", name="failure", field=models.CharField(blank=True, max_length=100, null=True),
         ),
-        migrations.AddField(
-            model_name="smsjob",
-            name="has_completed",
-            field=models.BooleanField(default=False),
-        ),
+        migrations.AddField(model_name="smsjob", name="has_completed", field=models.BooleanField(default=False),),
     ]

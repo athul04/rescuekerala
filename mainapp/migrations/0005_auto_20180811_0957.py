@@ -13,8 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="request",
             name="needothers",
-            field=models.CharField(
-                blank=True, max_length=500, verbose_name="Other needs"
-            ),
+            field=models.CharField(blank=True, max_length=500, verbose_name="Other needs"),
         ),
     ]

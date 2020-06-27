@@ -14,15 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Hospital",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 ("name", models.CharField(max_length=200)),
                 ("officer", models.CharField(max_length=100)),
                 ("designation", models.CharField(max_length=250)),

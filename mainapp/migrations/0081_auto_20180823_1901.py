@@ -14,10 +14,7 @@ class Migration(migrations.Migration):
             model_name="csvbulkupload",
             name="failure_reason",
             field=models.CharField(
-                blank=True,
-                default="",
-                max_length=150,
-                verbose_name="Reason of failure, if failed",
+                blank=True, default="", max_length=150, verbose_name="Reason of failure, if failed",
             ),
         ),
     ]

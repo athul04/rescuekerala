@@ -11,8 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="csvbulkupload",
-            name="failure_reason",
-            field=models.CharField(default="", max_length=150),
+            model_name="csvbulkupload", name="failure_reason", field=models.CharField(default="", max_length=150),
         ),
     ]

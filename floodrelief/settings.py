@@ -14,7 +14,7 @@ import os
 import environ
 import datetime
 
-import raven # noqa
+import raven  # noqa
 
 
 def get_list(text):
@@ -151,9 +151,7 @@ CACHE_TIMEOUT = env("CACHE_TIMEOUT")
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -171,12 +169,7 @@ LOGGING = {
         "command": {"format": "%(asctime)s %(message)s"},
     },
     "handlers": {
-        "file": {
-            "level": "DEBUG",
-            "class": "logging.FileHandler",
-            "filename": "mysite.log",
-            "formatter": "verbose",
-        },
+        "file": {"level": "DEBUG", "class": "logging.FileHandler", "filename": "mysite.log", "formatter": "verbose",},
         "send_sms": {
             "level": "DEBUG",
             "class": "logging.FileHandler",

@@ -11,8 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name="smsjob",
-            name="message",
-            field=models.CharField(blank=True, max_length=160, null=True),
+            model_name="smsjob", name="message", field=models.CharField(blank=True, max_length=160, null=True),
         ),
     ]

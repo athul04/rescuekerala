@@ -13,8 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="rescuecamp",
             name="total_people",
-            field=models.IntegerField(
-                blank=True, null=True, verbose_name="Total Number of People"
-            ),
+            field=models.IntegerField(blank=True, null=True, verbose_name="Total Number of People"),
         ),
     ]

@@ -13,9 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="collectioncenter",
             name="contacts",
-            field=models.CharField(
-                blank=True, max_length=250, null=True, verbose_name="Contacts - മൊബൈൽ"
-            ),
+            field=models.CharField(blank=True, max_length=250, null=True, verbose_name="Contacts - മൊബൈൽ"),
         ),
         migrations.AlterField(
             model_name="collectioncenter",
@@ -47,10 +45,7 @@ class Migration(migrations.Migration):
             model_name="collectioncenter",
             name="lsg_name",
             field=models.CharField(
-                blank=True,
-                max_length=150,
-                null=True,
-                verbose_name="LSG Name - സ്വയംഭരണ സ്ഥാപനത്തിന്റെ പേര്",
+                blank=True, max_length=150, null=True, verbose_name="LSG Name - സ്വയംഭരണ സ്ഥാപനത്തിന്റെ പേര്",
             ),
         ),
         migrations.AlterField(
@@ -58,11 +53,7 @@ class Migration(migrations.Migration):
             name="lsg_type",
             field=models.SmallIntegerField(
                 blank=True,
-                choices=[
-                    (0, "Corporation"),
-                    (1, "Municipality"),
-                    (2, "Grama Panchayath"),
-                ],
+                choices=[(0, "Corporation"), (1, "Municipality"), (2, "Grama Panchayath"),],
                 null=True,
                 verbose_name="LSG Type - തദ്ദേശ സ്വയംഭരണ സ്ഥാപനം",
             ),

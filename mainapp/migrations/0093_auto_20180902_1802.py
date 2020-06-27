@@ -11,8 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name="person",
-            name="name",
-            field=models.CharField(max_length=51, verbose_name="Name - പേര്"),
+            model_name="person", name="name", field=models.CharField(max_length=51, verbose_name="Name - പേര്"),
         ),
     ]

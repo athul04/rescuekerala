@@ -14,10 +14,7 @@ class Migration(migrations.Migration):
             model_name="requestupdate",
             name="other_status",
             field=models.CharField(
-                blank=True,
-                default="",
-                max_length=255,
-                verbose_name="Please specify other status",
+                blank=True, default="", max_length=255, verbose_name="Please specify other status",
             ),
         ),
     ]

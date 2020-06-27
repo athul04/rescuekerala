@@ -14,8 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="contributor",
             name="contrib_details",
-            field=models.TextField(
-                default="", verbose_name="Details of contribution Eg: 10 shirts"
-            ),
+            field=models.TextField(default="", verbose_name="Details of contribution Eg: 10 shirts"),
         ),
     ]

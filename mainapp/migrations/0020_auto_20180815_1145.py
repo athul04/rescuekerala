@@ -13,15 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="volunteer",
             name="is_dm",
-            field=models.BooleanField(
-                default=False, verbose_name="Is district manager"
-            ),
+            field=models.BooleanField(default=False, verbose_name="Is district manager"),
         ),
         migrations.AlterField(
             model_name="volunteer",
             name="is_spoc",
-            field=models.BooleanField(
-                default=False, verbose_name="Is point of contact"
-            ),
+            field=models.BooleanField(default=False, verbose_name="Is point of contact"),
         ),
     ]

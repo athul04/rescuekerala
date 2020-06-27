@@ -14,9 +14,7 @@ class Migration(migrations.Migration):
             model_name="rescuecamp",
             name="status",
             field=models.CharField(
-                choices=[("active", "Active"), ("closed", "Closed")],
-                default="active",
-                max_length=10,
+                choices=[("active", "Active"), ("closed", "Closed")], default="active", max_length=10,
             ),
         ),
     ]

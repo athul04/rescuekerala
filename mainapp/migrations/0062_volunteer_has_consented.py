@@ -10,9 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name="volunteer",
-            name="has_consented",
-            field=models.BooleanField(default=False),
-        ),
+        migrations.AddField(model_name="volunteer", name="has_consented", field=models.BooleanField(default=False),),
     ]

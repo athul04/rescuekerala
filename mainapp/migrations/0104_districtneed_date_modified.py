@@ -11,8 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="districtneed",
-            name="date_modified",
-            field=models.DateTimeField(auto_now=True),
+            model_name="districtneed", name="date_modified", field=models.DateTimeField(auto_now=True),
         ),
     ]

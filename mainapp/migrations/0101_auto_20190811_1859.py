@@ -10,10 +10,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name="collectioncenter",
-            options={"verbose_name": "Private collection centers"},
-        ),
+        migrations.AlterModelOptions(name="collectioncenter", options={"verbose_name": "Private collection centers"},),
         migrations.AlterModelOptions(
             name="districtneed",
             options={
@@ -22,9 +19,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.AddField(
-            model_name="districtneed",
-            name="inventory",
-            field=models.TextField(default=""),
-            preserve_default=False,
+            model_name="districtneed", name="inventory", field=models.TextField(default=""), preserve_default=False,
         ),
     ]

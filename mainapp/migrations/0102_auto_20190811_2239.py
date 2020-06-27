@@ -11,10 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterModelOptions(
-            name="datacollection",
-            options={
-                "verbose_name": "Data Uploads",
-                "verbose_name_plural": "Data Uploads",
-            },
+            name="datacollection", options={"verbose_name": "Data Uploads", "verbose_name_plural": "Data Uploads",},
         ),
     ]

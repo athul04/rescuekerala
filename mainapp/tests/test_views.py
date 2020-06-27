@@ -33,9 +33,7 @@ class TemplateViewTests(TestCase):
         self.check_template_view_response("/reg_success/", "mainapp/reg_success.html")
 
     def test_loading_contrib_success(self):
-        self.check_template_view_response(
-            "/contrib_success/", "mainapp/contrib_success.html"
-        )
+        self.check_template_view_response("/contrib_success/", "mainapp/contrib_success.html")
 
     def test_loading_disclaimer_page(self):
         self.check_template_view_response("/disclaimer/", "mainapp/disclaimer.html")
@@ -44,18 +42,12 @@ class TemplateViewTests(TestCase):
         self.check_template_view_response("/ieee/", "mainapp/aboutieee.html")
 
     def test_loading_dist_needs(self):
-        _ = DistrictNeed.objects.create(
-            district="ekm", needs="bedsheets", cnandpts="aluva uc college"
-        )
-        response = self.check_template_view_response(
-            "/district_needs/", "mainapp/district_needs.html"
-        )
+        _ = DistrictNeed.objects.create(district="ekm", needs="bedsheets", cnandpts="aluva uc college")
+        response = self.check_template_view_response("/district_needs/", "mainapp/district_needs.html")
         self.assertIn("district_data", response.context)
         self.assertEqual(response.context["district_data"][0].district, "ekm")
         self.assertEqual(response.context["district_data"][0].needs, "bedsheets")
-        self.assertEqual(
-            response.context["district_data"][0].cnandpts, "aluva uc college"
-        )
+        self.assertEqual(response.context["district_data"][0].cnandpts, "aluva uc college")
 
     def test_loading_mapview(self):
         self.check_template_view_response("/map/", "map.html")
@@ -94,9 +86,7 @@ class RequestViewTests(TestCase):
         self.assertTemplateUsed(response, "mainapp/request_form.html")
         self.assertFormError(response, "form", "district", "This field is required.")
         self.assertFormError(response, "form", "location", "This field is required.")
-        self.assertFormError(
-            response, "form", "requestee_phone", "This field is required."
-        )
+        self.assertFormError(response, "form", "requestee_phone", "This field is required.")
         self.assertFormError(response, "form", "requestee", "This field is required.")
         post_data = {
             "requestee_phone": "9562854604200",
@@ -154,10 +144,7 @@ class RegisterVolunteerViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "mainapp/volunteer_form.html")
         self.assertFormError(
-            response,
-            "form",
-            "area",
-            "Select a valid choice. asdasdasd is not one of the available choices.",
+            response, "form", "area", "Select a valid choice. asdasdasd is not one of the available choices.",
         )
 
     def test_creation(self):
@@ -250,9 +237,7 @@ class DownloadNGOListViewTests(TestCase):
         response = client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response["Content-Type"], "text/csv")
-        self.assertEqual(
-            response["Content-Disposition"], 'attachment; filename="ngo_list.csv.csv"'
-        )
+        self.assertEqual(response["Content-Disposition"], 'attachment; filename="ngo_list.csv.csv"')
 
     def test_single_district_ngo_list_download(self):
         ngo_data_ekm = {
@@ -400,9 +385,7 @@ class ReliefCampsListTest(TestCase):
         response = client.get(self.url, {"district": "tcr"})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "mainapp/relief_camps_list.html")
-        self.assertIn(
-            '<option value="tcr" selected>', str(response.context["filter"].form)
-        )
+        self.assertIn('<option value="tcr" selected>', str(response.context["filter"].form))
         self.assertEqual(len(response.context["data"]), 0)
 
     def test_data_consistency_in_query(self):
@@ -413,21 +396,21 @@ class ReliefCampsListTest(TestCase):
             "taluk": "chalakudy",
             "village": "kadukutty",
         }
-        rescue_camp_tcr_1_model = RescueCamp.objects.create(**rescue_camp_tcr_1_data) # noqa
+        rescue_camp_tcr_1_model = RescueCamp.objects.create(**rescue_camp_tcr_1_data)  # noqa
         rescue_camp_tcr_2_data = {
             "name": "anamanada lp school",
             "district": "tcr",
             "taluk": "chalakudy",
             "village": "anamanada",
         }
-        rescue_camp_tcr_2_model = RescueCamp.objects.create(**rescue_camp_tcr_2_data) # noqa
+        rescue_camp_tcr_2_model = RescueCamp.objects.create(**rescue_camp_tcr_2_data)  # noqa
         rescue_camp_tcr_3_data = {
             "name": "maloor lp school",
             "district": "tcr",
             "taluk": "chalakudy",
             "village": "maloor",
         }
-        rescue_camp_tcr_3_model = RescueCamp.objects.create(**rescue_camp_tcr_3_data) # noqa
+        rescue_camp_tcr_3_model = RescueCamp.objects.create(**rescue_camp_tcr_3_data)  # noqa
         # _ = Person.objects.create(name='person1', camped_at=rescue_camp_tcr_1_model)
         # _ = Person.objects.create(name='person2', camped_at=rescue_camp_tcr_1_model)
         # _ = Person.objects.create(name='person3', camped_at=rescue_camp_tcr_2_model)
@@ -438,9 +421,7 @@ class ReliefCampsListTest(TestCase):
         self.assertTemplateUsed(response, "mainapp/relief_camps_list.html")
         # print()
         self.assertEqual(len(response.context["data"]), 3)
-        self.assertIn(
-            '<option value="tcr" selected>', str(response.context["filter"].form)
-        )
+        self.assertIn('<option value="tcr" selected>', str(response.context["filter"].form))
         # for person in Person.objects.all():
         #     print({'person': person, 'camp': person.camped_at, 'cmp_dist': person.camped_at.district})
         # a,b,c = RescueCamp.objects.annotate(count=Count('person', distinct=True))

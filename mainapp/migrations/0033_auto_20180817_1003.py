@@ -10,7 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name="rescuecamp", options={"verbose_name": "Relief Camp"},
-        ),
+        migrations.AlterModelOptions(name="rescuecamp", options={"verbose_name": "Relief Camp"},),
     ]

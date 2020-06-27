@@ -11,9 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="announcements",
-            name="hashtags",
-            field=models.TextField(blank=True, default=""),
+            model_name="announcements", name="hashtags", field=models.TextField(blank=True, default=""),
         ),
         migrations.AlterField(
             model_name="hospital",

@@ -11,8 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(model_name="privaterescuecamp", name="city",),
-        migrations.RemoveField(
-            model_name="privaterescuecamp", name="is_inside_kerala",
-        ),
+        migrations.RemoveField(model_name="privaterescuecamp", name="is_inside_kerala",),
         migrations.RemoveField(model_name="privaterescuecamp", name="lsg_type",),
     ]

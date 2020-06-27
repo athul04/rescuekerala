@@ -10,9 +10,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name="request",
-            name="status",
-            field=models.BooleanField(default=False),
-        ),
+        migrations.AlterField(model_name="request", name="status", field=models.BooleanField(default=False),),
     ]

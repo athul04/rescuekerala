@@ -13,8 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="ngo",
             name="website_url",
-            field=models.CharField(
-                default="", max_length=300, verbose_name="Enter your website link"
-            ),
+            field=models.CharField(default="", max_length=300, verbose_name="Enter your website link"),
         ),
     ]

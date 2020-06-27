@@ -13,17 +13,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="person",
             name="checkin_date",
-            field=models.DateField(
-                blank=True, null=True, verbose_name="Check-in Date - ചെക്ക്-ഇൻ തീയതി"
-            ),
+            field=models.DateField(blank=True, null=True, verbose_name="Check-in Date - ചെക്ക്-ഇൻ തീയതി"),
         ),
         migrations.AlterField(
             model_name="person",
             name="checkout_date",
-            field=models.DateField(
-                blank=True,
-                null=True,
-                verbose_name="Check-out Date - ചെക്ക്-ഔട്ട് തീയതി",
-            ),
+            field=models.DateField(blank=True, null=True, verbose_name="Check-out Date - ചെക്ക്-ഔട്ട് തീയതി",),
         ),
     ]

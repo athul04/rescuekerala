@@ -14,9 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="districtneed",
             name="cnandpts",
-            field=models.TextField(
-                default=" ", verbose_name="Contacts and collection points"
-            ),
+            field=models.TextField(default=" ", verbose_name="Contacts and collection points"),
             preserve_default=False,
         ),
     ]

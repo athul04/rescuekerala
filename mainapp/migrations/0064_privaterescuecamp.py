@@ -13,27 +13,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="PrivateRescueCamp",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "name",
-                    models.CharField(
-                        max_length=50, verbose_name="Camp Name - ക്യാമ്പിന്റെ പേര്"
-                    ),
-                ),
-                (
-                    "location",
-                    models.TextField(
-                        blank=True, null=True, verbose_name="Address - അഡ്രസ്"
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
+                ("name", models.CharField(max_length=50, verbose_name="Camp Name - ക്യാമ്പിന്റെ പേര്"),),
+                ("location", models.TextField(blank=True, null=True, verbose_name="Address - അഡ്രസ്"),),
                 (
                     "district",
                     models.CharField(
@@ -56,22 +38,9 @@ class Migration(migrations.Migration):
                         max_length=15,
                     ),
                 ),
-                (
-                    "taluk",
-                    models.CharField(max_length=50, verbose_name="Taluk - താലൂക്ക്"),
-                ),
-                (
-                    "village",
-                    models.CharField(max_length=50, verbose_name="Village - വില്ലജ്"),
-                ),
-                (
-                    "contacts",
-                    models.TextField(
-                        blank=True,
-                        null=True,
-                        verbose_name="Phone Numbers - ഫോൺ നമ്പറുകൾ",
-                    ),
-                ),
+                ("taluk", models.CharField(max_length=50, verbose_name="Taluk - താലൂക്ക്"),),
+                ("village", models.CharField(max_length=50, verbose_name="Village - വില്ലജ്"),),
+                ("contacts", models.TextField(blank=True, null=True, verbose_name="Phone Numbers - ഫോൺ നമ്പറുകൾ",),),
                 (
                     "facilities_available",
                     models.TextField(
@@ -99,76 +68,24 @@ class Migration(migrations.Migration):
                         verbose_name="GPS Coordinates",
                     ),
                 ),
-                (
-                    "total_people",
-                    models.IntegerField(
-                        blank=True, null=True, verbose_name="Total Number of People"
-                    ),
-                ),
-                (
-                    "total_males",
-                    models.IntegerField(
-                        blank=True, null=True, verbose_name="Number of Males"
-                    ),
-                ),
-                (
-                    "total_females",
-                    models.IntegerField(
-                        blank=True, null=True, verbose_name="Number of Females"
-                    ),
-                ),
-                (
-                    "total_infants",
-                    models.IntegerField(
-                        blank=True, null=True, verbose_name="Number of Infants (<2y)"
-                    ),
-                ),
-                (
-                    "food_req",
-                    models.TextField(
-                        blank=True, null=True, verbose_name="Food - ഭക്ഷണം"
-                    ),
-                ),
-                (
-                    "clothing_req",
-                    models.TextField(
-                        blank=True, null=True, verbose_name="Clothing - വസ്ത്രം"
-                    ),
-                ),
-                (
-                    "sanitary_req",
-                    models.TextField(
-                        blank=True, null=True, verbose_name="Sanitary - സാനിറ്ററി"
-                    ),
-                ),
-                (
-                    "medical_req",
-                    models.TextField(
-                        blank=True, null=True, verbose_name="Medical - മെഡിക്കൽ"
-                    ),
-                ),
-                (
-                    "other_req",
-                    models.TextField(
-                        blank=True, null=True, verbose_name="Other - മറ്റുള്ളവ"
-                    ),
-                ),
+                ("total_people", models.IntegerField(blank=True, null=True, verbose_name="Total Number of People"),),
+                ("total_males", models.IntegerField(blank=True, null=True, verbose_name="Number of Males"),),
+                ("total_females", models.IntegerField(blank=True, null=True, verbose_name="Number of Females"),),
+                ("total_infants", models.IntegerField(blank=True, null=True, verbose_name="Number of Infants (<2y)"),),
+                ("food_req", models.TextField(blank=True, null=True, verbose_name="Food - ഭക്ഷണം"),),
+                ("clothing_req", models.TextField(blank=True, null=True, verbose_name="Clothing - വസ്ത്രം"),),
+                ("sanitary_req", models.TextField(blank=True, null=True, verbose_name="Sanitary - സാനിറ്ററി"),),
+                ("medical_req", models.TextField(blank=True, null=True, verbose_name="Medical - മെഡിക്കൽ"),),
+                ("other_req", models.TextField(blank=True, null=True, verbose_name="Other - മറ്റുള്ളവ"),),
                 (
                     "status",
                     models.CharField(
-                        choices=[
-                            ("active", "Active"),
-                            ("closed", "Closed"),
-                            ("duplicate", "Duplicate"),
-                        ],
+                        choices=[("active", "Active"), ("closed", "Closed"), ("duplicate", "Duplicate"),],
                         default="active",
                         max_length=10,
                     ),
                 ),
             ],
-            options={
-                "verbose_name": "Private Relief: Camp",
-                "verbose_name_plural": "Private Relief: Camps",
-            },
+            options={"verbose_name": "Private Relief: Camp", "verbose_name_plural": "Private Relief: Camps",},
         ),
     ]

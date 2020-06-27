@@ -50,9 +50,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="request",
             name="requestee",
-            field=models.CharField(
-                max_length=100, verbose_name="Requestee - അപേക്ഷകന്റെ പേര്"
-            ),
+            field=models.CharField(max_length=100, verbose_name="Requestee - അപേക്ഷകന്റെ പേര്"),
         ),
         migrations.AlterField(
             model_name="request",

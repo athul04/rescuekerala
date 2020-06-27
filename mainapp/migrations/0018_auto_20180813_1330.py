@@ -11,8 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name="districtneed",
-            name="needs",
-            field=models.TextField(verbose_name="Items required"),
+            model_name="districtneed", name="needs", field=models.TextField(verbose_name="Items required"),
         ),
     ]

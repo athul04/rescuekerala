@@ -11,8 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name="ngo",
-            name="area",
-            field=models.TextField(verbose_name="Area of volunteering"),
+            model_name="ngo", name="area", field=models.TextField(verbose_name="Area of volunteering"),
         ),
     ]

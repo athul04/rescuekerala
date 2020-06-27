@@ -11,23 +11,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RemoveField(model_name="announcements", name="link",),
-        migrations.AddField(
-            model_name="announcements",
-            name="description",
-            field=models.TextField(blank=True),
-        ),
+        migrations.AddField(model_name="announcements", name="description", field=models.TextField(blank=True),),
         migrations.AddField(
             model_name="announcements",
             name="image",
-            field=models.ImageField(
-                blank=True, null=True, upload_to="announcements/image_uploads"
-            ),
+            field=models.ImageField(blank=True, null=True, upload_to="announcements/image_uploads"),
         ),
-        migrations.AddField(
-            model_name="announcements",
-            name="is_pinned",
-            field=models.BooleanField(default=False),
-        ),
+        migrations.AddField(model_name="announcements", name="is_pinned", field=models.BooleanField(default=False),),
         migrations.AddField(
             model_name="announcements",
             name="priority",
@@ -41,22 +31,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="announcements",
             name="upload",
-            field=models.FileField(
-                blank=True, null=True, upload_to="announcements/attachement_uploads"
-            ),
+            field=models.FileField(blank=True, null=True, upload_to="announcements/attachement_uploads"),
         ),
         migrations.AlterField(
             model_name="announcements",
             name="category",
             field=models.IntegerField(
-                choices=[
-                    (0, "General"),
-                    (1, "Food"),
-                    (2, "Camps"),
-                    (3, "Weather"),
-                    (4, "All"),
-                ],
-                verbose_name="Type",
+                choices=[(0, "General"), (1, "Food"), (2, "Camps"), (3, "Weather"), (4, "All"),], verbose_name="Type",
             ),
         ),
     ]

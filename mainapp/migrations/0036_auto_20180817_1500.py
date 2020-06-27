@@ -18,9 +18,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="ngo",
             name="organisation",
-            field=models.CharField(
-                max_length=250, verbose_name="Name of Organization (സംഘടനയുടെ പേര്)"
-            ),
+            field=models.CharField(max_length=250, verbose_name="Name of Organization (സംഘടനയുടെ പേര്)"),
         ),
         migrations.AlterField(
             model_name="ngo",

@@ -11,8 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="person",
-            name="unique_identifier",
-            field=models.CharField(default="", max_length=32),
+            model_name="person", name="unique_identifier", field=models.CharField(default="", max_length=32),
         ),
     ]

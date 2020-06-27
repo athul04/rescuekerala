@@ -13,10 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="contributor",
             name="status",
-            field=models.CharField(
-                choices=[("new", "New"), ("ful", "Fullfilled")],
-                default="new",
-                max_length=10,
-            ),
+            field=models.CharField(choices=[("new", "New"), ("ful", "Fullfilled")], default="new", max_length=10,),
         ),
     ]

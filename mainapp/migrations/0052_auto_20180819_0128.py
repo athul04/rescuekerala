@@ -11,10 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterModelOptions(
-            name="request",
-            options={
-                "verbose_name": "Rescue: Request",
-                "verbose_name_plural": "Rescue:Requests",
-            },
+            name="request", options={"verbose_name": "Rescue: Request", "verbose_name_plural": "Rescue:Requests",},
         ),
     ]

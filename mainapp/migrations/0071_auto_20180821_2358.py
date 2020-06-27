@@ -13,29 +13,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="person",
             name="checkin_date",
-            field=models.DateTimeField(
-                blank=True, null=True, verbose_name="Check-in Date - ചെക്ക്-ഇൻ തീയതി"
-            ),
+            field=models.DateTimeField(blank=True, null=True, verbose_name="Check-in Date - ചെക്ക്-ഇൻ തീയതി"),
         ),
         migrations.AddField(
             model_name="person",
             name="checkout_date",
-            field=models.DateTimeField(
-                blank=True,
-                null=True,
-                verbose_name="Check-out Date - ചെക്ക്-ഔട്ട് തീയതി",
-            ),
+            field=models.DateTimeField(blank=True, null=True, verbose_name="Check-out Date - ചെക്ക്-ഔട്ട് തീയതി",),
         ),
         migrations.AddField(
             model_name="person",
             name="status",
             field=models.CharField(
                 blank=True,
-                choices=[
-                    ("new", "New"),
-                    ("checked_out", "Checked Out"),
-                    ("closed", "Closed"),
-                ],
+                choices=[("new", "New"), ("checked_out", "Checked Out"), ("closed", "Closed"),],
                 default=None,
                 max_length=15,
                 null=True,

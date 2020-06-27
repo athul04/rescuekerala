@@ -13,28 +13,20 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="rescuecamp",
             name="total_females",
-            field=models.IntegerField(
-                blank=True, null=True, verbose_name="Number of Females"
-            ),
+            field=models.IntegerField(blank=True, null=True, verbose_name="Number of Females"),
         ),
         migrations.AddField(
             model_name="rescuecamp",
             name="total_infants",
-            field=models.IntegerField(
-                blank=True, null=True, verbose_name="Number of Infants (<2y)"
-            ),
+            field=models.IntegerField(blank=True, null=True, verbose_name="Number of Infants (<2y)"),
         ),
         migrations.AddField(
             model_name="rescuecamp",
             name="total_males",
-            field=models.IntegerField(
-                blank=True, null=True, verbose_name="Number of Males"
-            ),
+            field=models.IntegerField(blank=True, null=True, verbose_name="Number of Males"),
         ),
         migrations.AlterField(
-            model_name="contributor",
-            name="address",
-            field=models.TextField(verbose_name="Address - വിലാസം"),
+            model_name="contributor", name="address", field=models.TextField(verbose_name="Address - വിലാസം"),
         ),
         migrations.AlterField(
             model_name="contributor",
@@ -61,16 +53,12 @@ class Migration(migrations.Migration):
             ),
         ),
         migrations.AlterField(
-            model_name="contributor",
-            name="name",
-            field=models.CharField(max_length=100, verbose_name="Name - പേര്"),
+            model_name="contributor", name="name", field=models.CharField(max_length=100, verbose_name="Name - പേര്"),
         ),
         migrations.AlterField(
             model_name="contributor",
             name="phone",
-            field=models.CharField(
-                max_length=10, verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d"
-            ),
+            field=models.CharField(max_length=10, verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d"),
         ),
         migrations.AlterField(
             model_name="districtmanager",
@@ -109,14 +97,10 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="districtmanager",
             name="phone",
-            field=models.CharField(
-                max_length=11, verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d"
-            ),
+            field=models.CharField(max_length=11, verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d"),
         ),
         migrations.AlterField(
-            model_name="volunteer",
-            name="address",
-            field=models.TextField(verbose_name="Address - വിലാസം"),
+            model_name="volunteer", name="address", field=models.TextField(verbose_name="Address - വിലാസം"),
         ),
         migrations.AlterField(
             model_name="volunteer",
@@ -166,15 +150,11 @@ class Migration(migrations.Migration):
             ),
         ),
         migrations.AlterField(
-            model_name="volunteer",
-            name="name",
-            field=models.CharField(max_length=100, verbose_name="Name - പേര്"),
+            model_name="volunteer", name="name", field=models.CharField(max_length=100, verbose_name="Name - പേര്"),
         ),
         migrations.AlterField(
             model_name="volunteer",
             name="phone",
-            field=models.CharField(
-                max_length=10, verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d"
-            ),
+            field=models.CharField(max_length=10, verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d"),
         ),
     ]

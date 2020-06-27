@@ -68,15 +68,9 @@ def import_inmate_file(csvid, is_recovery=False):
 
             gender = 2
             if len(datum.get("gender", "")) > 0:
-                if (
-                    datum.get("gender", "")[0] == "m"
-                    or datum.get("gender", "")[0] == "M"
-                ):
+                if datum.get("gender", "")[0] == "m" or datum.get("gender", "")[0] == "M":
                     gender = 0
-                elif (
-                    datum.get("gender", "")[0] == "f"
-                    or datum.get("gender", "")[0] == "F"
-                ):
+                elif datum.get("gender", "")[0] == "f" or datum.get("gender", "")[0] == "F":
                     gender = 1
             age = "-1"
             if datum.get("age", ""):
@@ -106,13 +100,9 @@ def import_inmate_file(csvid, is_recovery=False):
                 is_completed=True, failure_reason="", name="rec-" + csv_name[:15]
             )
         else:
-            CsvBulkUpload.objects.filter(id=csvid).update(
-                is_completed=True, failure_reason=""
-            )
+            CsvBulkUpload.objects.filter(id=csvid).update(is_completed=True, failure_reason="")
     except Exception as e:
-        CsvBulkUpload.objects.filter(id=csvid).update(
-            failure_reason=(getattr(e, "message", repr(e)))
-        )
+        CsvBulkUpload.objects.filter(id=csvid).update(failure_reason=(getattr(e, "message", repr(e))))
 
 
 # For Shell Testing

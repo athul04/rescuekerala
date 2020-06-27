@@ -14,17 +14,13 @@ class Migration(migrations.Migration):
             model_name="request",
             name="detailrescue",
             field=models.CharField(
-                blank=True,
-                max_length=250,
-                verbose_name="Details for rescue action - രക്ഷാപ്രവർത്തനം വിവരങ്ങള്",
+                blank=True, max_length=250, verbose_name="Details for rescue action - രക്ഷാപ്രവർത്തനം വിവരങ്ങള്",
             ),
         ),
         migrations.AddField(
             model_name="request",
             name="needrescue",
-            field=models.BooleanField(
-                default=False, verbose_name="Need rescue - രക്ഷാപ്രവർത്തനം ആവശ്യമുണ്ട്"
-            ),
+            field=models.BooleanField(default=False, verbose_name="Need rescue - രക്ഷാപ്രവർത്തനം ആവശ്യമുണ്ട്"),
             preserve_default=False,
         ),
     ]

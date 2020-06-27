@@ -13,16 +13,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="collectioncenter",
             name="city",
-            field=models.CharField(
-                blank=True, max_length=150, null=True, verbose_name="City - നഗരം"
-            ),
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name="City - നഗരം"),
         ),
         migrations.AlterField(
             model_name="collectioncenter",
             name="is_inside_kerala",
-            field=models.BooleanField(
-                default=True,
-                verbose_name="Center inside kerala? - കേന്ദ്രം കേരളത്തിലാണോ",
-            ),
+            field=models.BooleanField(default=True, verbose_name="Center inside kerala? - കേന്ദ്രം കേരളത്തിലാണോ",),
         ),
     ]

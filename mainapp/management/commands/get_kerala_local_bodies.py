@@ -35,11 +35,7 @@ def get_wards_from_lsg_code(lsg_code):
     response = requests.request("POST", url, data=payload, headers=headers)
     soup = BeautifulSoup(response.text, "html.parser")
     ward_names_options = soup.find(id="form_ward")
-    ward_names_dict = {
-        ward["value"]: ward.text
-        for ward in ward_names_options.find_all("option")
-        if ward["value"]
-    }
+    ward_names_dict = {ward["value"]: ward.text for ward in ward_names_options.find_all("option") if ward["value"]}
     return ward_names_dict
 
 
@@ -50,9 +46,7 @@ def get_lsg_details_for_district(district_key):
 
     lsg_names_options = soup.find(id="form_localBody")
     lsg_names_dict = {
-        lsg["value"]: {"name": lsg.text, "wards": {}}
-        for lsg in lsg_names_options.find_all("option")
-        if lsg["value"]
+        lsg["value"]: {"name": lsg.text, "wards": {}} for lsg in lsg_names_options.find_all("option") if lsg["value"]
     }
     return lsg_names_dict
 
@@ -100,8 +94,6 @@ class Command(BaseCommand):
         }
         """
         local_bodies = get_govt_local_bodies()
-        file_path = os.path.join(
-            settings.BASE_DIR + "/static/js/kerala_local_bodies.json"
-        )
+        file_path = os.path.join(settings.BASE_DIR + "/static/js/kerala_local_bodies.json")
         with open(file_path, "w") as f:
             f.write(str(local_bodies))

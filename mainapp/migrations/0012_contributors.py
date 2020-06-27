@@ -13,15 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Contributors",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 (
                     "district",
                     models.CharField(
@@ -47,10 +39,7 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(max_length=100)),
                 ("phone", models.CharField(max_length=10)),
                 ("address", models.TextField()),
-                (
-                    "commodities",
-                    models.TextField(verbose_name="What you can contribute"),
-                ),
+                ("commodities", models.TextField(verbose_name="What you can contribute"),),
             ],
         ),
     ]

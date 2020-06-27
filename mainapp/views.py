@@ -113,9 +113,7 @@ def volunteerdata(request):
     req_data.min_page = req_data.number - PAGE_LEFT
     req_data.max_page = req_data.number + PAGE_RIGHT
     req_data.lim_page = PAGE_INTERMEDIATE
-    return render(
-        request, "mainapp/volunteerview.html", {"filter": filter, "data": req_data}
-    )
+    return render(request, "mainapp/volunteerview.html", {"filter": filter, "data": req_data})
 
 
 class RegisterNGO(CreateView):
@@ -188,11 +186,7 @@ def pcampdetails(request):
     try:
         req_data = PrivateRescueCamp.objects.get(id=id)
     except PrivateRescueCamp.DoesNotExist:
-        return HttpResponseRedirect(
-            "/error?error_text={}".format(
-                "Sorry, we couldnt fetch details for that Camp"
-            )
-        )
+        return HttpResponseRedirect("/error?error_text={}".format("Sorry, we couldnt fetch details for that Camp"))
     return render(request, "mainapp/p_camp_details.html", {"req": req_data})
 
 
@@ -336,18 +330,12 @@ def missing_persons(request):
 
 
 def relief_camps_list(request):
-    filter = RescueCampFilter(
-        request.GET, queryset=RescueCamp.objects.filter(status="active")
-    )
-    relief_camps = (
-        filter.qs.annotate(count=Count("person")).order_by("district", "name").all()
-    )
+    filter = RescueCampFilter(request.GET, queryset=RescueCamp.objects.filter(status="active"))
+    relief_camps = filter.qs.annotate(count=Count("person")).order_by("district", "name").all()
     paginator = Paginator(relief_camps, 50)
     page = request.GET.get("page")
     data = paginator.get_page(page)
-    return render(
-        request, "mainapp/relief_camps_list.html", {"filter": filter, "data": data}
-    )
+    return render(request, "mainapp/relief_camps_list.html", {"filter": filter, "data": data})
 
 
 class RequestFilter(django_filters.FilterSet):
@@ -431,9 +419,7 @@ def contributors(request):
     contrib_data.min_page = contrib_data.number - PAGE_LEFT
     contrib_data.max_page = contrib_data.number + PAGE_RIGHT
     contrib_data.lim_page = PAGE_INTERMEDIATE
-    return render(
-        request, "mainapp/contrib_list.html", {"filter": filter, "data": contrib_data}
-    )
+    return render(request, "mainapp/contrib_list.html", {"filter": filter, "data": contrib_data})
 
 
 def request_list(request):
@@ -445,9 +431,7 @@ def request_list(request):
     req_data.min_page = req_data.number - PAGE_LEFT
     req_data.max_page = req_data.number + PAGE_RIGHT
     req_data.lim_page = PAGE_INTERMEDIATE
-    return render(
-        request, "mainapp/request_list.html", {"filter": filter, "data": req_data}
-    )
+    return render(request, "mainapp/request_list.html", {"filter": filter, "data": req_data})
 
 
 def ngo_list(request):
@@ -459,9 +443,7 @@ def ngo_list(request):
     ngo_data.min_page = ngo_data.number - PAGE_LEFT
     ngo_data.max_page = ngo_data.number + PAGE_RIGHT
     ngo_data.lim_page = PAGE_INTERMEDIATE
-    return render(
-        request, "mainapp/ngo_list.html", {"filter": filter, "data": ngo_data}
-    )
+    return render(request, "mainapp/ngo_list.html", {"filter": filter, "data": ngo_data})
 
 
 def request_details(request, request_id=None):
@@ -470,22 +452,10 @@ def request_details(request, request_id=None):
     filter = RequestFilter(None)
     try:
         req_data = Request.objects.get(id=request_id)
-        updates = (
-            RequestUpdate.objects.all()
-            .filter(request_id=request_id)
-            .order_by("-update_ts")
-        )
+        updates = RequestUpdate.objects.all().filter(request_id=request_id).order_by("-update_ts")
     except RequestUpdate.DoesNotExist:
-        return HttpResponseRedirect(
-            "/error?error_text={}".format(
-                "Sorry, we couldnt fetch details for that request"
-            )
-        )
-    return render(
-        request,
-        "mainapp/request_details.html",
-        {"filter": filter, "req": req_data, "updates": updates},
-    )
+        return HttpResponseRedirect("/error?error_text={}".format("Sorry, we couldnt fetch details for that request"))
+    return render(request, "mainapp/request_details.html", {"filter": filter, "req": req_data, "updates": updates},)
 
 
 class DistrictManagerFilter(django_filters.FilterSet):
@@ -518,20 +488,11 @@ def relief_camps_data(request):
         last_record = RescueCamp.objects.latest("id")
     else:
         last_record = RescueCamp(id=0)
-    relief_camp_data = (
-        RescueCamp.objects.filter(id__gt=offset).order_by("id")[:300]
-    ).values()
-    description = (
-        "select * from mainapp_rescuecamp where id > offset order by id limit 300"
-    )
+    relief_camp_data = (RescueCamp.objects.filter(id__gt=offset).order_by("id")[:300]).values()
+    description = "select * from mainapp_rescuecamp where id > offset order by id limit 300"
     response = {
         "data": list(relief_camp_data),
-        "meta": {
-            "offset": offset,
-            "limit": 300,
-            "description": description,
-            "last_record_id": last_record.id,
-        },
+        "meta": {"offset": offset, "limit": 300, "description": description, "last_record_id": last_record.id,},
     }
     return JsonResponse(response, safe=False)
 
@@ -543,17 +504,10 @@ def data(request):
         offset = 0
     last_record = Request.objects.latest("id")
     request_data = (Request.objects.filter(id__gt=offset).order_by("id")[:300]).values()
-    description = (
-        "select * from mainapp_requests where id > offset order by id limit 300"
-    )
+    description = "select * from mainapp_requests where id > offset order by id limit 300"
     response = {
         "data": list(request_data),
-        "meta": {
-            "offset": offset,
-            "limit": 300,
-            "description": description,
-            "last_record_id": last_record.id,
-        },
+        "meta": {"offset": offset, "limit": 300, "description": description, "last_record_id": last_record.id,},
     }
     return JsonResponse(response, safe=False)
 
@@ -564,9 +518,7 @@ def mapdata(request):
     if data:
         return JsonResponse(list(data), safe=False)
     if district != "all":
-        data = (
-            Request.objects.exclude(latlng__exact="").filter(district=district).values()
-        )
+        data = Request.objects.exclude(latlng__exact="").filter(district=district).values()
     else:
         data = Request.objects.exclude(latlng__exact="").values()
     cache.set("mapdata:" + district, data, settings.CACHE_TIMEOUT)
@@ -740,14 +692,10 @@ def logout_view(request):
 
 class PersonForm(CustomForm):
     checkin_date = forms.DateField(
-        required=False,
-        input_formats=["%d-%m-%Y"],
-        help_text="Use dd-mm-yyyy format. Eg. 18-08-2018",
+        required=False, input_formats=["%d-%m-%Y"], help_text="Use dd-mm-yyyy format. Eg. 18-08-2018",
     )
     checkout_date = forms.DateField(
-        required=False,
-        input_formats=["%d-%m-%Y"],
-        help_text="Use dd-mm-yyyy format. Eg. 21-08-2018",
+        required=False, input_formats=["%d-%m-%Y"], help_text="Use dd-mm-yyyy format. Eg. 21-08-2018",
     )
 
     class Meta:
@@ -937,15 +885,7 @@ def get_hashtags(announcement_obj):
     for i in announcement_obj.objects.all().values_list("hashtags", flat=True):
         if i != "":
             hashtags_str = hashtags_str + "," + i
-    hashtags = list(
-        set(
-            [
-                j.strip()
-                for j in hashtags_str.strip(",").split(",")
-                if j not in EMPTY_VALUES
-            ]
-        )
-    )
+    hashtags = list(set([j.strip() for j in hashtags_str.strip(",").split(",") if j not in EMPTY_VALUES]))
     return hashtags
 
 
@@ -959,12 +899,7 @@ def announcements(request):
     return render(
         request,
         "announcements.html",
-        {
-            "filter": filter,
-            "data": link_data,
-            "pinned_data": pinned_data,
-            "hashtags": all_hashtags,
-        },
+        {"filter": filter, "data": link_data, "pinned_data": pinned_data, "hashtags": all_hashtags,},
     )
 
 
@@ -974,18 +909,12 @@ def announcements_id(request, id):
     paginator = Paginator(link_data, 10)
     page = request.GET.get("page")
     link_data = paginator.get_page(page)
-    return render(
-        request,
-        "announcements.html",
-        {"data": link_data, "hashtags": all_hashtags, "id": id},
-    )
+    return render(request, "announcements.html", {"data": link_data, "hashtags": all_hashtags, "id": id},)
 
 
 # Function to filter announcements based on hashtag
 def announcements_filter(request, hashtag_id):
-    link_data = (
-        Announcements.objects.filter(hashtag__in=[hashtag_id]).order_by("-id").all()
-    )
+    link_data = Announcements.objects.filter(hashtag__in=[hashtag_id]).order_by("-id").all()
     # Uncomment next line if you want to show pinned data in filtered view and add pinned data in render JSON
     # pinned_data = Announcements.objects.filter(is_pinned=True).order_by('-id').all()[:5]
 
@@ -996,12 +925,7 @@ def announcements_filter(request, hashtag_id):
     return render(
         request,
         "announcements.html",
-        {
-            "filter": filter,
-            "data": link_data,
-            "hashtags": all_hashtags,
-            "selected_hashtag_id": hashtag_id,
-        },
+        {"filter": filter, "data": link_data, "hashtags": all_hashtags, "selected_hashtag_id": hashtag_id,},
     )
 
 
@@ -1035,9 +959,7 @@ def coordinator_home(request):
     page = request.GET.get("page")
     data = paginator.get_page(page)
 
-    return render(
-        request, "mainapp/coordinator_home.html", {"filter": filter, "data": data}
-    )
+    return render(request, "mainapp/coordinator_home.html", {"filter": filter, "data": data})
 
 
 class CampRequirementsFilter(django_filters.FilterSet):
@@ -1068,9 +990,7 @@ class VolunteerConsent(UpdateView):
         request_ts = kwargs["ts"]
 
         if request_ts != timestamp:
-            return HttpResponseRedirect(
-                "/error?error_text={}".format("Sorry, we couldnt fetch volunteer info")
-            )
+            return HttpResponseRedirect("/error?error_text={}".format("Sorry, we couldnt fetch volunteer info"))
         return super(VolunteerConsent, self).dispatch(request, *args, **kwargs)
 
 
@@ -1084,9 +1004,7 @@ def camp_requirements_list(request):
     paginator = Paginator(camp_data, 50)
     page = request.GET.get("page")
     data = paginator.get_page(page)
-    return render(
-        request, "mainapp/camp_requirements_list.html", {"filter": filter, "data": data}
-    )
+    return render(request, "mainapp/camp_requirements_list.html", {"filter": filter, "data": data})
 
 
 class RequestUpdateView(CreateView):
@@ -1109,11 +1027,7 @@ class RequestUpdateView(CreateView):
         #     return redirect('/login'+'?next=request_updates/'+kwargs['request_id']+'/')
 
         self.original_request = get_object_or_404(Request, pk=kwargs["request_id"])
-        self.updates = (
-            RequestUpdate.objects.all()
-            .filter(request_id=kwargs["request_id"])
-            .order_by("-update_ts")
-        )
+        self.updates = RequestUpdate.objects.all().filter(request_id=kwargs["request_id"]).order_by("-update_ts")
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -1180,9 +1094,7 @@ class HospitalView(ListView):
     queryset = Hospital.objects.order_by("-id")
 
     def get_context_data(self, **kwargs):
-        filtered_list = HospitalViewFitler(
-            self.request.GET, queryset=self.get_queryset()
-        )
+        filtered_list = HospitalViewFitler(self.request.GET, queryset=self.get_queryset())
         kwargs["object_list"] = filtered_list.qs
         context = super().get_context_data(**kwargs)
         filtered_list._qs = context["object_list"]
@@ -1202,10 +1114,7 @@ class CollectionCenterListView(ListView):
         context = super().get_context_data(**kwargs)
         context["inside_kerala"] = inside_kerala
         context["filter"] = CollectionCenterFilter(
-            self.request.GET,
-            queryset=CollectionCenter.objects.filter(
-                is_inside_kerala=inside_kerala
-            ).order_by("-id"),
+            self.request.GET, queryset=CollectionCenter.objects.filter(is_inside_kerala=inside_kerala).order_by("-id"),
         )
         return context
 

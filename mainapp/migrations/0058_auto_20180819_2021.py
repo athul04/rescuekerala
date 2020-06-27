@@ -13,32 +13,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="DataCollection",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 (
                     "document_name",
-                    models.CharField(
-                        blank=True,
-                        max_length=255,
-                        null=True,
-                        verbose_name="Document name",
-                    ),
+                    models.CharField(blank=True, max_length=255, null=True, verbose_name="Document name",),
                 ),
                 ("document", models.FileField(blank=True, upload_to="camp_data")),
                 ("tag", models.CharField(blank=True, max_length=255, null=True)),
             ],
-            options={
-                "verbose_name": "Data: Collection",
-                "verbose_name_plural": "Data: Collections",
-            },
+            options={"verbose_name": "Data: Collection", "verbose_name_plural": "Data: Collections",},
         ),
         migrations.DeleteModel(name="ReliefCampData",),
     ]

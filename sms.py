@@ -48,10 +48,7 @@ if __name__ == "__main__":
 
                 # Preparing unique URL
                 url = "http://keralarescue.in/c/" + sendID + "/" + str(timestamp)[-4:]
-                message = (
-                    "Thank you for registering to volunteer. Please click here to confirm "
-                    + url
-                )
+                message = "Thank you for registering to volunteer. Please click here to confirm " + url
 
                 payload = {
                     "username": "xxxxxxxx",
@@ -59,10 +56,7 @@ if __name__ == "__main__":
                     "message": message,
                     "numbers": mobile,
                 }
-                response = requests.get(
-                    "http://api.esms.kerala.gov.in/fastclient/SMSclient.php",
-                    params=payload,
-                )
+                response = requests.get("http://api.esms.kerala.gov.in/fastclient/SMSclient.php", params=payload,)
 
             except KeyboardInterrupt:
 

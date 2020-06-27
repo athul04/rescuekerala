@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             field=models.CharField(
                 blank=True,
                 help_text="This will only be used for"
-                          "informational messages. For consent messages, a preconfigured message is used",
+                "informational messages. For consent messages, a preconfigured message is used",
                 max_length=160,
                 null=True,
             ),

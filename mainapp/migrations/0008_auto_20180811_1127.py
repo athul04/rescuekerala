@@ -17,23 +17,13 @@ class Migration(migrations.Migration):
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name="request",
-            name="needcloth",
-            field=models.BooleanField(verbose_name="Clothing"),
+            model_name="request", name="needcloth", field=models.BooleanField(verbose_name="Clothing"),
+        ),
+        migrations.AlterField(model_name="request", name="needfood", field=models.BooleanField(verbose_name="Food"),),
+        migrations.AlterField(
+            model_name="request", name="needmed", field=models.BooleanField(verbose_name="Medicine"),
         ),
         migrations.AlterField(
-            model_name="request",
-            name="needfood",
-            field=models.BooleanField(verbose_name="Food"),
-        ),
-        migrations.AlterField(
-            model_name="request",
-            name="needmed",
-            field=models.BooleanField(verbose_name="Medicine"),
-        ),
-        migrations.AlterField(
-            model_name="request",
-            name="needwater",
-            field=models.BooleanField(verbose_name="Water"),
+            model_name="request", name="needwater", field=models.BooleanField(verbose_name="Water"),
         ),
     ]

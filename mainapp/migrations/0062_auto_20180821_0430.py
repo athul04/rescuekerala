@@ -15,15 +15,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="RequestUpdate",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 (
                     "status",
                     models.CharField(
@@ -47,12 +39,7 @@ class Migration(migrations.Migration):
                         verbose_name="Status description if none of the default statuses are applicable",
                     ),
                 ),
-                (
-                    "updater_name",
-                    models.CharField(
-                        max_length=100, verbose_name="Name of person or group updating"
-                    ),
-                ),
+                ("updater_name", models.CharField(max_length=100, verbose_name="Name of person or group updating"),),
                 (
                     "updater_phone",
                     models.CharField(
@@ -68,10 +55,7 @@ class Migration(migrations.Migration):
                         verbose_name="Phone number of person or group updating",
                     ),
                 ),
-                (
-                    "notes",
-                    models.TextField(blank=True, verbose_name="Volunteer comments"),
-                ),
+                ("notes", models.TextField(blank=True, verbose_name="Volunteer comments"),),
                 ("update_ts", models.DateTimeField(auto_now_add=True)),
             ],
         ),
@@ -95,8 +79,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="requestupdate",
             name="request",
-            field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="mainapp.Request"
-            ),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="mainapp.Request"),
         ),
     ]

@@ -13,22 +13,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="ReliefCampData",
             fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID",),),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
-                (
-                    "description",
-                    models.TextField(
-                        blank=True, verbose_name="Details of requirements"
-                    ),
-                ),
+                ("description", models.TextField(blank=True, verbose_name="Details of requirements"),),
                 ("file", models.FileField(blank=True, upload_to="camp_data")),
                 (
                     "district",
@@ -59,16 +46,10 @@ class Migration(migrations.Migration):
                 (
                     "phone",
                     models.CharField(
-                        blank=True,
-                        max_length=11,
-                        null=True,
-                        verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d",
+                        blank=True, max_length=11, null=True, verbose_name="Phone - ഫോണ്\u200d നമ്പര്\u200d",
                     ),
                 ),
             ],
-            options={
-                "verbose_name": "Relief: Camp Data",
-                "verbose_name_plural": "Relief: Camp Datas",
-            },
+            options={"verbose_name": "Relief: Camp Data", "verbose_name_plural": "Relief: Camp Datas",},
         ),
     ]
