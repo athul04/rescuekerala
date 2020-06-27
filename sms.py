@@ -12,7 +12,6 @@ import csv
 import sys
 
 import requests
-
 from dateutil import parser
 
 csvFile = sys.argv[1]  # command line argument

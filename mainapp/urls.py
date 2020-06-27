@@ -1,9 +1,9 @@
-from django.urls import path
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-from . import views
-from . import api_views
+from django.urls import path
 from django.views.generic import TemplateView
+
+from . import api_views, views
 
 urlpatterns = [
     path("", views.HomePageView.as_view(), name="home"),

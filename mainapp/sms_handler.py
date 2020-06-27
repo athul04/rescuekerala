@@ -1,5 +1,6 @@
 import logging
 import os
+
 import requests
 
 SMS_ENDPOINT = os.environ.get("SMS_API")

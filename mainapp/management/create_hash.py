@@ -1,4 +1,5 @@
 from hashlib import md5
+
 from mainapp.models import Person
 
 people = Person.objects.all()

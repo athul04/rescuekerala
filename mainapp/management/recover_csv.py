@@ -1,6 +1,6 @@
+from mainapp.csvimporter import import_inmate_file
 from mainapp.models import CsvBulkUpload
 from mainapp.redis_queue import bulk_csv_upload_queue
-from mainapp.csvimporter import import_inmate_file
 
 incompleted_csv_imports = CsvBulkUpload.objects.filter(is_completed=False, failure_reason__icontains="long")
 

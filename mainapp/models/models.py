@@ -1,17 +1,17 @@
-from enum import Enum
-import csv
 import codecs
+import csv
+from enum import Enum
 from hashlib import md5
 
-from django.db import models
-from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
-from django.urls import reverse
-from django.core.exceptions import ValidationError
-from django.db.models.signals import post_save
-from django.core.cache.utils import make_template_fragment_key
 from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
+from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
+from django.db import models
+from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 from django.utils import timezone
 
 from mainapp.utils.model_utils import upload_to

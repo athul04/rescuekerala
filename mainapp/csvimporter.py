@@ -1,6 +1,6 @@
-import datetime
-import csv
 import codecs
+import csv
+import datetime
 
 
 def parsedate(str):

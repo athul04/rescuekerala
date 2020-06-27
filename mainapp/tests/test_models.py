@@ -2,15 +2,15 @@ from django.test import TestCase
 
 # Create your tests here.
 from mainapp.models import (
-    Request,
-    Volunteer,
     NGO,
     Contributor,
+    DistrictCollection,
     DistrictManager,
     DistrictNeed,
-    DistrictCollection,
-    RescueCamp,
     Person,
+    Request,
+    RescueCamp,
+    Volunteer,
 )
 
 

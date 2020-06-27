@@ -1,12 +1,12 @@
+import calendar
+import logging
 import os
 
+import environ
 import requests
 from dateutil import parser
-import calendar
-import environ
-import logging
 
-from mainapp.models import Volunteer, SmsJob
+from mainapp.models import SmsJob, Volunteer
 
 logger = logging.getLogger("send_sms")
 

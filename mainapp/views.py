@@ -1,53 +1,49 @@
-import csv
 import calendar
+import csv
 from collections import OrderedDict
-from dateutil import parser
 
-from django.core.validators import EMPTY_VALUES
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic.base import TemplateView
-from django.views.generic.list import ListView
-from django.core.paginator import Paginator
-from django.http import JsonResponse
-from django.http import HttpResponseRedirect
+import django_filters
+import requests
+from dateutil import parser
 from django import forms
+from django.conf import settings
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth import logout
-from django.shortcuts import redirect, get_object_or_404
-from django.db.models import Count
-from django.db.models import Case, When, Sum, F
-from django.db.models.expressions import Value
-from django.db.models import CharField
 from django.core.cache import cache
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
-import requests
-import django_filters
+from django.core.paginator import Paginator
+from django.core.validators import EMPTY_VALUES
+from django.db.models import Case, CharField, Count, F, Sum, When
+from django.db.models.expressions import Value
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
 
-from mainapp.redis_queue import sms_queue
-from mainapp.sms_handler import send_confirmation_sms
+from mainapp.admin import create_csv_response
 from mainapp.models import (
-    Request,
-    Volunteer,
-    DistrictManager,
-    Contributor,
-    DistrictNeed,
-    Person,
-    RescueCamp,
     NGO,
     Announcements,
-    districts,
-    RequestUpdate,
+    CollectionCenter,
+    Contributor,
+    DistrictManager,
+    DistrictNeed,
+    HashTag,
+    Hospital,
+    Person,
     PrivateRescueCamp,
+    Request,
+    RequestUpdate,
+    RescueCamp,
+    Volunteer,
+    districts,
 )
-from mainapp.admin import create_csv_response
-from mainapp.models import CollectionCenter, Hospital, HashTag
+from mainapp.redis_queue import sms_queue
+from mainapp.sms_handler import send_confirmation_sms
 from mainapp.utils import get_numeric_value
 
 PER_PAGE = 100

@@ -1,18 +1,10 @@
 import csv
 import io
 
-from django.test import TestCase, Client
+from django.test import Client, TestCase
 from django.urls import reverse
 
-from mainapp.models import (
-    Request,
-    Volunteer,
-    Contributor,
-    NGO,
-    DistrictNeed,
-    RescueCamp,
-    Hospital,
-)
+from mainapp.models import NGO, Contributor, DistrictNeed, Hospital, Request, RescueCamp, Volunteer
 
 
 class TemplateViewTests(TestCase):

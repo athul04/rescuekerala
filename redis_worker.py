@@ -1,8 +1,7 @@
 import os
 
 import redis
-from rq import Worker, Queue, Connection
-
+from rq import Connection, Queue, Worker
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "floodrelief.settings")
 redis_url = os.environ.get("REDIS_URL", "redis://localhost:6379")
