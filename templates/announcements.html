@@ -1,0 +1,115 @@
+{% extends 'base.html' %} {% load tag_lib %}
+{% load static %} {% block content %} {% load bootstrap3 %}
+
+{% block pagespecs %}
+    {% if id %}
+        {% for req in data %}
+            <meta property="og:description" content="{{ req.description }}">
+            <title>{{ req.description | truncatechars:150 }}</title>
+        {% endfor %}
+    {% else %}
+        <meta property="og:description" content="Important Announcements regarding Kerala Rescue Operations">
+        <title>Kerala Rescue</title>
+    {% endif %}
+{% endblock %}
+
+<!--Navigation Breadcrumbs-->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Announcements</li>
+  </ol>
+</nav>
+
+<div class="container text-center">
+    {% if id %}
+    <h2 class="main-logo">Announcement {{ id }}</h2>
+    {% else %}
+    <h2 class="main-logo">Important Announcements</h2>
+    {% endif %}
+    <div class="announcement-cards">
+        {% if not id %}
+        <div class="card">
+                <span class="card-text">Tags<a href="{% url 'Announcements' %}" class="btn btn-info btn-xs pull-right" role="button">Clear Filters</a></span>
+                {% for id, tag in hashtags.items %}
+                    <span class="card-time">
+                        {% if id == selected_hashtag_id %}
+                        {% bootstrap_icon "link" %}<a href="{% url 'announcements_filter' id %}" style="color:red; font-weight:
+                        bold"> {{ tag }}</a>
+                         {% else %}
+                        {% bootstrap_icon "link" %}<a href="{% url 'announcements_filter' id %}"> {{ tag }}</a>
+                        {% endif %}
+                    </span>
+                {% endfor %}
+
+        </div>
+        {% endif %}
+        {% for req in pinned_data %}
+            <div class="card priority-very-important">
+                <span class="card-text">
+                    {{ req.description | safe | urlize | linebreaks }}<br/>
+                </span>
+                <span class="card-priority">Very Important</span><br/>
+                <span class="card-time">{% bootstrap_icon "time" %}&nbsp;<a href="{% url 'announcements_id' req.id %}">{{ req.dateadded }}</a></span>
+            </div>
+        {% endfor %}
+        
+        <div class="priority-index">
+            Priority : <b style="background:#ef7831"></b> High <b style="background:#ffc107"></b> Medium <b style="background:#286090"></b> Low
+        </div>
+            
+        {% for req in data %}
+            <div class="card priority-{{ req.get_priority_display.lower }}">
+                <span class="card-title">{% bootstrap_icon "time" %}&nbsp;<a href="{% url 'announcements_id' req.id %}">{{ req.dateadded }}</a>&nbsp;<b title="Priority" class="card-priority">{{ req.get_priority_display.upper }} priority</b></span><br/><br/>
+                <span class="card-text">
+                    {{ req.description | safe | urlize }}<br/>
+                    {% if req.image %}
+                        <a href="{{req.image.url}}"
+                            class="btn btn-default card-link">{% bootstrap_icon "eye-open" %} View Image</a>
+                    {% endif %}
+                    {% if req.upload %}
+                        <a href="{{req.upload.url}}"
+                            class="btn btn-default card-link">{% bootstrap_icon "download" %} Download</a>
+                    {% endif %}
+                </span>
+                <span class="card-time">{% bootstrap_icon "time" %}&nbsp;<a href="{% url 'announcements_id' req.id %}">{{ req.dateadded }}</a></span>
+
+
+                {% with req.hashtags as hashtags %}
+                {% if hashtags|length != 0 %}
+                {% for i in hashtags %}
+                <span class="card-time">{% bootstrap_icon "link" %} <a href="{% url 'announcements_filter' i %}"> {{ i }}</a></span>
+                {% endfor %}
+                {% endif %}
+
+{% endwith %}
+
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if id %}
+        <div>
+            <a href="{% url 'Announcements' %}" class="btn btn-primary">See All Announcements</a>
+        </div>
+    {% else %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if data.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ data.previous_page_number }}">previous</a>
+                {% endif %} {% for i in data.paginator.page_range %} {% if data.number == i %}
+                <a class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></a>
+                {% else %}
+                <a href="?page={{ i }}">{{ i }}</a>
+                {% endif %} {% endfor %} {% if data.has_next %}
+                <a href="?page={{ data.next_page_number }}">next</a>
+                <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% load bootstrap3 %}
+<!--Navigation Breadcrumbs-->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Medical Information</li>
+  </ol>
+</nav>
+
+<div class="container text-center">
+    <h1 class="main-logo">kerala<span style="font-weight: normal;">rescue</span></h1>
+
+    <a href="{%url 'hospitals' %}" class="home-button card" role="button">
+    {% bootstrap_icon "plus" %}
+    <span class="text">
+        List<br/>hospitals<br/>
+        <span class="ml small notranslate mal">ആശുപത്രികൾ</span>
+    </span>
+    </a>
+    <a href="{%url 'nhmdpm' %}" class="home-button card" role="button">
+        {% bootstrap_icon "list" %}
+        <span class="text">
+            District Program Managers<br/>(National Health Mission)
+            <span class="ml small notransalate"></span>
+        </span>
+    </a>
+</div>
+{% endblock %}

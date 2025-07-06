@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% load tag_lib %}
+{% load static %} {% block content %} {% load bootstrap3 %}
+
+<!--Navigation Breadcrumbs-->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Public information Feed</li>
+  </ol>
+</nav>
+
+<div class="container text-center">
+  <h2 class="main-logo">Public information Feed</h2>
+    <div class="announcement-cards">
+
+        
+        {% for i in data %}
+                        <div class="card priority-low">
+
+    <div class="fb-post" data-href="https://www.facebook.com/{{i.page_id}}/posts/{{i.post_id}}/"></div>
+
+            </div>
+
+{% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+
+<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+
+{% endblock %}

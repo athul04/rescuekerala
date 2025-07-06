@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0009_auto_20180811_1146'),
+        ("mainapp", "0009_auto_20180811_1146"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='request',
-            name='status',
-            field=models.CharField(choices=[('new', 'New'), ('pro', 'In progess'), ('sup', 'Supplied')], default='new', max_length=10),
+            model_name="request",
+            name="status",
+            field=models.CharField(
+                choices=[("new", "New"), ("pro", "In progess"), ("sup", "Supplied")], default="new", max_length=10,
+            ),
         ),
         migrations.AlterField(
-            model_name='request',
-            name='supply_details',
-            field=models.CharField(blank=True, max_length=100),
+            model_name="request", name="supply_details", field=models.CharField(blank=True, max_length=100),
         ),
     ]

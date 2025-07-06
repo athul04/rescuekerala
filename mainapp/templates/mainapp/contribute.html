@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% load bootstrap3 %}
+
+<!--Navigation Breadcrumbs-->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Contribute</a></li>
+  </ol>
+</nav>
+
+<div class="container text-center">
+    <h1 class="main-logo">kerala<span style="font-weight: normal;">rescue</span></h1>
+    <a href="https://keralarescuemap.ushahidi.io/posts/create/20" class="home-button card" role="button">
+        {% bootstrap_icon "plus" %}
+        <span class="text">
+          Contribute<br/>
+          <span class="ml small">സഹായം നൽകാൻ</span>
+        </span>
+    </a>
+    <a href="https://keralarescuemap.ushahidi.io/savedsearches/17/map" class="home-button card" role="button">
+        {% bootstrap_icon "search" %}
+        <span class="text">
+          Find Resources<br/>
+          <span class="ml small">സഹായം കണ്ടെത്താൻ</span>
+        </span>
+    </a>
+    <p class="home-info">
+        Contact Control Room or Disaster Management Cell or District Administration for any support.<br>
+        Volunteers may contact District Project Managers for support related to volunteering and contributions<br>
+        <br/>
+        സഹായത്തിനായി വൊളന്‍റീയര്‍മാര്‍ തയ്യാറാണ്. സഹായം ആവശ്യമെങ്കില്‍ ഒരോ ജില്ലയിലെയും നിയോഗിക്കപെട്ട ഉദ്യോഗസ്ഥരുമായി ബന്ധപ്പെടാം
+    </p>
+</div>
+{% endblock %}

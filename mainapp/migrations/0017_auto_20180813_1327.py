@@ -6,18 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0016_contributor_status'),
+        ("mainapp", "0016_contributor_status"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='districtneed',
-            name='status',
-        ),
+        migrations.RemoveField(model_name="districtneed", name="status",),
         migrations.AddField(
-            model_name='districtneed',
-            name='cnandpts',
-            field=models.TextField(default=' ', verbose_name='Contacts and collection points'),
+            model_name="districtneed",
+            name="cnandpts",
+            field=models.TextField(default=" ", verbose_name="Contacts and collection points"),
             preserve_default=False,
         ),
     ]

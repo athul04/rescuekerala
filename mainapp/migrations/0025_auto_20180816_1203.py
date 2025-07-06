@@ -6,18 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0024_auto_20180815_2306'),
+        ("mainapp", "0024_auto_20180815_2306"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='request',
-            name='latlng',
-            field=models.CharField(blank=True, max_length=100, verbose_name='GPS Coordinates - GPS നിർദ്ദേശാങ്കങ്ങൾ '),
+            model_name="request",
+            name="latlng",
+            field=models.CharField(
+                blank=True, max_length=100, verbose_name="GPS Coordinates - GPS നിർദ്ദേശാങ്കങ്ങൾ ",
+            ),
         ),
         migrations.AddField(
-            model_name='request',
-            name='latlng_accuracy',
-            field=models.CharField(blank=True, max_length=100, verbose_name='GPS Accuracy - GPS കൃത്യത '),
+            model_name="request",
+            name="latlng_accuracy",
+            field=models.CharField(blank=True, max_length=100, verbose_name="GPS Accuracy - GPS കൃത്യത "),
         ),
     ]

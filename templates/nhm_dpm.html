@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block css %}
+<style>
+    .table{
+      table-layout: fixed;
+    }
+
+    .table td{
+      word-wrap: break-word;
+    }
+</style>
+<style>
+@media only screen and (max-width: 800px)  {
+
+		#dpm-table table, thead, tbody, th, td, tr {
+			display: block;
+		}
+
+		#dpm-table thead tr {
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+
+    #dpm-table tr {
+      margin: 0 0 1rem 0;
+    }
+
+    #dpm-table tr:nth-child(odd) {
+      background: #ccc;
+    }
+
+		#dpm-table td {
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #eee;
+			position: relative;
+      text-align: center;		}
+  }
+@media only screen and (max-width: 420px)  {
+		#dpm-table td {
+            min-height: 60px;
+		}
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!--Navigation Breadcrumbs-->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="{%url 'medicalview' %}">Medical Information</a></li>
+    <li class="breadcrumb-item active" aria-current="page">District Program Managers (National Health Mission)</li>
+  </ol>
+</nav>
+
+<h1 class="text-center">District Program Managers (NHM)</h1>
+{# <h2 class="text-center mal">ഇതു വരെ ആവശ്യപ്പെട്ടവ</h2> #}
+ <div id="dpm-table" class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr class="mal">
+        <th>District - ജില്ല</th>
+        <th>Name - പേര</th>
+        <th>Phone - ഫോണ്‍ നമ്പര്‍</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for dpm in data %}
+        <tr>
+          <td>{{ dpm.0 }}</td>
+          <td>{{ dpm.1 }}</td>
+          <td>{{ dpm.2 }}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+
+ </div>
+
+ {% endblock %}

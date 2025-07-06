@@ -1,0 +1,2 @@
+django_debug_toolbar==1.11
+pympler
